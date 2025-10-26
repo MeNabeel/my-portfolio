@@ -7,10 +7,12 @@ import Certificates from "./components/Certificates";
 import Footer from "./components/Footer";
 import ProjectDetail from "./components/ProjectDetail";
 import TicTacToeIcon from "./components/TicTacToeIcon";
+import CustomCursor from "./components/cursor/CustomCursor"; // Import the custom cursor
 
 const Home = () => {
   return (
     <div>
+      <CustomCursor /> {/* Add custom cursor here */}
       <Header />
       <main>
         <section id="home" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">

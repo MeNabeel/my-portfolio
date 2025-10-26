@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import CustomCursor from "./cursor/CustomCursor"; // Import the custom cursor
 
 const ProjectDetail = () => {
   const { projectId } = useParams();
@@ -87,6 +88,7 @@ const ProjectDetail = () => {
   if (!project) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center animate-fade-in">
+        <CustomCursor /> {/* Add cursor to error state too */}
         <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-800 mb-4">Project Not Found</h2>
           <Link to="/" className="text-blue-600 hover:text-blue-800 transition-colors duration-300">
@@ -99,6 +101,7 @@ const ProjectDetail = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 py-8 animate-fade-in">
+      <CustomCursor /> {/* Add custom cursor here */}
       <div className="container mx-auto px-6">
         {/* Back Button with Animation */}
         <Link 
