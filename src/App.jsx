@@ -9,6 +9,7 @@ import ProjectDetail from "./components/ProjectDetail";
 import TicTacToeIcon from "./components/TicTacToeIcon";
 import CustomCursor from "./components/cursor/CustomCursor"; // Import the custom cursor
 import ContactPage from "./components/ContactPage";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -73,26 +74,13 @@ const Home = () => {
                 <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full blur opacity-30 group-hover:opacity-70 transition-opacity duration-500"></div>
               </a>
               
-              <a 
-                href="/contact" 
+              <Link 
+                to="/contact" 
                 className="group relative border-2 border-purple-400 text-purple-300 px-10 py-4 rounded-full font-semibold hover:bg-purple-400/20 hover:text-white hover:border-purple-300 transition-all duration-500 transform hover:scale-105 hover:shadow-xl"
               >
                 <span className="relative z-10">Contact Me</span>
                 <div className="absolute inset-0 bg-purple-400 rounded-full scale-0 group-hover:scale-100 transition-transform duration-500 opacity-10"></div>
-              </a>
-
-              <a 
-                href="/assets/resume.pdf"
-                download="Nabeel_Ijaz_Resume.pdf"
-                className="group relative bg-gradient-to-r from-green-500 to-emerald-600 text-white px-10 py-4 rounded-full font-semibold hover:from-green-600 hover:to-emerald-700 transition-all duration-500 transform hover:scale-110 hover:shadow-2xl overflow-hidden flex items-center gap-2"
-              >
-                <svg className="w-5 h-5 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-                </svg>
-                <span className="relative z-10">Download CV</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-green-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="absolute -inset-1 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full blur opacity-30 group-hover:opacity-70 transition-opacity duration-500"></div>
-              </a>
+              </Link>
             </div>
           </div>
         </section>

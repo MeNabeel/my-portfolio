@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -39,27 +40,48 @@ const Header = () => {
           <ul className="flex space-x-8">
             {["Home", "About", "Projects", "Certificates", "Contact"].map((item, index) => (
               <li key={item}>
-                <a
-                  href={item === "Contact" ? "/contact" : `/#${item.toLowerCase()}`}
-                  className="text-gray-700 hover:text-purple-600 font-medium transition-all duration-500 relative group"
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
-                  {/* Main Text */}
-                  <span className="relative z-10 block transform group-hover:translate-y-[-2px] transition-transform duration-300">
-                    {item}
-                  </span>
-                  
-                  {/* Animated Underline */}
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-600 to-blue-600 group-hover:w-full transition-all duration-500 ease-out"></span>
-                  
-                  {/* Background Highlight on Hover */}
-                  <span className="absolute inset-0 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300 -z-10"></span>
-                  
-                  {/* Floating Dots */}
-                  <span className="absolute -top-1 -right-1 w-1 h-1 bg-purple-400 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-bounce transition-opacity duration-300"></span>
-                </a>
+                {item === "Contact" ? (
+                  <Link
+                    to="/contact"
+                    className="text-gray-700 hover:text-purple-600 font-medium transition-all duration-500 relative group"
+                    style={{ animationDelay: `${index * 100}ms` }}
+                  >
+                    <span className="relative z-10 block transform group-hover:translate-y-[-2px] transition-transform duration-300">
+                      {item}
+                    </span>
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-600 to-blue-600 group-hover:w-full transition-all duration-500 ease-out"></span>
+                    <span className="absolute inset-0 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300 -z-10"></span>
+                    <span className="absolute -top-1 -right-1 w-1 h-1 bg-purple-400 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-bounce transition-opacity duration-300"></span>
+                  </Link>
+                ) : (
+                  <a
+                    href={`/#${item.toLowerCase()}`}
+                    className="text-gray-700 hover:text-purple-600 font-medium transition-all duration-500 relative group"
+                    style={{ animationDelay: `${index * 100}ms` }}
+                  >
+                    <span className="relative z-10 block transform group-hover:translate-y-[-2px] transition-transform duration-300">
+                      {item}
+                    </span>
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-600 to-blue-600 group-hover:w-full transition-all duration-500 ease-out"></span>
+                    <span className="absolute inset-0 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300 -z-10"></span>
+                    <span className="absolute -top-1 -right-1 w-1 h-1 bg-purple-400 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-bounce transition-opacity duration-300"></span>
+                  </a>
+                )}
               </li>
             ))}
+            <li>
+              <a 
+                href="/assets/resume.pdf"
+                download="Nabeel_Ijaz_Resume.pdf"
+                className="text-green-600 hover:text-green-700 font-medium transition-all duration-500 flex items-center gap-1 group bg-green-50 px-3 py-1 rounded-full border border-green-200 hover:bg-green-100 shadow-sm"
+                title="Download CV"
+              >
+                <svg className="w-4 h-4 transform group-hover:-translate-y-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                </svg>
+                <span>CV</span>
+              </a>
+            </li>
           </ul>
         </nav>
 
@@ -84,15 +106,38 @@ const Header = () => {
           <ul className="flex flex-col py-4 px-6 space-y-4">
             {["Home", "About", "Projects", "Certificates", "Contact"].map((item) => (
               <li key={item}>
-                <a
-                  href={item === "Contact" ? "/contact" : `/#${item.toLowerCase()}`}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block text-gray-700 hover:text-purple-600 font-medium text-lg"
-                >
-                  {item}
-                </a>
+                {item === "Contact" ? (
+                  <Link
+                    to="/contact"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block text-gray-700 hover:text-purple-600 font-medium text-lg"
+                  >
+                    {item}
+                  </Link>
+                ) : (
+                  <a
+                    href={`/#${item.toLowerCase()}`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block text-gray-700 hover:text-purple-600 font-medium text-lg"
+                  >
+                    {item}
+                  </a>
+                )}
               </li>
             ))}
+            <li>
+              <a 
+                href="/assets/resume.pdf"
+                download="Nabeel_Ijaz_Resume.pdf"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="inline-flex items-center gap-2 text-green-600 hover:text-green-700 font-medium text-lg mt-2 bg-green-50 px-4 py-2 rounded-lg border border-green-200"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                </svg>
+                Download CV
+              </a>
+            </li>
           </ul>
         </div>
       )}

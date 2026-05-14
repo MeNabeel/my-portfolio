@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -119,12 +120,23 @@ const Footer = () => {
               </div>
             </div>
             
-            {/* New Contact Me Button */}
-            <div className="mt-8">
-              <a href="/contact" className="inline-flex items-center justify-center bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg group">
+            {/* Action Buttons */}
+            <div className="mt-8 flex flex-wrap gap-4">
+              <Link to="/contact" className="inline-flex items-center justify-center bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg group">
                 <span className="mr-2">Contact Me</span>
                 <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+              </Link>
+              
+              <a 
+                href="/assets/resume.pdf"
+                download="Nabeel_Ijaz_Resume.pdf"
+                className="inline-flex items-center justify-center bg-gradient-to-r from-green-500 to-emerald-600 text-white px-8 py-3 rounded-full font-semibold hover:from-green-600 hover:to-emerald-700 transition-all duration-300 transform hover:scale-105 shadow-lg group"
+              >
+                <span className="mr-2">Download CV</span>
+                <svg className="w-5 h-5 transform group-hover:-translate-y-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
                 </svg>
               </a>
             </div>
