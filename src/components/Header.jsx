@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Header = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
     <header className="fixed top-0 w-full bg-white/90 backdrop-blur-md z-50 shadow-sm border-b border-gray-200 animate-slide-down">
       <div className="container mx-auto flex justify-between items-center px-6 py-4">
@@ -32,13 +34,13 @@ const Header = () => {
           </h1>
         </div>
 
-        {/* Navigation with Enhanced Animations */}
-        <nav>
+        {/* Desktop Navigation */}
+        <nav className="hidden md:block">
           <ul className="flex space-x-8">
             {["Home", "About", "Projects", "Certificates", "Contact"].map((item, index) => (
               <li key={item}>
                 <a
-                  href={`#${item.toLowerCase()}`}
+                  href={item === "Contact" ? "/contact" : `/#${item.toLowerCase()}`}
                   className="text-gray-700 hover:text-purple-600 font-medium transition-all duration-500 relative group"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
@@ -60,7 +62,40 @@ const Header = () => {
             ))}
           </ul>
         </nav>
+
+        {/* Mobile Menu Button */}
+        <button 
+          className="md:hidden text-gray-700 focus:outline-none"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {isMobileMenuOpen ? (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            )}
+          </svg>
+        </button>
       </div>
+      
+      {/* Mobile Navigation Dropdown */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-100 shadow-lg absolute w-full">
+          <ul className="flex flex-col py-4 px-6 space-y-4">
+            {["Home", "About", "Projects", "Certificates", "Contact"].map((item) => (
+              <li key={item}>
+                <a
+                  href={item === "Contact" ? "/contact" : `/#${item.toLowerCase()}`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block text-gray-700 hover:text-purple-600 font-medium text-lg"
+                >
+                  {item}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       
       {/* Progress Bar Indicator */}
       <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-600 to-blue-600 animate-progress"></div>

@@ -118,6 +118,16 @@ const Footer = () => {
                 <span className="text-sm group-hover:text-white">Available for projects</span>
               </div>
             </div>
+            
+            {/* New Contact Me Button */}
+            <div className="mt-8">
+              <a href="/contact" className="inline-flex items-center justify-center bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg group">
+                <span className="mr-2">Contact Me</span>
+                <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+              </a>
+            </div>
           </div>
 
           {/* Social Links with Enhanced Animations */}
