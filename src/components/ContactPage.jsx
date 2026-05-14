@@ -40,15 +40,24 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0f0c29] pt-24 pb-12 animate-fade-in flex flex-col text-white">
-      <CustomCursor />
-      <Header />
+    <div className="min-h-screen bg-[#0f0c29] pt-24 pb-12 animate-fade-in flex flex-col text-white relative overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600 rounded-full mix-blend-screen filter blur-[100px] opacity-30 animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600 rounded-full mix-blend-screen filter blur-[100px] opacity-30 animate-pulse delay-1000"></div>
+        <div className="absolute inset-0 bg-[length:50px_50px] bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] animate-grid-move"></div>
+      </div>
 
-      <div className="container mx-auto px-6 flex-grow flex items-center justify-center">
+      <CustomCursor />
+      <div className="relative z-50">
+        <Header />
+      </div>
+
+      <div className="container mx-auto px-6 flex-grow flex items-center justify-center my-8 md:my-16 relative z-10">
         <div className="bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-8 md:p-12 max-w-2xl w-full border border-white/20 animate-slide-in-right relative">
 
           <div className="mb-8">
-            <Link to="/" className="absolute top-6 right-6 w-10 h-10 bg-white/10 hover:bg-white/20 hover:rotate-90 rounded-full flex items-center justify-center text-white transition-all duration-300" title="Back to Home">
+            <Link to="/" className="absolute top-6 right-6 w-10 h-10 bg-white/10 hover:bg-red-500/80 hover:rotate-90 rounded-full flex items-center justify-center text-white transition-all duration-300 shadow-lg hover:shadow-red-500/50" title="Back to Home">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
@@ -66,43 +75,43 @@ const ContactPage = () => {
                   name="name"
                   id="name"
                   required
-                  className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 outline-none placeholder-gray-500"
+                  className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/30 focus:bg-white/10 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 outline-none placeholder-gray-500 shadow-inner"
                   placeholder="John Doe"
                 />
               </div>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2 group-hover:text-white transition-colors">Email Address</label>
                 <input
                   type="email"
                   name="email"
                   id="email"
                   required
-                  className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none placeholder-gray-500"
+                  className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/30 focus:bg-white/10 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none placeholder-gray-500 shadow-inner"
                   placeholder="john@example.com"
                 />
               </div>
             </div>
 
-            <div>
-              <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">Subject</label>
+            <div className="group">
+              <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2 group-hover:text-white transition-colors">Subject</label>
               <input
                 type="text"
                 name="subject"
                 id="subject"
                 required
-                className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 outline-none placeholder-gray-500"
+                className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/30 focus:bg-white/10 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 outline-none placeholder-gray-500 shadow-inner"
                 placeholder="Project Inquiry"
               />
             </div>
 
-            <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">Message</label>
+            <div className="group">
+              <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2 group-hover:text-white transition-colors">Message</label>
               <textarea
                 name="message"
                 id="message"
                 rows="5"
                 required
-                className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none resize-y placeholder-gray-500"
+                className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/30 focus:bg-white/10 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none resize-y placeholder-gray-500 shadow-inner"
                 placeholder="Hi Nabeel, I'd like to talk about..."
               ></textarea>
             </div>
@@ -110,7 +119,7 @@ const ContactPage = () => {
             <button
               type="submit"
               disabled={status === "loading"}
-              className={`w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold py-4 rounded-xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg flex justify-center items-center ${status === "loading" ? "opacity-70 cursor-not-allowed" : ""}`}
+              className={`w-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-700 hover:to-blue-700 text-white font-semibold py-4 rounded-xl transition-all duration-500 transform hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] flex justify-center items-center ${status === "loading" ? "opacity-70 cursor-not-allowed" : ""}`}
             >
               {status === "loading" ? (
                 <span className="flex items-center">
