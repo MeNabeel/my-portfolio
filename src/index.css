@@ -73,9 +73,21 @@
 .animate-typewriter {
   overflow: hidden;
   border-right: 2px solid #c084fc;
-  white-space: nowrap;
   margin: 0 auto;
   animation: typewriter 3s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@media (min-width: 768px) {
+  .animate-typewriter {
+    white-space: nowrap;
+  }
+}
+@media (max-width: 767px) {
+  .animate-typewriter {
+    white-space: normal;
+    animation: fadeIn 2s ease-out;
+    border-right: none;
+  }
 }
 
 @keyframes blink-caret {

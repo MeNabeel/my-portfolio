@@ -40,70 +40,69 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-24 pb-12 animate-fade-in flex flex-col">
+    <div className="min-h-screen bg-[#0f0c29] pt-24 pb-12 animate-fade-in flex flex-col text-white">
       <CustomCursor />
       <Header />
 
       <div className="container mx-auto px-6 flex-grow flex items-center justify-center">
-        <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 max-w-2xl w-full border border-gray-100 animate-slide-in-right">
+        <div className="bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-8 md:p-12 max-w-2xl w-full border border-white/20 animate-slide-in-right relative">
 
           <div className="mb-8">
-            <Link to="/" className="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold transition-all duration-300 transform hover:-translate-x-1 group mb-6">
-              <svg className="w-4 h-4 mr-2 transform group-hover:-translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            <Link to="/" className="absolute top-6 right-6 w-10 h-10 bg-white/10 hover:bg-white/20 hover:rotate-90 rounded-full flex items-center justify-center text-white transition-all duration-300" title="Back to Home">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
-              Back to Home
             </Link>
-            <h1 className="text-4xl font-bold text-gray-800 mb-4">Get in Touch</h1>
-            <p className="text-gray-600 text-lg">Have a question or want to work together? Leave a message!</p>
+            <h1 className="text-4xl font-bold text-white mb-4">Get in Touch</h1>
+            <p className="text-gray-300 text-lg">Have a question or want to work together? Leave a message!</p>
           </div>
 
           <form onSubmit={onSubmit} className="space-y-6">
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">Your Name</label>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">Your Name</label>
                 <input
                   type="text"
                   name="name"
                   id="name"
                   required
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-600 focus:border-transparent transition-all duration-300 outline-none"
+                  className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 outline-none placeholder-gray-500"
                   placeholder="John Doe"
                 />
               </div>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
                 <input
                   type="email"
                   name="email"
                   id="email"
                   required
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-300 outline-none"
+                  className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none placeholder-gray-500"
                   placeholder="john@example.com"
                 />
               </div>
             </div>
 
             <div>
-              <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+              <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">Subject</label>
               <input
                 type="text"
                 name="subject"
                 id="subject"
                 required
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-600 focus:border-transparent transition-all duration-300 outline-none"
+                className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 outline-none placeholder-gray-500"
                 placeholder="Project Inquiry"
               />
             </div>
 
             <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">Message</label>
+              <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">Message</label>
               <textarea
                 name="message"
                 id="message"
                 rows="5"
                 required
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-300 outline-none resize-y"
+                className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none resize-y placeholder-gray-500"
                 placeholder="Hi Nabeel, I'd like to talk about..."
               ></textarea>
             </div>

@@ -28,7 +28,7 @@ const Header = () => {
             {/* Pulsing Effect */}
             <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-blue-400 rounded-xl opacity-0 group-hover:opacity-100 -z-10 animate-ping-slow transition-opacity duration-500"></div>
           </div>
-          
+
           {/* Name with Enhanced Typography */}
           <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent group-hover:from-purple-700 group-hover:to-blue-700 transition-all duration-500 transform group-hover:scale-105">
             Nabeel Ijaz
@@ -37,7 +37,7 @@ const Header = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:block">
-          <ul className="flex space-x-8">
+          <ul className="flex items-center space-x-8">
             {["Home", "About", "Projects", "Certificates", "Contact"].map((item, index) => (
               <li key={item}>
                 {item === "Contact" ? (
@@ -70,14 +70,14 @@ const Header = () => {
               </li>
             ))}
             <li>
-              <a 
+              <a
                 href="/assets/resume.pdf"
-                download="Nabeel_Ijaz_Resume.pdf"
-                className="text-green-600 hover:text-green-700 font-medium transition-all duration-500 flex items-center gap-1 group bg-green-50 px-3 py-1 rounded-full border border-green-200 hover:bg-green-100 shadow-sm"
+                download="nabeel.pdf"
+                className="text-purple-600 hover:text-purple-700 font-medium transition-all duration-500 flex items-center gap-1 group bg-purple-50 px-4 py-2 rounded-full border border-purple-200 hover:bg-purple-100 shadow-sm"
                 title="Download CV"
               >
                 <svg className="w-4 h-4 transform group-hover:-translate-y-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                 </svg>
                 <span>CV</span>
               </a>
@@ -86,7 +86,7 @@ const Header = () => {
         </nav>
 
         {/* Mobile Menu Button */}
-        <button 
+        <button
           className="md:hidden text-gray-700 focus:outline-none"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
@@ -99,7 +99,7 @@ const Header = () => {
           </svg>
         </button>
       </div>
-      
+
       {/* Mobile Navigation Dropdown */}
       {isMobileMenuOpen && (
         <div className="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-100 shadow-lg absolute w-full">
@@ -126,14 +126,14 @@ const Header = () => {
               </li>
             ))}
             <li>
-              <a 
+              <a
                 href="/assets/resume.pdf"
                 download="Nabeel_Ijaz_Resume.pdf"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="inline-flex items-center gap-2 text-green-600 hover:text-green-700 font-medium text-lg mt-2 bg-green-50 px-4 py-2 rounded-lg border border-green-200"
+                className="inline-flex items-center gap-2 text-purple-600 hover:text-purple-700 font-medium text-lg mt-2 bg-purple-50 px-4 py-2 rounded-lg border border-purple-200"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                 </svg>
                 Download CV
               </a>
@@ -141,7 +141,7 @@ const Header = () => {
           </ul>
         </div>
       )}
-      
+
       {/* Progress Bar Indicator */}
       <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-600 to-blue-600 animate-progress"></div>
     </header>
