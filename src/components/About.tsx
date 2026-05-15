@@ -7,7 +7,7 @@ const About = () => {
       <div className="absolute top-10 left-10 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float"></div>
       <div className="absolute top-40 right-10 w-96 h-96 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float" style={{ animationDelay: '2s' }}></div>
       <div className="absolute bottom-20 left-1/4 w-80 h-80 bg-pink-200 rounded-full mix-blend-multiply filter blur-xl opacity-15 animate-float" style={{ animationDelay: '4s' }}></div>
-      
+
       {/* Animated Particles */}
       <div className="absolute inset-0 overflow-hidden">
         {[...Array(15)].map((_, i) => (
@@ -44,16 +44,16 @@ const About = () => {
             <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent transform transition-all duration-500 hover:scale-105">
               About Me
             </h2>
-            
+
             <div className="bg-white/70 backdrop-blur-lg rounded-2xl p-8 shadow-xl border border-white/30 transform transition-all duration-500 hover:shadow-2xl hover:scale-[1.02] relative overflow-hidden">
               {/* Card Background Effect */}
               <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-400/10 to-blue-500/10 rounded-full -translate-y-16 translate-x-16"></div>
               <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-blue-400/10 to-purple-500/10 rounded-full translate-y-12 -translate-x-12"></div>
-              
+
               <div className="relative z-10">
                 <p className="text-lg text-gray-700 leading-relaxed mb-6 transform transition-all duration-500 delay-100">
-                  Hi, <span className="font-semibold text-purple-600 transition-colors duration-300 hover:text-purple-700">I'm Nabeel Ijaz</span>, 
-                  a passionate Software Engineering student at the University of Central Punjab. 
+                  Hi, <span className="font-semibold text-purple-600 transition-colors duration-300 hover:text-purple-700">I'm Nabeel Ijaz</span>,
+                  a passionate Software Engineering student at the University of Central Punjab.
                   I specialize in creating innovative solutions using cutting-edge technologies.
                 </p>
 
@@ -63,9 +63,9 @@ const About = () => {
                     Core Interests
                   </h3>
                   <div className="flex flex-wrap gap-3">
-                    {["AI & Machine Learning", "Cloud Computing", "Full-Stack Development", "DevOps"].map((interest, index) => (
-                      <span 
-                        key={interest} 
+                    {["Full-Stack Development", "System Design", "AI & Machine Learning", "DevOps", "Cloud Computing"].map((interest, index) => (
+                      <span
+                        key={interest}
                         className="px-4 py-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-full text-sm font-medium shadow-lg transform transition-all duration-300 hover:scale-110 hover:shadow-xl hover:from-purple-600 hover:to-blue-600"
                         style={{ transitionDelay: `${300 + index * 100}ms` }}
                       >
@@ -81,9 +81,9 @@ const About = () => {
                     Technical Skills
                   </h3>
                   <div className="grid grid-cols-2 gap-3">
-                    {["React", "Node.js", "MongoDB", "Python", "Java", "C++", "AWS", "Docker"].map((skill, index) => (
-                      <div 
-                        key={skill} 
+                    {["React", "Node.js", "MongoDB", "Express", "Python", "Java", "C++", "AWS", "Docker"].map((skill, index) => (
+                      <div
+                        key={skill}
                         className="flex items-center transform transition-all duration-300 hover:translate-x-2 hover:text-blue-600"
                         style={{ transitionDelay: `${400 + index * 50}ms` }}
                       >
@@ -100,9 +100,9 @@ const About = () => {
                     Certifications
                   </h3>
                   <ul className="space-y-2">
-                    {["Meta Front-End Developer Specialization", "AWS Cloud Practitioner", "Introduction to Software Engineering", "Version Control"].map((cert, index) => (
-                      <li 
-                        key={cert} 
+                    {["Introduction to Software Engineering", "Meta Front-End Developer Specialization", "AWS Cloud Practitioner", "Version Control", "Machine Learning"].map((cert, index) => (
+                      <li
+                        key={cert}
                         className="flex items-center text-gray-700 transform transition-all duration-300 hover:translate-x-2 hover:text-green-600"
                         style={{ transitionDelay: `${500 + index * 75}ms` }}
                       >
