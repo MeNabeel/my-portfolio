@@ -4,6 +4,28 @@ import { Link } from "react-router-dom";
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const handleDownloadCV = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("/assets/nabeel.pdf");
+      if (!response.ok) {
+        throw new Error("File not found");
+      }
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "Nabeel_Ijaz_Resume.pdf");
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("CV Download failed:", error);
+      alert("Oops! The CV file is currently not available. Please contact the administrator.");
+    }
+  };
+
   return (
     <header className="fixed top-0 w-full bg-white/90 backdrop-blur-md z-50 shadow-sm border-b border-gray-200 animate-slide-down">
       <div className="container mx-auto flex justify-between items-center px-6 py-4">
@@ -71,8 +93,8 @@ const Header = () => {
             ))}
             <li>
               <a
-                href="/assets/resume.pdf"
-                download="nabeel.pdf"
+                href="/assets/nabeel.pdf"
+                onClick={handleDownloadCV}
                 className="text-purple-600 hover:text-purple-700 font-medium transition-all duration-500 flex items-center gap-1 group bg-purple-50 px-4 py-2 rounded-full border border-purple-200 hover:bg-purple-100 shadow-sm"
                 title="Download CV"
               >
@@ -127,9 +149,8 @@ const Header = () => {
             ))}
             <li>
               <a
-                href="/assets/resume.pdf"
-                download="Nabeel_Ijaz_Resume.pdf"
-                onClick={() => setIsMobileMenuOpen(false)}
+                href="/assets/nabeel.pdf"
+                onClick={(e) => { handleDownloadCV(e); setIsMobileMenuOpen(false); }}
                 className="inline-flex items-center gap-2 text-purple-600 hover:text-purple-700 font-medium text-lg mt-2 bg-purple-50 px-4 py-2 rounded-lg border border-purple-200"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

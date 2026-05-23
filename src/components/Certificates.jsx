@@ -63,7 +63,7 @@ const Certificates = () => {
       setCurrentIndex((prevIndex) => 
         prevIndex === certificates.length - 1 ? 0 : prevIndex + 1
       );
-    }, 4000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [currentIndex, isAutoPlaying, certificates.length, showAllCertificates]);
@@ -133,24 +133,6 @@ const Certificates = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
-                
-                {/* Navigation Arrows */}
-                <button
-                  onClick={prevSlide}
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/90 backdrop-blur-sm p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-300 group"
-                >
-                  <svg className="w-6 h-6 text-purple-600 group-hover:text-purple-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
-                </button>
-                <button
-                  onClick={nextSlide}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/90 backdrop-blur-sm p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-300 group"
-                >
-                  <svg className="w-6 h-6 text-purple-600 group-hover:text-purple-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
               </div>
 
               {/* Certificate Details */}
@@ -231,31 +213,39 @@ const Certificates = () => {
 
       {/* All Certificates Modal */}
       {showAllCertificates && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in overflow-y-auto">
-          <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-3xl shadow-2xl border border-white/30 max-w-6xl w-full max-h-[90vh] overflow-hidden transform animate-scale-in">
+        <div className="fixed inset-0 bg-[#0f0c29]/90 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in overflow-y-auto">
+          <div className="bg-[#0f0c29] text-white rounded-3xl shadow-2xl border border-white/20 max-w-6xl w-full max-h-[90vh] overflow-hidden transform animate-scale-in relative">
+            
+            {/* Background elements */}
+            <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+              <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600 rounded-full mix-blend-screen filter blur-[100px] opacity-35 animate-pulse"></div>
+              <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600 rounded-full mix-blend-screen filter blur-[100px] opacity-35 animate-pulse delay-1000"></div>
+              <div className="absolute inset-0 bg-[length:50px_50px] bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] animate-grid-move"></div>
+            </div>
+
             {/* Header */}
-            <div className="bg-gradient-to-r from-purple-600 to-blue-600 p-6 text-white">
+            <div className="relative z-10 bg-white/5 border-b border-white/10 p-6 text-white">
               <div className="flex justify-between items-center">
                 <h3 className="text-3xl font-bold">All Certificates</h3>
                 <button
                   onClick={() => setShowAllCertificates(false)}
-                  className="text-white hover:text-purple-200 transition-colors duration-300 p-2 hover:bg-white/20 rounded-full"
+                  className="text-white hover:text-purple-300 transition-colors duration-300 p-2 hover:bg-white/10 rounded-full cursor-pointer"
                 >
                   <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
               </div>
-              <p className="text-purple-100 mt-2">Browse through all my professional certifications and achievements</p>
+              <p className="text-purple-200 mt-2">Browse through all my professional certifications and achievements</p>
             </div>
 
             {/* Certificates Grid */}
-            <div className="p-8 max-h-[70vh] overflow-y-auto">
+            <div className="relative z-10 p-8 max-h-[70vh] overflow-y-auto">
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {certificates.map((cert, index) => (
                   <div
                     key={cert.id}
-                    className="bg-white/80 backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-white/30 transform transition-all duration-500 hover:scale-105 hover:shadow-xl cursor-pointer group"
+                    className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-white/20 transform transition-all duration-500 hover:scale-105 hover:shadow-xl cursor-pointer group"
                     onClick={() => {
                       setCurrentIndex(index);
                       setShowAllCertificates(false);
@@ -277,21 +267,21 @@ const Certificates = () => {
                         {cert.date}
                       </div>
                     </div>
-                    <h4 className="font-bold text-gray-800 mb-2 line-clamp-2 group-hover:text-purple-600 transition-colors duration-300">
+                    <h4 className="font-bold text-white mb-2 line-clamp-2 group-hover:text-purple-300 transition-colors duration-300">
                       {cert.title}
                     </h4>
-                    <p className="text-sm text-gray-600 mb-3">{cert.issuer}</p>
+                    <p className="text-sm text-gray-300 mb-3">{cert.issuer}</p>
                     <div className="flex flex-wrap gap-1">
                       {cert.skills.slice(0, 3).map((skill) => (
                         <span
                           key={skill}
-                          className="px-2 py-1 bg-gradient-to-r from-green-50 to-blue-50 text-green-700 rounded-full text-xs font-medium border border-green-200"
+                          className="px-2 py-1 bg-white/5 border border-white/10 text-purple-300 rounded-full text-xs font-medium"
                         >
                           {skill}
                         </span>
                       ))}
                       {cert.skills.length > 3 && (
-                        <span className="px-2 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">
+                        <span className="px-2 py-1 bg-white/5 border border-white/10 text-gray-300 rounded-full text-xs">
                           +{cert.skills.length - 3} more
                         </span>
                       )}
@@ -302,11 +292,11 @@ const Certificates = () => {
             </div>
 
             {/* Footer */}
-            <div className="border-t border-gray-200 p-6 bg-white/50">
+            <div className="relative z-10 border-t border-white/10 p-6 bg-white/5">
               <div className="text-center">
                 <button
                   onClick={() => setShowAllCertificates(false)}
-                  className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
+                  className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg cursor-pointer"
                 >
                   Close
                 </button>
