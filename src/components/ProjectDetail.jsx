@@ -31,17 +31,22 @@ const ProjectDetail = () => {
       liveDemo: "https://chrome.google.com/webstore/detail/toolkit"
     },
     "wifi-intrusion": {
-      title: "WiFi Intrusion Detection System",
-      description: "Advanced security system using machine learning to detect network intrusions in real-time.",
-      fullDescription: "This system employs sophisticated machine learning algorithms to monitor network traffic and identify potential security threats. It analyzes packet patterns, connection attempts, and network behavior to detect unauthorized access attempts in real-time. The system provides comprehensive security monitoring with instant alerts and detailed threat analysis reports.",
-      technologies: ["Python", "TensorFlow", "Scikit-learn", "Network Security", "ML Algorithms"],
+      title: "Distributed Network Intrusion Detection System (DNIDS)",
+      description: "A full-stack administrative security portal designed to monitor, analyze, and mitigate network threats in real-time.",
+      fullDescription: "The DNIDS project uses a scalable, monolithic architecture where a Node/Express backend serves both a RESTful API and a compiled Vite/React frontend. The system relies on strictly typed TypeScript across the entire stack with shared Zod schemas ensuring data integrity between client and server.\n\nWhen unauthorized behavior occurs, the backend intercepts the request and generates a security alert containing severity level, event type, and offender's IP address. Admins using the dark-themed Shadcn UI dashboard can view alerts in real-time and proactively block IPs tied to critical alerts. The application uses Drizzle ORM to efficiently query PostgreSQL databases, ensuring fast load times even with large volumes of security logs.",
+      technologies: [
+        "React 18", "TypeScript", "Vite", "Tailwind CSS", "Shadcn UI (Radix UI)", 
+        "Lucide React", "Node.js", "Express.js", "PostgreSQL (Neon Serverless)", 
+        "Drizzle ORM", "Drizzle-Zod", "Express Sessions", "JWT/Token-based", 
+        "Zod", "Nodemailer (SMTP)", "Archiver (ZIP)", "React Query", "Wouter"
+      ],
       features: [
-        "Real-time Network Monitoring",
-        "Machine Learning Threat Detection",
-        "Automated Threat Classification",
-        "Instant Alert System",
-        "Historical Data Analysis",
-        "Security Dashboard"
+        "Real-Time Security Dashboard - Centralized admin portal for viewing critical security events and network anomalies",
+        "Automated Alert Generation - Intelligently logs suspicious activities (unauthorized login attempts) with timestamps and source IPs",
+        "Threat Mitigation & IP Blocking - Instantly block malicious IP addresses directly from incoming alerts",
+        "Secure Authentication & Recovery - Robust login with email-based password recovery using expiring tokens",
+        "Dynamic Code Export - Generate on-the-fly .zip archives of frontend, backend, or full source code",
+        "Granular User Auditing - Tracks and logs user interactions for compliance and security"
       ],
       images: [
         "/assets/w1.jpeg",
@@ -51,26 +56,31 @@ const ProjectDetail = () => {
       githubUrl: "https://github.com/nabeelijaz/wifi-intrusion-detection",
       liveDemo: null
     },
-    "shortcut": {
-      title: "Shortcut Keys Extension for UCP Portal",
-      description: "Auto-detect buttons and links with dynamic shortcut keys for keyboard-only portal navigation.",
-      fullDescription: "This Chrome extension revolutionizes the UCP portal navigation by automatically detecting all interactive elements and assigning intelligent shortcut keys. It eliminates the need for constant switching between keyboard and mouse, providing two modes (Beginner and Advanced) to cater to different user preferences. The extension scans the portal dynamically and creates an efficient keyboard-driven interface.",
-      technologies: ["JavaScript", "Chrome API", "DOM Manipulation", "LocalStorage", "HTML/CSS"],
+    "smart-resume": {
+      title: "Smart Resume - ATS Resume Builder",
+      description: "Smart Resume is a full-stack, ATS-friendly MERN web application that helps users effortlessly create, manage, and export professional resumes with real-time preview and multiple modern templates.",
+      fullDescription: "Smart Resume is a comprehensive, full-stack MERN application designed to help job seekers create resumes that pass Applicant Tracking Systems (ATS). The application features a dynamic, split-screen editor where users can input their personal details, work experience, education, skills, projects, certifications, languages, and extracurricular activities, seeing changes reflect in real-time on a selected template. Built with modern security practices like JWT and Google OAuth, users can securely store their resumes and export them to high-quality PDF format seamlessly.",
+      technologies: [
+        "React 18", "Vite", "Tailwind CSS", "MongoDB", "Express.js", "Node.js", 
+        "JWT Authentication", "Google OAuth", "html2canvas", "jspdf", 
+        "React Quill", "Mongoose"
+      ],
       features: [
-        "Automatic Element Detection",
-        "Dynamic Shortcut Assignment", 
-        "Beginner & Advanced Modes",
-        "Real-time Portal Scanning",
-        "Keyboard-Only Navigation",
-        "Visual Shortcut Guides"
+        "Dynamic real-time live preview while typing",
+        "5 professional ATS-friendly templates",
+        "High-quality PDF export functionality",
+        "9 comprehensive resume sections (Personal Details, Summary, Work Experience, Education, Skills, Projects, Certifications, Languages, Extracurricular)",
+        "Secure authentication (Email/Password + Google OAuth)",
+        "Rich text editor support for formatted content"
       ],
       images: [
-        "/assets/scanner.png",
-        "/assets/s2.png",
-        "/assets/s3.png"
+        "/assets/ats1.jpeg",
+        "/assets/ats2.jpeg",
+        "/assets/ats3.jpeg",
+        "/assets/ats4.jpeg"
       ],
-      githubUrl: "https://github.com/nabeelijaz/shortcut-keys-extension",
-      liveDemo: "https://chrome.google.com/webstore/detail/shortcut-keys"
+      githubUrl: "https://github.com/MeNabeel/my-portfolio",
+      liveDemo: null
     }
   };
 

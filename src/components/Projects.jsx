@@ -5,10 +5,17 @@ const Projects = () => {
   const projectData = [
     {
       id: "wifi-intrusion", 
-      title: "WiFi Intrusion Detection System",
-      description: "Advanced security system using machine learning algorithms to detect network intrusions and suspicious activities in real-time.",
-      technologies: ["Python", "Machine Learning", "Network Security", "TensorFlow"],
+      title: "Distributed Network Intrusion Detection System (DNIDS)",
+      description: "A full-stack administrative security portal designed to monitor, analyze, and mitigate network threats in real-time.",
+      technologies: ["React 18", "TypeScript", "Node.js", "PostgreSQL", "Shadcn UI"],
       image: "/assets/w3.jpeg" 
+    },
+    {
+      id: "smart-resume",
+      title: "Smart Resume - ATS Resume Builder",
+      description: "Smart Resume is a full-stack, ATS-friendly MERN web application that helps users effortlessly create, manage, and export professional resumes with real-time preview.",
+      technologies: ["React 18", "Node.js", "MongoDB", "Express.js", "Tailwind CSS", "JWT Auth"],
+      image: "/assets/ats1.jpeg"
     },
     {
       id: "toolkit", 
@@ -16,13 +23,6 @@ const Projects = () => {
       description: "Chrome extension enhancing student experience with automated features, grade tracking, and personalized notifications.",
       technologies: ["HTML", "JavaScript", "Chrome API", "CSS"],
       image: "/assets/t1.png" 
-    },
-    {
-      id: "shortcut",
-      title: "Shortcut keys Extension for UCP Portal",
-      description: "Scan Portal and identified buttons and links and dynamically give short keys. User use Keybord to control complete portal instead shifting keybord to mouse",
-      technologies: ["HTML", "CSS", "JavaScript", "ChromeApi"],
-      image: "/assets/s1.png" 
     },
   ];
 
