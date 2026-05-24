@@ -43,7 +43,7 @@ const About = () => {
           <div className="flex-shrink-0">
             <div className="relative">
               <img
-                src={theme === "gold" ? "/assets/pp.png" : "/assets/nab.png"}
+                src={theme === "gold" ? "/assets/nabeel_t2.png" : "/assets/nabeel_t1.png"}
                 alt="Nabeel Ijaz"
                 className="w-80 h-80 rounded-2xl object-cover shadow-2xl border-8 border-white/10 transform rotate-3 hover:rotate-0 transition-all duration-500 ease-out hover:scale-105"
               />
