@@ -278,7 +278,7 @@ const ProjectDetail = () => {
               {project.technologies.map((tech, index) => (
                 <span 
                   key={index}
-                  className="px-4 py-2 bg-[var(--primary-color)]/10 text-[var(--primary-color)] rounded-full text-sm font-medium border border-[var(--primary-color)]/20 transform transition-all duration-300 hover:scale-105 hover:shadow-md hover:-translate-y-1"
+                  className="px-4 py-2 bg-[var(--primary-color)]/10 text-[var(--accent-color)] rounded-full text-sm font-medium border border-[var(--primary-color)]/20 transform transition-all duration-200 hover:scale-105 hover:shadow-md hover:-translate-y-1"
                   style={{animationDelay: `${index * 0.05}s`}}
                 >
                   {tech}

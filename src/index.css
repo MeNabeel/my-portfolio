@@ -17,6 +17,13 @@ body.theme-cosmic {
   --bg-gradient-from: #0f0c29;
   --bg-gradient-via: #24243e;
   --bg-gradient-to: #0f0c29;
+  --about-bg: linear-gradient(135deg, #f9fafb, #eff6ff);
+  --about-card-bg: rgba(255, 255, 255, 0.7);
+  --about-card-border: rgba(0, 0, 0, 0.08);
+  --about-text-title: #1f2937;
+  --about-text-body: #4b5563;
+  --about-highlight-color: var(--primary-color);
+  --footer-bg: linear-gradient(to bottom, #05020c, #000000);
 }
 
 body.theme-gold {
@@ -26,6 +33,13 @@ body.theme-gold {
   --bg-gradient-from: #0a0518;   /* Deep space black */
   --bg-gradient-via: #3b0764;    /* Deep purple glow */
   --bg-gradient-to: #0a0518;
+  --about-bg: linear-gradient(135deg, #fffdf5, #fffbeb);
+  --about-card-bg: rgba(255, 255, 255, 0.85);
+  --about-card-border: rgba(251, 191, 36, 0.15);
+  --about-text-title: #27272a;
+  --about-text-body: #52525b;
+  --about-highlight-color: var(--secondary-color);
+  --footer-bg: linear-gradient(to bottom, #030107, #000000);
 }
 
 /* Custom theme helper utility classes */
@@ -338,16 +352,31 @@ html {
 .stagger-animate > *:nth-child(5) { animation-delay: 0.5s; }
 
 /* Smooth transitions for all interactive elements */
-* {
+a, button, input, select, textarea, [role="button"] {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
+  transition-duration: 200ms;
 }
 
 /* Enhanced hover effects */
+.hover-lift {
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
 .hover-lift:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  transform: translateY(-4px) !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* About Section custom items styling */
+.about-item-hover {
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+.about-item-hover:hover {
+  color: var(--about-highlight-color) !important;
+}
+.about-item-hover:hover span {
+  color: var(--about-highlight-color) !important;
 }
 
 /* Gradient text animation */
@@ -580,10 +609,7 @@ html {
   }
 }
 
-/* Smooth transitions for all elements */
-* {
-  transition: all 0.3s ease;
-}
+/* Smooth transitions are applied to interactive elements only */
 
 /* Custom scroll behavior */
 html {
@@ -675,11 +701,7 @@ html {
   animation: slide-down 0.6s ease-out forwards;
 }
 
-/* Enhanced hover effects */
-.hover-lift:hover {
-  transform: translateY(-2px);
-  transition: all 0.3s ease;
-}
+
 
 /* Smooth scrolling */
 html {

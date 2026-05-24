@@ -162,12 +162,12 @@ const Certificates = () => {
                     Skills Acquired
                   </h4>
                   <div className="flex flex-wrap gap-2">
-                    {certificates[currentIndex].skills.map((skill, index) => (
-                      <span
-                        key={skill}
-                        className="px-3 py-1 bg-[var(--primary-color)]/10 text-[var(--primary-color)] rounded-full text-sm font-medium border border-[var(--primary-color)]/20 transform transition-all duration-300 hover:scale-105 hover:shadow-md"
-                        style={{ transitionDelay: `${300 + index * 50}ms` }}
-                      >
+                      {certificates[currentIndex].skills.map((skill, index) => (
+                        <span
+                          key={skill}
+                          className="px-3 py-1 bg-[var(--primary-color)]/10 text-[var(--accent-color)] rounded-full text-sm font-medium border border-[var(--primary-color)]/20 transform transition-all duration-200 hover:scale-105 hover:shadow-md"
+                          style={{ transitionDelay: `${300 + index * 50}ms` }}
+                        >
                         {skill}
                       </span>
                     ))}
@@ -263,11 +263,11 @@ const Certificates = () => {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                         <span className="text-white font-semibold text-sm">Click to view details</span>
                       </div>
-                      <div className="absolute top-3 right-3 bg-purple-600 text-white px-2 py-1 rounded-full text-xs font-semibold">
+                      <div className="absolute top-3 right-3 text-white px-2 py-1 rounded-full text-xs font-semibold" style={{ backgroundColor: 'var(--primary-color)' }}>
                         {cert.date}
                       </div>
                     </div>
-                    <h4 className="font-bold text-white mb-2 line-clamp-2 group-hover:text-purple-300 transition-colors duration-300">
+                    <h4 className="font-bold text-white mb-2 line-clamp-2 group-hover:text-[var(--accent-color)] transition-colors duration-200">
                       {cert.title}
                     </h4>
                     <p className="text-sm text-gray-300 mb-3">{cert.issuer}</p>
@@ -275,7 +275,7 @@ const Certificates = () => {
                       {cert.skills.slice(0, 3).map((skill) => (
                         <span
                           key={skill}
-                          className="px-2 py-1 bg-white/5 border border-white/10 text-purple-300 rounded-full text-xs font-medium"
+                          className="px-2 py-1 bg-white/5 border border-white/10 text-[var(--accent-color)] rounded-full text-xs font-medium"
                         >
                           {skill}
                         </span>

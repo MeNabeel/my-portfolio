@@ -220,15 +220,29 @@ const TicTacToeIcon = () => {
 
   const renderSquare = (index) => (
     <button
-      className={`w-16 h-16 bg-white/90 border-2 text-2xl font-bold rounded-lg shadow-md transition-all duration-300 flex items-center justify-center
-        ${board[index] ? 'cursor-default' : 'cursor-pointer hover:bg-white hover:shadow-lg hover:scale-105'}
+      className={`w-16 h-16 bg-white/10 hover:bg-white/20 border-2 text-2xl font-bold rounded-lg shadow-md transition-all duration-200 flex items-center justify-center
+        ${board[index] ? 'cursor-default' : 'cursor-pointer hover:shadow-lg hover:scale-105'}
         ${!isUserTurn() && gameMode === "ai" ? 'cursor-not-allowed opacity-80' : ''}
-        ${board[index] === 'X' ? 'border-purple-200' : 'border-blue-200'}
       `}
+      style={{
+        borderColor: board[index] === 'X' 
+          ? 'var(--primary-color)' 
+          : board[index] === 'O' 
+          ? 'var(--secondary-color)' 
+          : 'rgba(255,255,255,0.1)'
+      }}
       onClick={() => handleClick(index)}
       disabled={!!board[index] || winner || (gameMode === "ai" && !isUserTurn())}
     >
-      <span className={board[index] === 'X' ? 'text-purple-600' : 'text-blue-600'}>
+      <span 
+        style={{ 
+          color: board[index] === 'X' 
+            ? 'var(--primary-color)' 
+            : board[index] === 'O' 
+            ? 'var(--secondary-color)' 
+            : undefined 
+        }}
+      >
         {board[index]}
       </span>
     </button>
@@ -251,7 +265,7 @@ const TicTacToeIcon = () => {
       <div className="fixed bottom-6 right-6 z-50">
         <button
           onClick={() => setIsOpen(true)}
-          className="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-4 rounded-2xl shadow-2xl hover:shadow-3xl transform hover:scale-110 hover:rotate-12 transition-all duration-500 group animate-bounce"
+          className="theme-button-gradient text-white p-4 rounded-2xl shadow-2xl hover:shadow-3xl transform hover:scale-110 hover:rotate-12 transition-all duration-300 group animate-bounce"
           title="Play Tic Tac Toe"
         >
           <div className="relative">
@@ -272,186 +286,195 @@ const TicTacToeIcon = () => {
             </div>
             
             {/* Pulsing Effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-blue-400 rounded-2xl opacity-0 group-hover:opacity-100 -z-10 animate-ping"></div>
+            <div className="absolute inset-0 theme-button-gradient rounded-2xl opacity-0 group-hover:opacity-100 -z-10 animate-ping"></div>
           </div>
         </button>
       </div>
 
       {/* Game Modal */}
       {isOpen && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in">
-          <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-3xl shadow-2xl border border-white/30 p-8 max-w-md w-full transform animate-scale-in">
-            {/* Header */}
-            <div className="flex justify-between items-center mb-6">
-              <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                Tic Tac Toe
-              </h3>
-              <button
-                onClick={() => setIsOpen(false)}
-                className="text-gray-500 hover:text-purple-600 transition-colors duration-300 p-2 hover:bg-white/50 rounded-full"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in">
+          <div className="theme-gradient-bg text-white rounded-3xl shadow-2xl border border-white/20 p-8 max-w-md w-full transform animate-scale-in relative overflow-hidden">
+            {/* Background elements */}
+            <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+              <div className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full mix-blend-screen filter blur-[40px] opacity-15 animate-pulse" style={{ backgroundColor: 'var(--primary-color)' }}></div>
+              <div className="absolute bottom-1/4 right-1/4 w-32 h-32 rounded-full mix-blend-screen filter blur-[40px] opacity-15 animate-pulse delay-1000" style={{ backgroundColor: 'var(--secondary-color)' }}></div>
             </div>
 
-            {/* Game Mode Selection - Only show when no active game */}
-            {!winner && board.every(square => square === null) && (
-              <div className="mb-6 space-y-4">
-                <div className="text-center">
-                  <h4 className="font-semibold text-gray-700 mb-3">Choose Game Mode</h4>
-                  <div className="flex gap-3 mb-4">
-                    <button
-                      onClick={() => startNewGame("player")}
-                      className={`flex-1 py-2 rounded-lg font-semibold transition-all duration-300 ${
-                        gameMode === "player" 
-                          ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg" 
-                          : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                      }`}
-                    >
-                      👥 2 Players
-                    </button>
-                    <button
-                      onClick={() => startNewGame("ai", "X", "medium")}
-                      className={`flex-1 py-2 rounded-lg font-semibold transition-all duration-300 ${
-                        gameMode === "ai" 
-                          ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg" 
-                          : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                      }`}
-                    >
-                      🤖 vs AI
-                    </button>
-                  </div>
+            <div className="relative z-10">
+              {/* Header */}
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="text-2xl font-bold theme-accent-text">
+                  Tic Tac Toe
+                </h3>
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="text-white/70 hover:text-white hover:bg-white/10 transition-colors duration-200 p-2 rounded-full"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
 
-                  {/* AI Settings */}
-                  {gameMode === "ai" && (
-                    <div className="space-y-3">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Choose Your Symbol:
-                        </label>
-                        <div className="flex gap-3">
-                          {["X", "O"].map(symbol => (
-                            <button
-                              key={symbol}
-                              onClick={() => startNewGame("ai", symbol, difficulty)}
-                              className={`flex-1 py-2 rounded-lg font-bold text-lg transition-all duration-300 ${
-                                userSymbol === symbol
-                                  ? symbol === 'X' 
-                                    ? "bg-purple-600 text-white shadow-lg" 
-                                    : "bg-blue-600 text-white shadow-lg"
-                                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                              }`}
-                            >
-                              {symbol}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          AI Difficulty:
-                        </label>
-                        <div className="grid grid-cols-3 gap-2">
-                          {["easy", "medium", "hard"].map(level => (
-                            <button
-                              key={level}
-                              onClick={() => startNewGame("ai", userSymbol, level)}
-                              className={`py-2 rounded-lg font-semibold text-sm transition-all duration-300 ${
-                                difficulty === level
-                                  ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg" 
-                                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                              }`}
-                            >
-                              {level.charAt(0).toUpperCase() + level.slice(1)}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
+              {/* Game Mode Selection - Only show when no active game */}
+              {!winner && board.every(square => square === null) && (
+                <div className="mb-6 space-y-4">
+                  <div className="text-center">
+                    <h4 className="font-semibold text-white/95 mb-3">Choose Game Mode</h4>
+                    <div className="flex gap-3 mb-4">
+                      <button
+                        onClick={() => startNewGame("player")}
+                        className={`flex-1 py-2 rounded-lg font-semibold transition-all duration-200 ${
+                          gameMode === "player" 
+                            ? "theme-button-gradient text-white shadow-lg" 
+                            : "bg-white/10 text-white/80 hover:bg-white/20"
+                        }`}
+                      >
+                        👥 2 Players
+                      </button>
+                      <button
+                        onClick={() => startNewGame("ai", "X", "medium")}
+                        className={`flex-1 py-2 rounded-lg font-semibold transition-all duration-200 ${
+                          gameMode === "ai" 
+                            ? "theme-button-gradient text-white shadow-lg" 
+                            : "bg-white/10 text-white/80 hover:bg-white/20"
+                        }`}
+                      >
+                        🤖 vs AI
+                      </button>
                     </div>
-                  )}
-                </div>
-              </div>
-            )}
 
-            {/* Game Status */}
-            <div className="text-center mb-6">
-              <div className={`text-lg font-semibold px-4 py-2 rounded-full backdrop-blur-sm ${
-                winner 
-                  ? winner === 'Draw' 
-                    ? 'bg-yellow-100 text-yellow-800' 
-                    : gameMode === "ai" && winner === userSymbol
-                    ? 'bg-green-100 text-green-800'
-                    : gameMode === "ai" && winner !== userSymbol
-                    ? 'bg-red-100 text-red-800'
-                    : 'bg-green-100 text-green-800'
-                  : 'bg-purple-100 text-purple-800'
-              } transition-all duration-500`}>
-                {getStatus()}
+                    {/* AI Settings */}
+                    {gameMode === "ai" && (
+                      <div className="space-y-3">
+                        <div>
+                          <label className="block text-sm font-medium text-white/80 mb-2">
+                            Choose Your Symbol:
+                          </label>
+                          <div className="flex gap-3">
+                            {["X", "O"].map(symbol => (
+                              <button
+                                key={symbol}
+                                onClick={() => startNewGame("ai", symbol, difficulty)}
+                                className={`flex-1 py-2 rounded-lg font-bold text-lg transition-all duration-200 ${
+                                  userSymbol === symbol
+                                    ? "text-white shadow-lg" 
+                                    : "bg-white/10 text-white/80 hover:bg-white/20"
+                                }`}
+                                style={{
+                                  backgroundColor: userSymbol === symbol ? 'var(--primary-color)' : undefined
+                                }}
+                              >
+                                {symbol}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-white/80 mb-2">
+                            AI Difficulty:
+                          </label>
+                          <div className="grid grid-cols-3 gap-2">
+                            {["easy", "medium", "hard"].map(level => (
+                              <button
+                                key={level}
+                                onClick={() => startNewGame("ai", userSymbol, level)}
+                                className={`py-2 rounded-lg font-semibold text-sm transition-all duration-200 ${
+                                  difficulty === level
+                                    ? "theme-button-gradient text-white shadow-lg" 
+                                    : "bg-white/10 text-white/80 hover:bg-white/20"
+                                }`}
+                              >
+                                {level.charAt(0).toUpperCase() + level.slice(1)}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Game Status */}
+              <div className="text-center mb-6">
+                <div className={`text-lg font-semibold px-4 py-2 rounded-full backdrop-blur-sm border ${
+                  winner 
+                    ? winner === 'Draw' 
+                      ? 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30' 
+                      : gameMode === "ai" && winner === userSymbol
+                      ? 'bg-green-500/20 text-green-300 border-green-500/30'
+                      : gameMode === "ai" && winner !== userSymbol
+                      ? 'bg-red-500/20 text-red-300 border-red-500/30'
+                      : 'bg-green-500/20 text-green-300 border-green-500/30'
+                    : 'bg-white/10 text-white border-white/10'
+                } transition-all duration-300`}>
+                  {getStatus()}
+                </div>
+                {gameMode === "ai" && !winner && (
+                  <p className="text-sm text-white/60 mt-2">
+                    You are <span className="font-bold" style={{ color: userSymbol === 'X' ? 'var(--primary-color)' : 'var(--secondary-color)' }}>{userSymbol}</span>
+                  </p>
+                )}
               </div>
-              {gameMode === "ai" && !winner && (
-                <p className="text-sm text-gray-600 mt-2">
-                  You are <span className={userSymbol === 'X' ? 'text-purple-600 font-bold' : 'text-blue-600 font-bold'}>{userSymbol}</span>
-                </p>
+
+              {/* Game Board */}
+              <div className="grid grid-cols-3 gap-3 mb-6 bg-black/30 p-4 rounded-2xl border border-white/5 shadow-inner">
+                {[0, 1, 2, 3, 4, 5, 6, 7, 8].map(index => (
+                  <div key={index} className="flex justify-center">
+                    {renderSquare(index)}
+                  </div>
+                ))}
+              </div>
+
+              {/* Controls */}
+              <div className="flex gap-3">
+                <button
+                  onClick={resetGame}
+                  className="flex-1 theme-button-gradient text-white py-3 rounded-xl font-semibold hover:theme-button-gradient-hover transition-all duration-200 transform hover:scale-105 shadow-lg"
+                >
+                  New Game
+                </button>
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="px-6 py-3 border border-white/20 text-white/80 rounded-xl hover:border-white hover:text-white transition-colors duration-200"
+                >
+                  Close
+                </button>
+              </div>
+
+              {/* Game History */}
+              {gameHistory.length > 0 && (
+                <div className="mt-6 pt-4 border-t border-white/10">
+                  <h4 className="text-sm font-semibold text-white/70 mb-2">Recent Games</h4>
+                  <div className="space-y-1 max-h-20 overflow-y-auto">
+                    {gameHistory.slice(-3).map((game, index) => (
+                      <div key={index} className="text-xs text-white/50 flex justify-between items-center">
+                        <span>Game {gameHistory.length - index}</span>
+                        <div className="flex items-center gap-2">
+                          {game.mode === "ai" && (
+                            <span className="text-xs bg-white/10 text-white/80 px-1.5 py-0.5 rounded">AI</span>
+                          )}
+                          <span className={
+                            game.winner === 'Draw' 
+                              ? 'text-yellow-400' 
+                              : game.mode === "ai" && game.winner === userSymbol
+                              ? 'text-green-400'
+                              : game.mode === "ai" && game.winner !== userSymbol
+                              ? 'text-red-400'
+                              : 'text-green-400'
+                          }>
+                            {game.winner === 'Draw' ? 'Draw' : game.mode === "ai" ? (game.winner === userSymbol ? 'You Won' : 'AI Won') : `${game.winner} won`}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               )}
             </div>
-
-            {/* Game Board */}
-            <div className="grid grid-cols-3 gap-3 mb-6 bg-white/50 p-4 rounded-2xl shadow-inner">
-              {[0, 1, 2, 3, 4, 5, 6, 7, 8].map(index => (
-                <div key={index} className="flex justify-center">
-                  {renderSquare(index)}
-                </div>
-              ))}
-            </div>
-
-            {/* Controls */}
-            <div className="flex gap-3">
-              <button
-                onClick={resetGame}
-                className="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 text-white py-3 rounded-xl font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
-              >
-                New Game
-              </button>
-              <button
-                onClick={() => setIsOpen(false)}
-                className="px-6 py-3 border border-gray-300 text-gray-600 rounded-xl hover:border-purple-400 hover:text-purple-600 transition-colors duration-300"
-              >
-                Close
-              </button>
-            </div>
-
-            {/* Game History */}
-            {gameHistory.length > 0 && (
-              <div className="mt-6 pt-4 border-t border-gray-200">
-                <h4 className="text-sm font-semibold text-gray-600 mb-2">Recent Games</h4>
-                <div className="space-y-1 max-h-20 overflow-y-auto">
-                  {gameHistory.slice(-3).map((game, index) => (
-                    <div key={index} className="text-xs text-gray-500 flex justify-between items-center">
-                      <span>Game {gameHistory.length - index}</span>
-                      <div className="flex items-center gap-2">
-                        {game.mode === "ai" && (
-                          <span className="text-xs bg-gray-200 px-1 rounded">AI</span>
-                        )}
-                        <span className={
-                          game.winner === 'Draw' 
-                            ? 'text-yellow-600' 
-                            : game.mode === "ai" && game.winner === userSymbol
-                            ? 'text-green-600'
-                            : game.mode === "ai" && game.winner !== userSymbol
-                            ? 'text-red-600'
-                            : 'text-green-600'
-                        }>
-                          {game.winner === 'Draw' ? 'Draw' : game.mode === "ai" ? (game.winner === userSymbol ? 'You Won' : 'AI Won') : `${game.winner} won`}
-                        </span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
         </div>
       )}

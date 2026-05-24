@@ -52,7 +52,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer id="contact" className="theme-gradient-bg text-white py-16 relative overflow-hidden border-t border-white/10">
+    <footer id="contact" className="text-white py-16 relative overflow-hidden border-t border-white/10" style={{ background: 'var(--footer-bg)' }}>
       {/* Animated Background Elements */}
       <div className="absolute inset-0">
         {/* Floating Particles */}
