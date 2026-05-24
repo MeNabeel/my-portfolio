@@ -214,7 +214,7 @@ const Certificates = () => {
       {/* All Certificates Modal */}
       {showAllCertificates && (
         <div className="fixed inset-0 bg-[#0f0c29]/90 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in overflow-y-auto">
-          <div className="bg-[#0f0c29] text-white rounded-3xl shadow-2xl border border-white/20 max-w-6xl w-full max-h-[90vh] overflow-hidden transform animate-scale-in relative">
+          <div className="bg-[#0f0c29] text-white rounded-3xl shadow-2xl border border-white/20 max-w-6xl w-full max-h-[90vh] flex flex-col overflow-hidden transform animate-scale-in relative">
             
             {/* Background elements */}
             <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -229,9 +229,10 @@ const Certificates = () => {
                 <h3 className="text-3xl font-bold">All Certificates</h3>
                 <button
                   onClick={() => setShowAllCertificates(false)}
-                  className="text-white hover:text-purple-300 transition-colors duration-300 p-2 hover:bg-white/10 rounded-full cursor-pointer"
+                  className="text-white bg-white/10 hover:bg-red-500/80 hover:rotate-90 rounded-full w-10 h-10 flex items-center justify-center transition-all duration-300 shadow-lg hover:shadow-red-500/50 cursor-pointer"
+                  title="Close Modal"
                 >
-                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
@@ -240,7 +241,7 @@ const Certificates = () => {
             </div>
 
             {/* Certificates Grid */}
-            <div className="relative z-10 p-8 max-h-[70vh] overflow-y-auto">
+            <div className="relative z-10 p-8 flex-1 overflow-y-auto">
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {certificates.map((cert, index) => (
                   <div
