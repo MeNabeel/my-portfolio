@@ -32,7 +32,7 @@ const Home = () => {
 
           {/* Aries Constellation (Left Side) */}
           <div 
-            className="absolute left-[3%] md:left-[8%] top-[25%] w-[220px] h-[220px] md:w-[280px] md:h-[280px] pointer-events-none z-0 transition-opacity duration-300"
+            className="absolute left-[3%] md:left-[8%] top-[25%] w-[220px] h-[220px] md:w-[280px] md:h-[280px] pointer-events-none z-10 transition-opacity duration-300"
             style={{ opacity: hoveredAries ? 0.9 : 0.4 }}
           >
             <svg className="w-full h-full pointer-events-none" viewBox="0 0 100 100">
@@ -111,7 +111,7 @@ const Home = () => {
 
           {/* Libra Constellation (Right Side) */}
           <div 
-            className="absolute right-[3%] md:right-[8%] top-[30%] w-[240px] h-[240px] md:w-[300px] md:h-[300px] pointer-events-none z-0 transition-opacity duration-300"
+            className="absolute right-[3%] md:right-[8%] top-[30%] w-[240px] h-[240px] md:w-[300px] md:h-[300px] pointer-events-none z-10 transition-opacity duration-300"
             style={{ opacity: hoveredLibra ? 0.9 : 0.4 }}
           >
             <svg className="w-full h-full pointer-events-none" viewBox="0 0 100 100">
@@ -221,7 +221,7 @@ const Home = () => {
             </span>
           </div>
 
-          <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
             {[...Array(20)].map((_, i) => (
               <div
                 key={i}
@@ -236,7 +236,7 @@ const Home = () => {
             ))}
           </div>
           
-          <div className="text-center text-white relative z-10 px-6">
+          <div className="text-center text-white relative z-20 px-6">
             <div className="mb-8">
               <h1 className="text-6xl md:text-8xl font-bold mb-4 animate-fade-in-up">
                 <span className="theme-accent-text animate-gradient-x">
