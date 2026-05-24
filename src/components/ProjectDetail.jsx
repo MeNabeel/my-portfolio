@@ -90,6 +90,9 @@ const ProjectDetail = () => {
       setIsLoading(false);
     }, 500);
 
+    const activeTheme = localStorage.getItem("portfolio-theme") || "cosmic";
+    document.body.className = activeTheme === "gold" ? "theme-gold" : "theme-cosmic";
+
     return () => clearTimeout(timer);
   }, []);
 
@@ -110,13 +113,19 @@ const ProjectDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 animate-fade-in">
+    <div className="min-h-screen theme-gradient-bg py-8 animate-fade-in text-white relative overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full mix-blend-screen filter blur-[100px] opacity-25 animate-pulse" style={{ backgroundColor: 'var(--primary-color)' }}></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full mix-blend-screen filter blur-[100px] opacity-25 animate-pulse delay-1000" style={{ backgroundColor: 'var(--secondary-color)' }}></div>
+        <div className="absolute inset-0 bg-[length:50px_50px] bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] animate-grid-move"></div>
+      </div>
       <CustomCursor /> {/* Add custom cursor here */}
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 relative z-10">
         {/* Back Button with Animation */}
         <Link 
           to="/" 
-          className="inline-flex items-center text-blue-600 hover:text-blue-800 mb-8 font-semibold transition-all duration-300 transform hover:-translate-x-1 group"
+          className="inline-flex items-center text-[var(--primary-color)] hover:text-[var(--secondary-color)] mb-8 font-semibold transition-all duration-300 transform hover:-translate-x-1 group"
         >
           <svg className="w-4 h-4 mr-2 transform group-hover:-translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
@@ -125,11 +134,11 @@ const ProjectDetail = () => {
         </Link>
 
         {/* Project Header with Enhanced Animations */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 mb-8 transform transition-all duration-500 hover:shadow-xl border border-gray-100">
-          <h1 className="text-4xl font-bold text-gray-800 mb-4 animate-slide-in-right">
+        <div className="bg-white/10 backdrop-blur-lg rounded-2xl shadow-lg p-8 mb-8 transform transition-all duration-500 hover:shadow-xl border border-white/10 text-white">
+          <h1 className="text-4xl font-bold text-white mb-4 animate-slide-in-right">
             {project.title}
           </h1>
-          <p className="text-xl text-gray-600 animate-slide-in-right" style={{animationDelay: '0.1s'}}>
+          <p className="text-xl text-gray-300 animate-slide-in-right" style={{animationDelay: '0.1s'}}>
             {project.description}
           </p>
           
@@ -153,7 +162,7 @@ const ProjectDetail = () => {
                 href={project.liveDemo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
+                className="inline-flex items-center gap-2 theme-button-gradient text-white px-6 py-3 rounded-lg font-semibold hover:theme-button-gradient-hover transition-all duration-300 transform hover:scale-105 shadow-lg"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
@@ -165,11 +174,11 @@ const ProjectDetail = () => {
         </div>
 
         {/* Enhanced Project Gallery with Carousel */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 mb-8 transform transition-all duration-500 hover:shadow-xl">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6 animate-slide-in-right">Project Gallery</h2>
+        <div className="bg-white/10 backdrop-blur-lg rounded-2xl shadow-lg p-8 mb-8 border border-white/10 text-white">
+          <h2 className="text-2xl font-bold text-white mb-6 animate-slide-in-right">Project Gallery</h2>
           
           {/* Main Image */}
-          <div className="relative mb-6 rounded-xl overflow-hidden bg-gray-100 animate-fade-in-up">
+          <div className="relative mb-6 rounded-xl overflow-hidden bg-white/5 animate-fade-in-up">
             <img 
               src={project.images[activeImage]} 
               alt={`${project.title} screenshot ${activeImage + 1}`}
@@ -183,17 +192,17 @@ const ProjectDetail = () => {
               <>
                 <button
                   onClick={() => setActiveImage((prev) => (prev === 0 ? project.images.length - 1 : prev - 1))}
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/90 backdrop-blur-sm p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-300"
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/10 backdrop-blur-sm p-3 rounded-full shadow-lg hover:bg-white/20 hover:scale-110 transition-all duration-300"
                 >
-                  <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"/>
                   </svg>
                 </button>
                 <button
                   onClick={() => setActiveImage((prev) => (prev === project.images.length - 1 ? 0 : prev + 1))}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/90 backdrop-blur-sm p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-300"
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/10 backdrop-blur-sm p-3 rounded-full shadow-lg hover:bg-white/20 hover:scale-110 transition-all duration-300"
                 >
-                  <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/>
                   </svg>
                 </button>
@@ -208,8 +217,8 @@ const ProjectDetail = () => {
                 key={index} 
                 className={`relative rounded-lg overflow-hidden cursor-pointer transform transition-all duration-300 border-2 ${
                   activeImage === index 
-                    ? 'border-blue-500 scale-105 shadow-lg' 
-                    : 'border-gray-200 hover:border-gray-300 hover:scale-105'
+                    ? 'border-[var(--primary-color)] scale-105 shadow-lg' 
+                    : 'border-white/10 hover:border-white/30 hover:scale-105'
                 }`}
                 onClick={() => setActiveImage(index)}
               >
@@ -222,8 +231,8 @@ const ProjectDetail = () => {
                   }}
                 />
                 {activeImage === index && (
-                  <div className="absolute inset-0 bg-blue-500/20 flex items-center justify-center">
-                    <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>
+                  <div className="absolute inset-0 bg-[var(--primary-color)]/20 flex items-center justify-center">
+                    <div className="w-3 h-3 bg-[var(--primary-color)] rounded-full animate-pulse"></div>
                   </div>
                 )}
               </div>
@@ -234,9 +243,9 @@ const ProjectDetail = () => {
         {/* Features and Technologies with Staggered Animations */}
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Features Section */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 transform transition-all duration-500 hover:shadow-xl animate-fade-in-up">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-              <svg className="w-6 h-6 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl shadow-lg p-8 border border-white/10 text-white animate-fade-in-up">
+            <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+              <svg className="w-6 h-6 mr-3" style={{ color: 'var(--primary-color)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
               </svg>
               Key Features
@@ -245,22 +254,22 @@ const ProjectDetail = () => {
               {project.features.map((feature, index) => (
                 <li 
                   key={index} 
-                  className="flex items-start text-gray-700 transform transition-all duration-300 hover:translate-x-2 group"
+                  className="flex items-start text-gray-300 transform transition-all duration-300 hover:translate-x-2 group"
                   style={{animationDelay: `${index * 0.1}s`}}
                 >
-                  <svg className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0 transform group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 mr-3 mt-0.5 flex-shrink-0 transform group-hover:scale-110 transition-transform duration-300" style={{ color: 'var(--primary-color)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7"/>
                   </svg>
-                  <span className="group-hover:text-gray-900 transition-colors duration-300">{feature}</span>
+                  <span className="group-hover:text-white transition-colors duration-300">{feature}</span>
                 </li>
               ))}
             </ul>
           </div>
 
           {/* Technologies Section */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 transform transition-all duration-500 hover:shadow-xl animate-fade-in-up" style={{animationDelay: '0.1s'}}>
-            <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-              <svg className="w-6 h-6 text-blue-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl shadow-lg p-8 border border-white/10 text-white animate-fade-in-up" style={{animationDelay: '0.1s'}}>
+            <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+              <svg className="w-6 h-6 mr-3" style={{ color: 'var(--secondary-color)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
               </svg>
               Technologies Used
@@ -269,7 +278,7 @@ const ProjectDetail = () => {
               {project.technologies.map((tech, index) => (
                 <span 
                   key={index}
-                  className="px-4 py-2 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800 rounded-full text-sm font-medium border border-blue-200 transform transition-all duration-300 hover:scale-105 hover:shadow-md hover:-translate-y-1"
+                  className="px-4 py-2 bg-[var(--primary-color)]/10 text-[var(--primary-color)] rounded-full text-sm font-medium border border-[var(--primary-color)]/20 transform transition-all duration-300 hover:scale-105 hover:shadow-md hover:-translate-y-1"
                   style={{animationDelay: `${index * 0.05}s`}}
                 >
                   {tech}
@@ -280,14 +289,14 @@ const ProjectDetail = () => {
         </div>
 
         {/* Project Overview with Enhanced Animation */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 mt-8 transform transition-all duration-500 hover:shadow-xl animate-fade-in-up" style={{animationDelay: '0.2s'}}>
-          <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-            <svg className="w-6 h-6 text-purple-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="bg-white/10 backdrop-blur-lg rounded-2xl shadow-lg p-8 mt-8 border border-white/10 text-white animate-fade-in-up" style={{animationDelay: '0.2s'}}>
+          <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+            <svg className="w-6 h-6 mr-3" style={{ color: 'var(--primary-color)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
             Project Overview
           </h2>
-          <p className="text-gray-700 leading-relaxed text-lg transform transition-all duration-500 hover:translate-x-1">
+          <p className="text-gray-300 leading-relaxed text-lg transform transition-all duration-500 hover:translate-x-1">
             {project.fullDescription}
           </p>
         </div>

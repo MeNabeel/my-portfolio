@@ -82,18 +82,19 @@ const Certificates = () => {
 
   return (
     <>
-      <section id="certificates" className="py-20 bg-gradient-to-br from-purple-50 to-blue-50 relative overflow-hidden">
+      <section id="certificates" className="py-20 theme-gradient-bg relative overflow-hidden text-white border-t border-white/5">
         {/* Background Elements */}
-        <div className="absolute top-20 left-10 w-64 h-64 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float"></div>
-        <div className="absolute bottom-20 right-10 w-80 h-80 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float" style={{ animationDelay: '3s' }}></div>
+        <div className="absolute top-20 left-10 w-64 h-64 rounded-full mix-blend-screen filter blur-xl opacity-10 animate-float" style={{ backgroundColor: 'var(--primary-color)' }}></div>
+        <div className="absolute bottom-20 right-10 w-80 h-80 rounded-full mix-blend-screen filter blur-xl opacity-10 animate-float" style={{ backgroundColor: 'var(--secondary-color)', animationDelay: '3s' }}></div>
         
         {/* Animated Particles */}
         <div className="absolute inset-0 overflow-hidden">
           {[...Array(12)].map((_, i) => (
             <div
               key={i}
-              className="absolute w-1.5 h-1.5 bg-purple-400 rounded-full opacity-25 animate-pulse"
+              className="absolute w-1.5 h-1.5 rounded-full opacity-20 animate-pulse"
               style={{
+                backgroundColor: 'var(--primary-color)',
                 top: `${Math.random() * 100}%`,
                 left: `${Math.random() * 100}%`,
                 animationDelay: `${Math.random() * 5}s`,
@@ -108,14 +109,14 @@ const Certificates = () => {
             <h2 className="text-5xl font-bold mb-4 theme-accent-text transform transition-all duration-500 hover:scale-105">
               Certificates & Achievements
             </h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+            <p className="text-gray-300 text-lg max-w-2xl mx-auto">
               Professional certifications and courses that validate my expertise in various technologies.
             </p>
           </div>
 
           {/* Main Slider */}
           <div 
-            className="relative max-w-6xl mx-auto bg-white/80 backdrop-blur-lg rounded-3xl shadow-2xl border border-white/30 p-8 mb-8 transform transition-all duration-700 hover:shadow-3xl"
+            className="relative max-w-6xl mx-auto bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl border border-white/10 p-8 mb-8 transform transition-all duration-700 hover:shadow-3xl text-white"
             onMouseEnter={() => setIsAutoPlaying(false)}
             onMouseLeave={() => setIsAutoPlaying(true)}
           >
@@ -137,34 +138,34 @@ const Certificates = () => {
 
               {/* Certificate Details */}
               <div className="flex-1 text-left">
-                <h3 className="text-3xl font-bold text-gray-800 mb-4 transform transition-all duration-500 hover:translate-x-2">
+                <h3 className="text-3xl font-bold text-white mb-4 transform transition-all duration-500 hover:translate-x-2">
                   {certificates[currentIndex].title}
                 </h3>
                 <div className="space-y-3 mb-6">
-                  <div className="flex items-center text-gray-600 transform transition-all duration-500 delay-100 hover:translate-x-2">
-                    <svg className="w-5 h-5 mr-3 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="flex items-center text-gray-300 transform transition-all duration-500 delay-100 hover:translate-x-2">
+                    <svg className="w-5 h-5 mr-3" style={{ color: 'var(--primary-color)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                     </svg>
-                    <span className="font-semibold">Issuer:</span> {certificates[currentIndex].issuer}
+                    <span className="font-semibold text-white mr-1.5">Issuer:</span> {certificates[currentIndex].issuer}
                   </div>
-                  <div className="flex items-center text-gray-600 transform transition-all duration-500 delay-200 hover:translate-x-2">
-                    <svg className="w-5 h-5 mr-3 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="flex items-center text-gray-300 transform transition-all duration-500 delay-200 hover:translate-x-2">
+                    <svg className="w-5 h-5 mr-3" style={{ color: 'var(--secondary-color)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
-                    <span className="font-semibold">Date:</span> {certificates[currentIndex].date}
+                    <span className="font-semibold text-white mr-1.5">Date:</span> {certificates[currentIndex].date}
                   </div>
                 </div>
 
                 <div className="mb-6">
-                  <h4 className="text-lg font-semibold text-gray-800 mb-3 flex items-center transform transition-all duration-300 hover:translate-x-2">
-                    <span className="w-2 h-2 bg-green-500 rounded-full mr-3 transition-all duration-300 hover:scale-150"></span>
+                  <h4 className="text-lg font-semibold text-white mb-3 flex items-center transform transition-all duration-300 hover:translate-x-2">
+                    <span className="w-2 h-2 rounded-full mr-3 transition-all duration-300 hover:scale-150" style={{ backgroundColor: 'var(--primary-color)' }}></span>
                     Skills Acquired
                   </h4>
                   <div className="flex flex-wrap gap-2">
                     {certificates[currentIndex].skills.map((skill, index) => (
                       <span
                         key={skill}
-                        className="px-3 py-1 bg-gradient-to-r from-green-100 to-blue-100 text-green-700 rounded-full text-sm font-medium border border-green-200 transform transition-all duration-300 hover:scale-105 hover:shadow-md"
+                        className="px-3 py-1 bg-[var(--primary-color)]/10 text-[var(--primary-color)] rounded-full text-sm font-medium border border-[var(--primary-color)]/20 transform transition-all duration-300 hover:scale-105 hover:shadow-md"
                         style={{ transitionDelay: `${300 + index * 50}ms` }}
                       >
                         {skill}
@@ -190,7 +191,7 @@ const Certificates = () => {
                 className={`w-3.5 h-3.5 rounded-full transition-all duration-300 transform hover:scale-125 ${
                   index === currentIndex
                     ? 'theme-button-gradient scale-125 shadow-lg'
-                    : 'bg-gray-300 hover:bg-gray-400'
+                    : 'bg-white/20 hover:bg-white/45'
                 }`}
               />
             ))}

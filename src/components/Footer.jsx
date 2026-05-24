@@ -52,7 +52,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer id="contact" className="bg-gradient-to-r from-gray-900 to-blue-900 text-white py-16 relative overflow-hidden">
+    <footer id="contact" className="theme-gradient-bg text-white py-16 relative overflow-hidden border-t border-white/10">
       {/* Animated Background Elements */}
       <div className="absolute inset-0">
         {/* Floating Particles */}
@@ -72,8 +72,8 @@ const Footer = () => {
         </div>
 
         {/* Gradient Orbs */}
-        <div className="absolute -bottom-32 -left-32 w-64 h-64 bg-blue-600 rounded-full opacity-10 blur-3xl animate-pulse"></div>
-        <div className="absolute -top-32 -right-32 w-64 h-64 bg-purple-600 rounded-full opacity-10 blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute -bottom-32 -left-32 w-64 h-64 rounded-full opacity-10 blur-3xl animate-pulse" style={{ backgroundColor: 'var(--secondary-color)' }}></div>
+        <div className="absolute -top-32 -right-32 w-64 h-64 rounded-full opacity-10 blur-3xl animate-pulse" style={{ backgroundColor: 'var(--primary-color)', animationDelay: '2s' }}></div>
 
         {/* Animated Grid */}
         <div className="absolute inset-0 opacity-5">
@@ -91,12 +91,12 @@ const Footer = () => {
             <p className="text-gray-300 mb-6 text-lg leading-relaxed transform hover:translate-x-2 transition-transform duration-300">
               Interested in collaborating? Feel free to reach out for opportunities in AI, Cloud Computing, or Full-Stack Development.
             </p>
-            <div className="flex items-center justify-center md:justify-start text-gray-300 group transform hover:translate-x-2 transition-all duration-300">
+             <div className="flex items-center justify-center md:justify-start text-gray-300 group transform hover:translate-x-2 transition-all duration-300">
               <div className="relative">
-                <svg className="w-6 h-6 mr-4 text-blue-400 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-6 h-6 mr-4 group-hover:scale-110 transition-transform duration-300" style={{ color: 'var(--secondary-color)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                <div className="absolute inset-0 text-blue-400 opacity-0 group-hover:opacity-100 animate-ping"></div>
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 animate-ping" style={{ color: 'var(--secondary-color)' }}></div>
               </div>
               <span className="group-hover:text-white transition-colors duration-300 font-medium">
                 nabeelijaz559@gmail.com
@@ -122,7 +122,7 @@ const Footer = () => {
 
             {/* Action Buttons */}
             <div className="mt-8 flex flex-col sm:flex-row flex-wrap gap-4 justify-center md:justify-start">
-              <Link to="/contact" className="inline-flex items-center justify-center bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg group">
+              <Link to="/contact" className="inline-flex items-center justify-center theme-button-gradient text-white px-8 py-3 rounded-full font-semibold hover:theme-button-gradient-hover transition-all duration-300 transform hover:scale-105 shadow-lg group">
                 <span className="mr-2">Contact Me</span>
                 <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -132,7 +132,7 @@ const Footer = () => {
               <a
                 href="/assets/nabeel.pdf"
                 download="Nabeel_Ijaz_Resume.pdf"
-                className="inline-flex items-center justify-center border-2 border-purple-400 text-purple-300 px-8 py-3 rounded-full font-semibold hover:bg-purple-400/20 hover:text-white transition-all duration-300 transform hover:scale-105 shadow-lg group"
+                className="inline-flex items-center justify-center border-2 border-[var(--primary-color)] text-[var(--accent-color)] px-8 py-3 rounded-full font-semibold hover:bg-[var(--primary-color)]/20 hover:text-white transition-all duration-300 transform hover:scale-105 shadow-lg group"
               >
                 <span className="mr-2">Download CV</span>
                 <svg className="w-5 h-5 transform group-hover:-translate-y-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -145,7 +145,7 @@ const Footer = () => {
           {/* Social Links with Enhanced Animations */}
           <div className={`transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'}`}>
             <h3 className="text-2xl font-bold mb-8 text-center text-white">
-              Follow My <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Journey</span>
+              Follow My <span className="theme-accent-text">Journey</span>
             </h3>
             <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
               {socialLinks.map((social, index) => (
@@ -187,8 +187,8 @@ const Footer = () => {
                 {[...Array(3)].map((_, i) => (
                   <div
                     key={i}
-                    className="w-2 h-2 bg-blue-400 rounded-full animate-bounce"
-                    style={{ animationDelay: `${i * 0.2}s` }}
+                    className="w-2 h-2 rounded-full animate-bounce"
+                    style={{ backgroundColor: 'var(--secondary-color)', animationDelay: `${i * 0.2}s` }}
                   ></div>
                 ))}
               </div>
@@ -201,11 +201,11 @@ const Footer = () => {
           <div className="flex flex-col items-center space-y-4">
             {/* Animated Logo/Name */}
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+              <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: 'var(--secondary-color)' }}></div>
               <p className="text-gray-300 font-semibold text-lg">
                 Nabeel Ijaz
               </p>
-              <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+              <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: 'var(--primary-color)', animationDelay: '0.5s' }}></div>
             </div>
 
             <p className="text-gray-300 text-sm">
