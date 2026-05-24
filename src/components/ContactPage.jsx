@@ -40,11 +40,11 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0f0c29] pt-24 pb-12 animate-fade-in flex flex-col text-white relative overflow-hidden">
+    <div className="min-h-screen theme-gradient-bg pt-24 pb-12 animate-fade-in flex flex-col text-white relative overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600 rounded-full mix-blend-screen filter blur-[100px] opacity-30 animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600 rounded-full mix-blend-screen filter blur-[100px] opacity-30 animate-pulse delay-1000"></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full mix-blend-screen filter blur-[100px] opacity-35 animate-pulse" style={{ backgroundColor: 'var(--primary-color)' }}></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full mix-blend-screen filter blur-[100px] opacity-35 animate-pulse delay-1000" style={{ backgroundColor: 'var(--secondary-color)' }}></div>
         <div className="absolute inset-0 bg-[length:50px_50px] bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] animate-grid-move"></div>
       </div>
 
@@ -57,7 +57,7 @@ const ContactPage = () => {
         <div className="bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-8 md:p-12 max-w-2xl w-full border border-white/20 animate-slide-in-right relative">
 
           <div className="mb-8">
-            <Link to="/" className="absolute top-6 right-6 w-10 h-10 bg-white/10 hover:bg-red-500/80 hover:rotate-90 rounded-full flex items-center justify-center text-white transition-all duration-300 shadow-lg hover:shadow-red-500/50" title="Back to Home">
+            <Link to="/" className="absolute top-6 right-6 w-10 h-10 bg-white/10 hover:bg-red-500/80 hover:rotate-90 hover:-translate-y-1 rounded-full flex items-center justify-center text-white transition-all duration-300 shadow-lg hover:shadow-red-500/50" title="Back to Home">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
@@ -75,7 +75,7 @@ const ContactPage = () => {
                   name="name"
                   id="name"
                   required
-                  className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/30 focus:bg-white/10 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 outline-none placeholder-gray-500 shadow-inner"
+                  className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/30 focus:bg-white/10 focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent transition-all duration-300 outline-none placeholder-gray-500 shadow-inner"
                   placeholder="John Doe"
                 />
               </div>
@@ -86,7 +86,7 @@ const ContactPage = () => {
                   name="email"
                   id="email"
                   required
-                  className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/30 focus:bg-white/10 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none placeholder-gray-500 shadow-inner"
+                  className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/30 focus:bg-white/10 focus:ring-2 focus:ring-[var(--secondary-color)] focus:border-transparent transition-all duration-300 outline-none placeholder-gray-500 shadow-inner"
                   placeholder="john@example.com"
                 />
               </div>
@@ -99,7 +99,7 @@ const ContactPage = () => {
                 name="subject"
                 id="subject"
                 required
-                className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/30 focus:bg-white/10 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 outline-none placeholder-gray-500 shadow-inner"
+                className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/30 focus:bg-white/10 focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent transition-all duration-300 outline-none placeholder-gray-500 shadow-inner"
                 placeholder="Project Inquiry"
               />
             </div>
@@ -111,7 +111,7 @@ const ContactPage = () => {
                 id="message"
                 rows="5"
                 required
-                className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/30 focus:bg-white/10 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none resize-y placeholder-gray-500 shadow-inner"
+                className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/30 focus:bg-white/10 focus:ring-2 focus:ring-[var(--secondary-color)] focus:border-transparent transition-all duration-300 outline-none resize-y placeholder-gray-500 shadow-inner"
                 placeholder="Hi Nabeel, I'd like to talk about..."
               ></textarea>
             </div>
@@ -119,7 +119,7 @@ const ContactPage = () => {
             <button
               type="submit"
               disabled={status === "loading"}
-              className={`w-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-700 hover:to-blue-700 text-white font-semibold py-4 rounded-xl transition-all duration-500 transform hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] flex justify-center items-center ${status === "loading" ? "opacity-70 cursor-not-allowed" : ""}`}
+              className={`w-full theme-button-gradient text-white font-semibold py-4 rounded-xl transition-all duration-500 transform hover:scale-[1.02] hover:shadow-lg flex justify-center items-center ${status === "loading" ? "opacity-70 cursor-not-allowed" : ""}`}
             >
               {status === "loading" ? (
                 <span className="flex items-center">

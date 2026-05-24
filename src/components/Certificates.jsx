@@ -105,7 +105,7 @@ const Certificates = () => {
 
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent transform transition-all duration-500 hover:scale-105">
+            <h2 className="text-5xl font-bold mb-4 theme-accent-text transform transition-all duration-500 hover:scale-105">
               Certificates & Achievements
             </h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
@@ -187,9 +187,9 @@ const Certificates = () => {
               <button
                 key={index}
                 onClick={() => goToSlide(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 transform hover:scale-125 ${
+                className={`w-3.5 h-3.5 rounded-full transition-all duration-300 transform hover:scale-125 ${
                   index === currentIndex
-                    ? 'bg-gradient-to-r from-purple-600 to-blue-600 scale-125'
+                    ? 'theme-button-gradient scale-125 shadow-lg'
                     : 'bg-gray-300 hover:bg-gray-400'
                 }`}
               />
@@ -200,7 +200,7 @@ const Certificates = () => {
           <div className="text-center">
             <button 
               onClick={() => setShowAllCertificates(true)}
-              className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-10 py-4 rounded-full font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center mx-auto gap-3"
+              className="theme-button-gradient text-white px-10 py-4 rounded-full font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center mx-auto gap-3"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -214,7 +214,7 @@ const Certificates = () => {
       {/* All Certificates Modal */}
       {showAllCertificates && (
         <div className="fixed inset-0 bg-[#0f0c29]/90 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in overflow-y-auto">
-          <div className="bg-[#0f0c29] text-white rounded-3xl shadow-2xl border border-white/20 max-w-6xl w-full max-h-[90vh] flex flex-col overflow-hidden transform animate-scale-in relative">
+          <div className="theme-gradient-bg text-white rounded-3xl shadow-2xl border border-white/20 max-w-6xl w-full max-h-[90vh] flex flex-col overflow-hidden transform animate-scale-in relative">
             
             {/* Background elements */}
             <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -224,20 +224,18 @@ const Certificates = () => {
             </div>
 
             {/* Header */}
-            <div className="relative z-10 bg-white/5 border-b border-white/10 p-6 text-white">
-              <div className="flex justify-between items-center">
-                <h3 className="text-3xl font-bold">All Certificates</h3>
-                <button
-                  onClick={() => setShowAllCertificates(false)}
-                  className="text-white bg-white/10 hover:bg-red-500/80 hover:rotate-90 rounded-full w-10 h-10 flex items-center justify-center transition-all duration-300 shadow-lg hover:shadow-red-500/50 cursor-pointer"
-                  title="Close Modal"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
+            <div className="relative z-10 bg-white/5 border-b border-white/10 p-6 text-white flex-shrink-0">
+              <h3 className="text-3xl font-bold">All Certificates</h3>
               <p className="text-purple-200 mt-2">Browse through all my professional certifications and achievements</p>
+              <button
+                onClick={() => setShowAllCertificates(false)}
+                className="absolute top-6 right-6 text-white bg-white/10 hover:bg-red-500/80 hover:rotate-90 hover:-translate-y-1 rounded-full w-10 h-10 flex items-center justify-center transition-all duration-300 shadow-lg hover:shadow-red-500/50 cursor-pointer"
+                title="Close Modal"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
             </div>
 
             {/* Certificates Grid */}
@@ -293,11 +291,11 @@ const Certificates = () => {
             </div>
 
             {/* Footer */}
-            <div className="relative z-10 border-t border-white/10 p-6 bg-white/5">
+            <div className="relative z-10 border-t border-white/10 pt-6 pb-10 px-6 bg-white/5 flex-shrink-0">
               <div className="text-center">
                 <button
                   onClick={() => setShowAllCertificates(false)}
-                  className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg cursor-pointer"
+                  className="theme-button-gradient text-white px-8 py-3 rounded-full font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg cursor-pointer"
                 >
                   Close
                 </button>

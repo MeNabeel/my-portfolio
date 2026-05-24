@@ -1,6 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const About = () => {
+  const [theme, setTheme] = useState(localStorage.getItem("portfolio-theme") || "cosmic");
+
+  useEffect(() => {
+    const handleThemeChange = () => {
+      setTheme(localStorage.getItem("portfolio-theme") || "cosmic");
+    };
+    window.addEventListener("theme-change", handleThemeChange);
+    return () => window.removeEventListener("theme-change", handleThemeChange);
+  }, []);
+
   return (
     <section id="about" className="py-20 bg-gradient-to-br from-gray-50 to-blue-50 relative overflow-hidden">
       {/* Background Orbs */}
@@ -32,16 +42,16 @@ const About = () => {
           <div className="flex-shrink-0">
             <div className="relative">
               <img
-                src="/assets/nab.png"
+                src={theme === "gold" ? "/assets/pp.png" : "/assets/nab.png"}
                 alt="Nabeel Ijaz"
                 className="w-80 h-80 rounded-2xl object-cover shadow-2xl border-8 border-white transform rotate-3 hover:rotate-0 transition-all duration-500 ease-out hover:scale-105"
               />
-              <div className="absolute -inset-4 bg-gradient-to-r from-purple-400 to-blue-500 rounded-2xl -z-10 opacity-20 blur-lg transition-all duration-700 hover:opacity-30 hover:blur-xl"></div>
+              <div className="absolute -inset-4 theme-button-gradient rounded-2xl -z-10 opacity-20 blur-lg transition-all duration-700 hover:opacity-30 hover:blur-xl"></div>
             </div>
           </div>
 
           <div className="flex-1 max-w-2xl">
-            <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent transform transition-all duration-500 hover:scale-105">
+            <h2 className="text-5xl font-bold mb-6 theme-accent-text transform transition-all duration-500 hover:scale-105">
               About Me
             </h2>
 
@@ -52,21 +62,21 @@ const About = () => {
 
               <div className="relative z-10">
                 <p className="text-lg text-gray-700 leading-relaxed mb-6 transform transition-all duration-500 delay-100">
-                  Hi, <span className="font-semibold text-purple-600 transition-colors duration-300 hover:text-purple-700">I'm Nabeel Ijaz</span>,
+                  Hi, <span className="font-semibold text-[var(--primary-color)] transition-colors duration-300 hover:text-[var(--secondary-color)]">I'm Nabeel Ijaz</span>,
                   a passionate Software Engineering student at the University of Central Punjab.
                   I specialize in creating innovative solutions using cutting-edge technologies.
                 </p>
 
                 <div className="mb-6 transform transition-all duration-500 delay-200">
                   <h3 className="text-xl font-semibold text-gray-800 mb-4 flex items-center transform transition-all duration-300 hover:translate-x-2">
-                    <span className="w-2 h-2 bg-purple-500 rounded-full mr-3 transition-all duration-300 hover:scale-150"></span>
+                    <span className="w-2 h-2 rounded-full mr-3 transition-all duration-300 hover:scale-150" style={{ backgroundColor: 'var(--primary-color)' }}></span>
                     Core Interests
                   </h3>
                   <div className="flex flex-wrap gap-3">
                     {["Full-Stack Development", "System Design", "AI & Machine Learning", "DevOps", "Cloud Computing"].map((interest, index) => (
                       <span
                         key={interest}
-                        className="px-4 py-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-full text-sm font-medium shadow-lg transform transition-all duration-300 hover:scale-110 hover:shadow-xl hover:from-purple-600 hover:to-blue-600"
+                        className="px-4 py-2 theme-button-gradient text-white rounded-full text-sm font-medium shadow-lg transform transition-all duration-300 hover:scale-110 hover:shadow-xl"
                         style={{ transitionDelay: `${300 + index * 100}ms` }}
                       >
                         {interest}
@@ -77,17 +87,17 @@ const About = () => {
 
                 <div className="mb-6 transform transition-all duration-500 delay-300">
                   <h3 className="text-xl font-semibold text-gray-800 mb-4 flex items-center transform transition-all duration-300 hover:translate-x-2">
-                    <span className="w-2 h-2 bg-blue-500 rounded-full mr-3 transition-all duration-300 hover:scale-150"></span>
+                    <span className="w-2 h-2 rounded-full mr-3 transition-all duration-300 hover:scale-150" style={{ backgroundColor: 'var(--secondary-color)' }}></span>
                     Technical Skills
                   </h3>
                   <div className="grid grid-cols-2 gap-3">
                     {["React", "Node.js", "MongoDB", "Express", "Python", "Java", "C++", "AWS", "Docker"].map((skill, index) => (
                       <div
                         key={skill}
-                        className="flex items-center transform transition-all duration-300 hover:translate-x-2 hover:text-blue-600"
+                        className="flex items-center transform transition-all duration-300 hover:translate-x-2 hover:text-[var(--secondary-color)]"
                         style={{ transitionDelay: `${400 + index * 50}ms` }}
                       >
-                        <div className="w-2 h-2 bg-blue-400 rounded-full mr-3 transition-all duration-300 hover:scale-150 hover:bg-blue-600"></div>
+                        <div className="w-2 h-2 rounded-full mr-3 transition-all duration-300 hover:scale-150" style={{ backgroundColor: 'var(--secondary-color)' }}></div>
                         <span className="text-gray-700 transition-colors duration-300">{skill}</span>
                       </div>
                     ))}
@@ -96,17 +106,17 @@ const About = () => {
 
                 <div className="transform transition-all duration-500 delay-400">
                   <h3 className="text-xl font-semibold text-gray-800 mb-4 flex items-center transform transition-all duration-300 hover:translate-x-2">
-                    <span className="w-2 h-2 bg-green-500 rounded-full mr-3 transition-all duration-300 hover:scale-150"></span>
+                    <span className="w-2 h-2 rounded-full mr-3 transition-all duration-300 hover:scale-150" style={{ backgroundColor: 'var(--primary-color)' }}></span>
                     Certifications
                   </h3>
                   <ul className="space-y-2">
                     {["Introduction to Software Engineering", "Meta Front-End Developer Specialization", "AWS Cloud Practitioner", "Version Control", "Machine Learning"].map((cert, index) => (
                       <li
                         key={cert}
-                        className="flex items-center text-gray-700 transform transition-all duration-300 hover:translate-x-2 hover:text-green-600"
+                        className="flex items-center text-gray-700 transform transition-all duration-300 hover:translate-x-2 hover:text-[var(--primary-color)]"
                         style={{ transitionDelay: `${500 + index * 75}ms` }}
                       >
-                        <span className="text-green-500 mr-3 transition-transform duration-300 hover:scale-125">✓</span>
+                        <span className="mr-3 transition-transform duration-300 hover:scale-125" style={{ color: 'var(--primary-color)' }}>✓</span>
                         {cert}
                       </li>
                     ))}

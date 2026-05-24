@@ -52,30 +52,38 @@ const CustomCursor = () => {
       setHidden(false);
     };
 
-    // Add hover effects for interactive elements
-    const handleHoverEvents = () => {
-      const links = document.querySelectorAll('a');
-      const buttons = document.querySelectorAll('button, [role="button"]');
-      const inputs = document.querySelectorAll('input, textarea, select');
-      
-      links.forEach(link => {
-        link.addEventListener('mouseenter', () => setLinkHovered(true));
-        link.addEventListener('mouseleave', () => setLinkHovered(false));
-      });
-      
-      buttons.forEach(button => {
-        button.addEventListener('mouseenter', () => setButtonHovered(true));
-        button.addEventListener('mouseleave', () => setButtonHovered(false));
-      });
+    // Use event delegation for hover tracking to support dynamically loaded components (e.g. modals)
+    const handleMouseOver = (e) => {
+      const target = e.target;
+      if (!target) return;
 
-      inputs.forEach(input => {
-        input.addEventListener('mouseenter', () => setButtonHovered(true));
-        input.addEventListener('mouseleave', () => setButtonHovered(false));
-      });
+      const isLink = target.closest('a');
+      const isButton = target.closest('button, [role="button"], input, textarea, select');
+
+      setLinkHovered(!!isLink);
+      setButtonHovered(!!isButton);
+
+      if (isButton && (
+        isButton.classList.contains('hover:bg-red-500/80') || 
+        isButton.title === 'Close Modal' || 
+        isButton.title === 'Back to Home' ||
+        isButton.closest('a')?.title === 'Back to Home'
+      )) {
+        document.body.classList.add('cursor-close-hover');
+      } else {
+        document.body.classList.remove('cursor-close-hover');
+      }
+    };
+
+    const handleMouseLeaveWindow = () => {
+      setLinkHovered(false);
+      setButtonHovered(false);
+      document.body.classList.remove('cursor-close-hover');
     };
 
     addEventListeners();
-    handleHoverEvents();
+    document.addEventListener('mouseover', handleMouseOver);
+    document.addEventListener('mouseleave', handleMouseLeaveWindow);
     document.body.style.cursor = 'none';
 
     // Clean up trail points
@@ -85,6 +93,8 @@ const CustomCursor = () => {
 
     return () => {
       removeEventListeners();
+      document.removeEventListener('mouseover', handleMouseOver);
+      document.removeEventListener('mouseleave', handleMouseLeaveWindow);
       document.body.style.cursor = 'auto';
       clearInterval(trailCleanup);
     };

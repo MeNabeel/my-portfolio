@@ -17,13 +17,13 @@ const Home = () => {
       <CustomCursor /> {/* Add custom cursor here */}
       <Header />
       <main>
-        <section id="home" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
+        <section id="home" className="min-h-screen flex items-center justify-center theme-gradient-bg relative overflow-hidden">
           {/* Your existing home section content */}
           <div className="absolute inset-0 opacity-15">
-            <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-purple-500 rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500 rounded-full blur-3xl animate-pulse delay-1000"></div>
-            <div className="absolute top-3/4 left-1/3 w-64 h-64 bg-cyan-500 rounded-full blur-3xl animate-bounce delay-500"></div>
-            <div className="absolute top-1/3 right-1/4 w-48 h-48 bg-pink-500 rounded-full blur-2xl animate-ping delay-700"></div>
+            <div className="absolute top-1/4 left-1/4 w-72 h-72 rounded-full blur-3xl animate-pulse" style={{ backgroundColor: 'var(--primary-color)' }}></div>
+            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl animate-pulse delay-1000" style={{ backgroundColor: 'var(--secondary-color)' }}></div>
+            <div className="absolute top-3/4 left-1/3 w-64 h-64 rounded-full blur-3xl animate-bounce delay-500" style={{ backgroundColor: 'var(--secondary-color)' }}></div>
+            <div className="absolute top-1/3 right-1/4 w-48 h-48 rounded-full blur-2xl animate-ping delay-700" style={{ backgroundColor: 'var(--primary-color)' }}></div>
           </div>
           
           <div className="absolute inset-0 overflow-hidden">
@@ -44,7 +44,7 @@ const Home = () => {
           <div className="text-center text-white relative z-10 px-6">
             <div className="mb-8">
               <h1 className="text-6xl md:text-8xl font-bold mb-4 animate-fade-in-up">
-                <span className="bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent animate-gradient-x">
+                <span className="theme-accent-text animate-gradient-x">
                   Nabeel Ijaz
                 </span>
               </h1>
@@ -67,19 +67,19 @@ const Home = () => {
             <div className="flex gap-6 justify-center flex-wrap animate-fade-in-up delay-500">
               <a 
                 href="#projects" 
-                className="group relative bg-gradient-to-r from-purple-600 to-blue-600 text-white px-10 py-4 rounded-full font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-500 transform hover:scale-110 hover:shadow-2xl overflow-hidden"
+                className="group relative theme-button-gradient text-white px-10 py-4 rounded-full font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-500 transform hover:scale-110 hover:shadow-2xl overflow-hidden"
               >
                 <span className="relative z-10">View My Work</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full blur opacity-30 group-hover:opacity-70 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 theme-button-gradient-hover opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute -inset-1 theme-button-gradient rounded-full blur opacity-30 group-hover:opacity-70 transition-opacity duration-500"></div>
               </a>
               
               <Link 
                 to="/contact" 
-                className="group relative border-2 border-purple-400 text-purple-300 px-10 py-4 rounded-full font-semibold hover:bg-purple-400/20 hover:text-white hover:border-purple-300 transition-all duration-500 transform hover:scale-105 hover:shadow-xl"
+                className="group relative border-2 border-[var(--primary-color)] text-[var(--accent-color)] px-10 py-4 rounded-full font-semibold hover:bg-[var(--primary-color)]/20 hover:text-white hover:border-[var(--secondary-color)] transition-all duration-500 transform hover:scale-105 hover:shadow-xl"
               >
                 <span className="relative z-10">Contact Me</span>
-                <div className="absolute inset-0 bg-purple-400 rounded-full scale-0 group-hover:scale-100 transition-transform duration-500 opacity-10"></div>
+                <div className="absolute inset-0 bg-[var(--primary-color)] rounded-full scale-0 group-hover:scale-100 transition-transform duration-500 opacity-10"></div>
               </Link>
             </div>
           </div>

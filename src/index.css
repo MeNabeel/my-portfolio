@@ -1,5 +1,54 @@
 @import "tailwindcss";
 
+:root {
+  /* Default Theme (Cosmic Theme) variables */
+  --primary-color: #8a2be2;      /* Purple */
+  --secondary-color: #00f5ff;    /* Blue / Cyan */
+  --accent-color: #d8b4fe;       /* Pastel Lavender */
+  --bg-gradient-from: #0f0c29;   /* Slate/indigo */
+  --bg-gradient-via: #24243e;    /* Deep space purple */
+  --bg-gradient-to: #0f0c29;
+}
+
+body.theme-cosmic {
+  --primary-color: #8a2be2;
+  --secondary-color: #00f5ff;
+  --accent-color: #d8b4fe;
+  --bg-gradient-from: #0f0c29;
+  --bg-gradient-via: #24243e;
+  --bg-gradient-to: #0f0c29;
+}
+
+body.theme-gold {
+  --primary-color: #ffd700;      /* Cyber Gold */
+  --secondary-color: #a855f7;    /* Starlight Lavender */
+  --accent-color: #f59e0b;       /* Amber */
+  --bg-gradient-from: #0a0518;   /* Deep space black */
+  --bg-gradient-via: #3b0764;    /* Deep purple glow */
+  --bg-gradient-to: #0a0518;
+}
+
+/* Custom theme helper utility classes */
+.theme-gradient-bg {
+  background: linear-gradient(135deg, var(--bg-gradient-from), var(--bg-gradient-via), var(--bg-gradient-to)) !important;
+}
+
+.theme-accent-text {
+  background: linear-gradient(to right, var(--primary-color), var(--secondary-color), var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.theme-button-gradient {
+  background: linear-gradient(to right, var(--primary-color), var(--secondary-color)) !important;
+}
+
+.theme-button-gradient-hover {
+  background: linear-gradient(to right, var(--secondary-color), var(--primary-color)) !important;
+}
+
+
 /* Custom Animations */
 @keyframes fadeInUp {
   from {
