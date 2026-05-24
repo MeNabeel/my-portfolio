@@ -3,28 +3,7 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const handleDownloadCV = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch("/assets/nabeel.pdf");
-      if (!response.ok) {
-        throw new Error("File not found");
-      }
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", "Nabeel_Ijaz_Resume.pdf");
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      window.URL.revokeObjectURL(url);
-    } catch (error) {
-      console.error("CV Download failed:", error);
-      alert("Oops! The CV file is currently not available. Please contact the administrator.");
-    }
-  };
+  const [logoFailed, setLogoFailed] = useState(false);
 
   return (
     <header className="fixed top-0 w-full bg-white/90 backdrop-blur-md z-50 shadow-sm border-b border-gray-200 animate-slide-down">
@@ -32,24 +11,22 @@ const Header = () => {
         {/* Logo and Name with Enhanced Animation */}
         <div className="flex items-center space-x-3 group cursor-pointer">
           {/* PNG Logo with Enhanced Animation */}
-          <div className="relative">
-            <img
-              src="/assets/nabeel.png"
-              alt="Nabeel Ijaz Logo"
-              className="w-10 h-10 rounded-xl transform group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 shadow-lg group-hover:shadow-xl object-cover border-2 border-transparent group-hover:border-purple-300"
-              onError={(e) => {
-                // Fallback if image doesn't load
-                e.target.style.display = 'none';
-                e.target.nextSibling.style.display = 'flex';
-              }}
-            />
-            {/* Fallback Logo if PNG doesn't load */}
-            <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl flex items-center justify-center transform group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 shadow-lg group-hover:shadow-xl hidden">
-              <span className="text-white font-bold text-sm">NI</span>
+            <div className="relative">
+              {!logoFailed ? (
+                <img
+                  src="/assets/nabeel.png"
+                  alt="Nabeel Ijaz Logo"
+                  className="w-10 h-10 rounded-xl transform group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 shadow-lg group-hover:shadow-xl object-cover border-2 border-transparent group-hover:border-purple-300"
+                  onError={() => setLogoFailed(true)}
+                />
+              ) : (
+                <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl flex items-center justify-center transform group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 shadow-lg group-hover:shadow-xl">
+                  <span className="text-white font-bold text-sm">NI</span>
+                </div>
+              )}
+              {/* Pulsing Effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-blue-400 rounded-xl opacity-0 group-hover:opacity-100 -z-10 animate-ping-slow transition-opacity duration-500"></div>
             </div>
-            {/* Pulsing Effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-blue-400 rounded-xl opacity-0 group-hover:opacity-100 -z-10 animate-ping-slow transition-opacity duration-500"></div>
-          </div>
 
           {/* Name with Enhanced Typography */}
           <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent group-hover:from-purple-700 group-hover:to-blue-700 transition-all duration-500 transform group-hover:scale-105">
@@ -94,7 +71,7 @@ const Header = () => {
             <li>
               <a
                 href="/assets/nabeel.pdf"
-                onClick={handleDownloadCV}
+                download="Nabeel_Ijaz_Resume.pdf"
                 className="text-purple-600 hover:text-purple-700 font-medium transition-all duration-500 flex items-center gap-1 group bg-purple-50 px-4 py-2 rounded-full border border-purple-200 hover:bg-purple-100 shadow-sm"
                 title="Download CV"
               >
@@ -150,7 +127,8 @@ const Header = () => {
             <li>
               <a
                 href="/assets/nabeel.pdf"
-                onClick={(e) => { handleDownloadCV(e); setIsMobileMenuOpen(false); }}
+                download="Nabeel_Ijaz_Resume.pdf"
+                onClick={() => setIsMobileMenuOpen(false)}
                 className="inline-flex items-center gap-2 text-purple-600 hover:text-purple-700 font-medium text-lg mt-2 bg-purple-50 px-4 py-2 rounded-lg border border-purple-200"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

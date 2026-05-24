@@ -4,28 +4,6 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   const [isVisible, setIsVisible] = useState(false);
 
-  const handleDownloadCV = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch("/assets/nabeel.pdf");
-      if (!response.ok) {
-        throw new Error("File not found");
-      }
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", "Nabeel_Ijaz_Resume.pdf");
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      window.URL.revokeObjectURL(url);
-    } catch (error) {
-      console.error("CV Download failed:", error);
-      alert("Oops! The CV file is currently not available. Please contact the administrator.");
-    }
-  };
-
   useEffect(() => {
     setIsVisible(true);
   }, []);
@@ -153,7 +131,7 @@ const Footer = () => {
 
               <a
                 href="/assets/nabeel.pdf"
-                onClick={handleDownloadCV}
+                download="Nabeel_Ijaz_Resume.pdf"
                 className="inline-flex items-center justify-center border-2 border-purple-400 text-purple-300 px-8 py-3 rounded-full font-semibold hover:bg-purple-400/20 hover:text-white transition-all duration-300 transform hover:scale-105 shadow-lg group"
               >
                 <span className="mr-2">Download CV</span>
