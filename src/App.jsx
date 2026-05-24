@@ -13,6 +13,9 @@ import ContactPage from "./components/ContactPage";
 import { Link } from "react-router-dom";
 
 const Home = () => {
+  const [hoveredAries, setHoveredAries] = React.useState(false);
+  const [hoveredLibra, setHoveredLibra] = React.useState(false);
+
   return (
     <div>
       <CustomCursor /> {/* Add custom cursor here */}
@@ -21,57 +24,190 @@ const Home = () => {
         <section id="home" className="min-h-screen flex items-center justify-center theme-gradient-bg relative overflow-hidden">
           {/* Drifting Background Orbs */}
           <div className="absolute inset-0 opacity-20 pointer-events-none">
-            <div className="absolute top-[10%] left-[15%] w-80 h-80 rounded-full blur-3xl animate-drift-1" style={{ backgroundColor: 'var(--primary-color)' }}></div>
-            <div className="absolute bottom-[15%] right-[10%] w-96 h-96 rounded-full blur-3xl animate-drift-2" style={{ backgroundColor: 'var(--secondary-color)' }}></div>
-            <div className="absolute bottom-[10%] left-[20%] w-72 h-72 rounded-full blur-3xl animate-drift-3" style={{ backgroundColor: 'var(--primary-color)' }}></div>
-            <div className="absolute top-[20%] right-[15%] w-64 h-64 rounded-full blur-2xl animate-drift-1" style={{ backgroundColor: 'var(--secondary-color)', animationDelay: '-5s' }}></div>
+            <div className="absolute top-[10%] left-[15%] w-80 h-80 rounded-full blur-3xl" style={{ backgroundColor: 'var(--primary-color)', animation: 'space-drift-1 25s ease-in-out infinite' }}></div>
+            <div className="absolute bottom-[15%] right-[10%] w-96 h-96 rounded-full blur-3xl" style={{ backgroundColor: 'var(--secondary-color)', animation: 'space-drift-2 30s ease-in-out infinite' }}></div>
+            <div className="absolute bottom-[10%] left-[20%] w-72 h-72 rounded-full blur-3xl" style={{ backgroundColor: 'var(--primary-color)', animation: 'space-drift-3 35s ease-in-out infinite' }}></div>
+            <div className="absolute top-[20%] right-[15%] w-64 h-64 rounded-full blur-2xl" style={{ backgroundColor: 'var(--secondary-color)', animation: 'space-drift-1 25s ease-in-out infinite', animationDelay: '-5s' }}></div>
           </div>
 
           {/* Aries Constellation (Left Side) */}
-          <div className="absolute left-[3%] md:left-[8%] top-[25%] w-[220px] h-[220px] md:w-[280px] md:h-[280px] pointer-events-none opacity-25 md:opacity-40 z-0">
+          <div 
+            className="absolute left-[3%] md:left-[8%] top-[25%] w-[220px] h-[220px] md:w-[280px] md:h-[280px] pointer-events-none z-0 transition-opacity duration-300"
+            style={{ opacity: hoveredAries ? 0.9 : 0.4 }}
+          >
             <svg className="w-full h-full" viewBox="0 0 100 100">
               {/* Lines */}
-              <line x1="30" y1="20" x2="45" y2="40" stroke="var(--accent-color)" strokeWidth="0.5" strokeDasharray="3 3" opacity="0.6" />
-              <line x1="45" y1="40" x2="65" y2="65" stroke="var(--accent-color)" strokeWidth="0.5" strokeDasharray="3 3" opacity="0.6" />
-              <line x1="65" y1="65" x2="75" y2="85" stroke="var(--accent-color)" strokeWidth="0.5" strokeDasharray="3 3" opacity="0.6" />
+              <line 
+                x1="30" y1="20" x2="45" y2="40" 
+                stroke={hoveredAries ? "var(--secondary-color)" : "var(--accent-color)"} 
+                strokeWidth={hoveredAries ? "1.2" : "0.5"} 
+                strokeDasharray={hoveredAries ? "none" : "3 3"} 
+                opacity={hoveredAries ? "0.9" : "0.6"}
+                className="transition-all duration-300"
+              />
+              <line 
+                x1="45" y1="40" x2="65" y2="65" 
+                stroke={hoveredAries ? "var(--secondary-color)" : "var(--accent-color)"} 
+                strokeWidth={hoveredAries ? "1.2" : "0.5"} 
+                strokeDasharray={hoveredAries ? "none" : "3 3"} 
+                opacity={hoveredAries ? "0.9" : "0.6"}
+                className="transition-all duration-300"
+              />
+              <line 
+                x1="65" y1="65" x2="75" y2="85" 
+                stroke={hoveredAries ? "var(--secondary-color)" : "var(--accent-color)"} 
+                strokeWidth={hoveredAries ? "1.2" : "0.5"} 
+                strokeDasharray={hoveredAries ? "none" : "3 3"} 
+                opacity={hoveredAries ? "0.9" : "0.6"}
+                className="transition-all duration-300"
+              />
               
               {/* Stars */}
               {/* Hamal */}
-              <circle cx="45" cy="40" r="2.2" className="constellation-star" style={{ fill: 'var(--primary-color)' }} />
+              <circle 
+                cx="45" cy="40" r="2.2" 
+                className="constellation-star pointer-events-auto cursor-pointer" 
+                style={{ fill: 'var(--primary-color)' }}
+                onMouseEnter={() => setHoveredAries(true)}
+                onMouseLeave={() => setHoveredAries(false)}
+              />
               {/* Sheratan */}
-              <circle cx="65" cy="65" r="1.8" className="constellation-star" style={{ fill: 'var(--secondary-color)', animationDelay: '1s' }} />
+              <circle 
+                cx="65" cy="65" r="1.8" 
+                className="constellation-star pointer-events-auto cursor-pointer" 
+                style={{ fill: 'var(--secondary-color)', animationDelay: '1s' }}
+                onMouseEnter={() => setHoveredAries(true)}
+                onMouseLeave={() => setHoveredAries(false)}
+              />
               {/* Mesarthim */}
-              <circle cx="75" cy="85" r="1.5" className="constellation-star" style={{ fill: 'var(--accent-color)', animationDelay: '2s' }} />
+              <circle 
+                cx="75" cy="85" r="1.5" 
+                className="constellation-star pointer-events-auto cursor-pointer" 
+                style={{ fill: 'var(--accent-color)', animationDelay: '2s' }}
+                onMouseEnter={() => setHoveredAries(true)}
+                onMouseLeave={() => setHoveredAries(false)}
+              />
               {/* 41 Arietis */}
-              <circle cx="30" cy="20" r="1.2" className="constellation-star" style={{ fill: 'var(--secondary-color)', animationDelay: '0.5s' }} />
+              <circle 
+                cx="30" cy="20" r="1.2" 
+                className="constellation-star pointer-events-auto cursor-pointer" 
+                style={{ fill: 'var(--secondary-color)', animationDelay: '0.5s' }}
+                onMouseEnter={() => setHoveredAries(true)}
+                onMouseLeave={() => setHoveredAries(false)}
+              />
             </svg>
-            <span className="absolute left-[10%] top-[5%] text-[9px] font-mono tracking-widest text-white/30 uppercase">Aries</span>
+            <span 
+              className="absolute left-[10%] top-[5%] text-[9px] font-mono tracking-widest uppercase transition-colors duration-300"
+              style={{ color: hoveredAries ? 'var(--secondary-color)' : 'rgba(255, 255, 255, 0.3)' }}
+            >
+              Aries
+            </span>
           </div>
 
           {/* Libra Constellation (Right Side) */}
-          <div className="absolute right-[3%] md:right-[8%] top-[30%] w-[240px] h-[240px] md:w-[300px] md:h-[300px] pointer-events-none opacity-25 md:opacity-40 z-0">
+          <div 
+            className="absolute right-[3%] md:right-[8%] top-[30%] w-[240px] h-[240px] md:w-[300px] md:h-[300px] pointer-events-none z-0 transition-opacity duration-300"
+            style={{ opacity: hoveredLibra ? 0.9 : 0.4 }}
+          >
             <svg className="w-full h-full" viewBox="0 0 100 100">
               {/* Lines */}
-              <line x1="50" y1="20" x2="25" y2="55" stroke="var(--accent-color)" strokeWidth="0.5" strokeDasharray="3 3" opacity="0.6" />
-              <line x1="50" y1="20" x2="75" y2="40" stroke="var(--accent-color)" strokeWidth="0.5" strokeDasharray="3 3" opacity="0.6" />
-              <line x1="25" y1="55" x2="75" y2="40" stroke="var(--accent-color)" strokeWidth="0.5" strokeDasharray="3 3" opacity="0.6" />
-              <line x1="25" y1="55" x2="30" y2="75" stroke="var(--accent-color)" strokeWidth="0.5" strokeDasharray="3 3" opacity="0.6" />
-              <line x1="25" y1="55" x2="60" y2="80" stroke="var(--accent-color)" strokeWidth="0.5" strokeDasharray="3 3" opacity="0.6" />
-              <line x1="60" y1="80" x2="30" y2="75" stroke="var(--accent-color)" strokeWidth="0.5" strokeDasharray="3 3" opacity="0.6" />
+              <line 
+                x1="50" y1="20" x2="25" y2="55" 
+                stroke={hoveredLibra ? "var(--secondary-color)" : "var(--accent-color)"} 
+                strokeWidth={hoveredLibra ? "1.2" : "0.5"} 
+                strokeDasharray={hoveredLibra ? "none" : "3 3"} 
+                opacity={hoveredLibra ? "0.9" : "0.6"}
+                className="transition-all duration-300"
+              />
+              <line 
+                x1="50" y1="20" x2="75" y2="40" 
+                stroke={hoveredLibra ? "var(--secondary-color)" : "var(--accent-color)"} 
+                strokeWidth={hoveredLibra ? "1.2" : "0.5"} 
+                strokeDasharray={hoveredLibra ? "none" : "3 3"} 
+                opacity={hoveredLibra ? "0.9" : "0.6"}
+                className="transition-all duration-300"
+              />
+              <line 
+                x1="25" y1="55" x2="75" y2="40" 
+                stroke={hoveredLibra ? "var(--secondary-color)" : "var(--accent-color)"} 
+                strokeWidth={hoveredLibra ? "1.2" : "0.5"} 
+                strokeDasharray={hoveredLibra ? "none" : "3 3"} 
+                opacity={hoveredLibra ? "0.9" : "0.6"}
+                className="transition-all duration-300"
+              />
+              <line 
+                x1="25" y1="55" x2="30" y2="75" 
+                stroke={hoveredLibra ? "var(--secondary-color)" : "var(--accent-color)"} 
+                strokeWidth={hoveredLibra ? "1.2" : "0.5"} 
+                strokeDasharray={hoveredLibra ? "none" : "3 3"} 
+                opacity={hoveredLibra ? "0.9" : "0.6"}
+                className="transition-all duration-300"
+              />
+              <line 
+                x1="25" y1="55" x2="60" y2="80" 
+                stroke={hoveredLibra ? "var(--secondary-color)" : "var(--accent-color)"} 
+                strokeWidth={hoveredLibra ? "1.2" : "0.5"} 
+                strokeDasharray={hoveredLibra ? "none" : "3 3"} 
+                opacity={hoveredLibra ? "0.9" : "0.6"}
+                className="transition-all duration-300"
+              />
+              <line 
+                x1="60" y1="80" x2="30" y2="75" 
+                stroke={hoveredLibra ? "var(--secondary-color)" : "var(--accent-color)"} 
+                strokeWidth={hoveredLibra ? "1.2" : "0.5"} 
+                strokeDasharray={hoveredLibra ? "none" : "3 3"} 
+                opacity={hoveredLibra ? "0.9" : "0.6"}
+                className="transition-all duration-300"
+              />
               
               {/* Stars */}
               {/* Zubeneschamali */}
-              <circle cx="50" cy="20" r="2.2" className="constellation-star" style={{ fill: 'var(--primary-color)' }} />
+              <circle 
+                cx="50" cy="20" r="2.2" 
+                className="constellation-star pointer-events-auto cursor-pointer" 
+                style={{ fill: 'var(--primary-color)' }}
+                onMouseEnter={() => setHoveredLibra(true)}
+                onMouseLeave={() => setHoveredLibra(false)}
+              />
               {/* Zubenelgenubi */}
-              <circle cx="25" cy="55" r="2.4" className="constellation-star" style={{ fill: 'var(--secondary-color)', animationDelay: '1.5s' }} />
+              <circle 
+                cx="25" cy="55" r="2.4" 
+                className="constellation-star pointer-events-auto cursor-pointer" 
+                style={{ fill: 'var(--secondary-color)', animationDelay: '1.5s' }}
+                onMouseEnter={() => setHoveredLibra(true)}
+                onMouseLeave={() => setHoveredLibra(false)}
+              />
               {/* Zubenelhakrabi */}
-              <circle cx="75" cy="40" r="1.8" className="constellation-star" style={{ fill: 'var(--accent-color)', animationDelay: '0.7s' }} />
+              <circle 
+                cx="75" cy="40" r="1.8" 
+                className="constellation-star pointer-events-auto cursor-pointer" 
+                style={{ fill: 'var(--accent-color)', animationDelay: '0.7s' }}
+                onMouseEnter={() => setHoveredLibra(true)}
+                onMouseLeave={() => setHoveredLibra(false)}
+              />
               {/* Brachium */}
-              <circle cx="60" cy="80" r="1.8" className="constellation-star" style={{ fill: 'var(--secondary-color)', animationDelay: '2.2s' }} />
+              <circle 
+                cx="60" cy="80" r="1.8" 
+                className="constellation-star pointer-events-auto cursor-pointer" 
+                style={{ fill: 'var(--secondary-color)', animationDelay: '2.2s' }}
+                onMouseEnter={() => setHoveredLibra(true)}
+                onMouseLeave={() => setHoveredLibra(false)}
+              />
               {/* upsilon Librae */}
-              <circle cx="30" cy="75" r="1.5" className="constellation-star" style={{ fill: 'var(--accent-color)', animationDelay: '1s' }} />
+              <circle 
+                cx="30" cy="75" r="1.5" 
+                className="constellation-star pointer-events-auto cursor-pointer" 
+                style={{ fill: 'var(--accent-color)', animationDelay: '1s' }}
+                onMouseEnter={() => setHoveredLibra(true)}
+                onMouseLeave={() => setHoveredLibra(false)}
+              />
             </svg>
-            <span className="absolute right-[10%] top-[5%] text-[9px] font-mono tracking-widest text-white/30 uppercase">Libra</span>
+            <span 
+              className="absolute right-[10%] top-[5%] text-[9px] font-mono tracking-widest uppercase transition-colors duration-300"
+              style={{ color: hoveredLibra ? 'var(--secondary-color)' : 'rgba(255, 255, 255, 0.3)' }}
+            >
+              Libra
+            </span>
           </div>
 
           <div className="absolute inset-0 overflow-hidden">

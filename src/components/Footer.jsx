@@ -91,7 +91,7 @@ const Footer = () => {
             <p className="text-gray-300 mb-6 text-lg leading-relaxed transform hover:translate-x-2 transition-transform duration-300">
               Interested in collaborating? Feel free to reach out for opportunities in AI, Cloud Computing, or Full-Stack Development.
             </p>
-             <div className="flex items-center justify-center md:justify-start text-gray-300 group transform hover:translate-x-2 transition-all duration-300">
+            <div className="flex items-center justify-center md:justify-start text-gray-300 group transform hover:translate-x-2 transition-all duration-300">
               <div className="relative">
                 <svg className="w-6 h-6 mr-4 group-hover:scale-110 transition-transform duration-300" style={{ color: 'var(--secondary-color)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -209,7 +209,7 @@ const Footer = () => {
             </div>
 
             <p className="text-gray-300 text-sm">
-              © {new Date().getFullYear()} Crafted with <span className="text-red-400 animate-pulse">❤️</span> and modern technologies
+              © {new Date().getFullYear()} Coded <span className="text-red-400 animate-pulse">with</span> purpose
             </p>
             <p className="text-gray-400 text-xs">
               Software Engineering Student at University of Central Punjab
