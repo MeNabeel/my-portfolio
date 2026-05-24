@@ -713,6 +713,58 @@ html {
   background: rgba(147, 51, 234, 0.2);
 }
 
+/* Orbital background drift animations */
+@keyframes space-drift-1 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translate(80px, -60px) scale(1.15) rotate(180deg);
+  }
+}
+@keyframes space-drift-2 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1.1) rotate(0deg);
+  }
+  50% {
+    transform: translate(-100px, 80px) scale(0.9) rotate(-180deg);
+  }
+}
+@keyframes space-drift-3 {
+  0%, 100% {
+    transform: translate(0, 0) scale(0.95) rotate(0deg);
+  }
+  50% {
+    transform: translate(60px, 100px) scale(1.1) rotate(120deg);
+  }
+}
+
+.animate-drift-1 {
+  animation: space-drift-1 25s ease-in-out infinite;
+}
+.animate-drift-2 {
+  animation: space-drift-2 30s ease-in-out infinite;
+}
+.animate-drift-3 {
+  animation: space-drift-3 35s ease-in-out infinite;
+}
+
+/* Constellation custom star node styles */
+@keyframes star-glow {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 8px var(--accent-color), 0 0 16px var(--secondary-color);
+  }
+  50% {
+    transform: scale(1.2);
+    box-shadow: 0 0 16px var(--accent-color), 0 0 24px var(--secondary-color);
+  }
+}
+
+.constellation-star {
+  animation: star-glow 4s ease-in-out infinite;
+}
+
 /* Backdrop blur support */
 @supports (backdrop-filter: blur(12px)) {
   .backdrop-blur-md {

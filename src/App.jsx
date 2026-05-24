@@ -18,14 +18,61 @@ const Home = () => {
       <Header />
       <main>
         <section id="home" className="min-h-screen flex items-center justify-center theme-gradient-bg relative overflow-hidden">
-          {/* Your existing home section content */}
-          <div className="absolute inset-0 opacity-15">
-            <div className="absolute top-1/4 left-1/4 w-72 h-72 rounded-full blur-3xl animate-pulse" style={{ backgroundColor: 'var(--primary-color)' }}></div>
-            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl animate-pulse delay-1000" style={{ backgroundColor: 'var(--secondary-color)' }}></div>
-            <div className="absolute top-3/4 left-1/3 w-64 h-64 rounded-full blur-3xl animate-bounce delay-500" style={{ backgroundColor: 'var(--secondary-color)' }}></div>
-            <div className="absolute top-1/3 right-1/4 w-48 h-48 rounded-full blur-2xl animate-ping delay-700" style={{ backgroundColor: 'var(--primary-color)' }}></div>
+          {/* Drifting Background Orbs */}
+          <div className="absolute inset-0 opacity-20 pointer-events-none">
+            <div className="absolute top-[10%] left-[15%] w-80 h-80 rounded-full blur-3xl animate-drift-1" style={{ backgroundColor: 'var(--primary-color)' }}></div>
+            <div className="absolute bottom-[15%] right-[10%] w-96 h-96 rounded-full blur-3xl animate-drift-2" style={{ backgroundColor: 'var(--secondary-color)' }}></div>
+            <div className="absolute bottom-[10%] left-[20%] w-72 h-72 rounded-full blur-3xl animate-drift-3" style={{ backgroundColor: 'var(--primary-color)' }}></div>
+            <div className="absolute top-[20%] right-[15%] w-64 h-64 rounded-full blur-2xl animate-drift-1" style={{ backgroundColor: 'var(--secondary-color)', animationDelay: '-5s' }}></div>
           </div>
-          
+
+          {/* Aries Constellation (Left Side) */}
+          <div className="absolute left-[3%] md:left-[8%] top-[25%] w-[220px] h-[220px] md:w-[280px] md:h-[280px] pointer-events-none opacity-25 md:opacity-40 z-0">
+            <svg className="w-full h-full" viewBox="0 0 100 100">
+              {/* Lines */}
+              <line x1="30" y1="20" x2="45" y2="40" stroke="var(--accent-color)" strokeWidth="0.5" strokeDasharray="3 3" opacity="0.6" />
+              <line x1="45" y1="40" x2="65" y2="65" stroke="var(--accent-color)" strokeWidth="0.5" strokeDasharray="3 3" opacity="0.6" />
+              <line x1="65" y1="65" x2="75" y2="85" stroke="var(--accent-color)" strokeWidth="0.5" strokeDasharray="3 3" opacity="0.6" />
+              
+              {/* Stars */}
+              {/* Hamal */}
+              <circle cx="45" cy="40" r="2.2" className="constellation-star" style={{ fill: 'var(--primary-color)' }} />
+              {/* Sheratan */}
+              <circle cx="65" cy="65" r="1.8" className="constellation-star" style={{ fill: 'var(--secondary-color)', animationDelay: '1s' }} />
+              {/* Mesarthim */}
+              <circle cx="75" cy="85" r="1.5" className="constellation-star" style={{ fill: 'var(--accent-color)', animationDelay: '2s' }} />
+              {/* 41 Arietis */}
+              <circle cx="30" cy="20" r="1.2" className="constellation-star" style={{ fill: 'var(--secondary-color)', animationDelay: '0.5s' }} />
+            </svg>
+            <span className="absolute left-[10%] top-[5%] text-[9px] font-mono tracking-widest text-white/30 uppercase">Aries</span>
+          </div>
+
+          {/* Libra Constellation (Right Side) */}
+          <div className="absolute right-[3%] md:right-[8%] top-[30%] w-[240px] h-[240px] md:w-[300px] md:h-[300px] pointer-events-none opacity-25 md:opacity-40 z-0">
+            <svg className="w-full h-full" viewBox="0 0 100 100">
+              {/* Lines */}
+              <line x1="50" y1="20" x2="25" y2="55" stroke="var(--accent-color)" strokeWidth="0.5" strokeDasharray="3 3" opacity="0.6" />
+              <line x1="50" y1="20" x2="75" y2="40" stroke="var(--accent-color)" strokeWidth="0.5" strokeDasharray="3 3" opacity="0.6" />
+              <line x1="25" y1="55" x2="75" y2="40" stroke="var(--accent-color)" strokeWidth="0.5" strokeDasharray="3 3" opacity="0.6" />
+              <line x1="25" y1="55" x2="30" y2="75" stroke="var(--accent-color)" strokeWidth="0.5" strokeDasharray="3 3" opacity="0.6" />
+              <line x1="25" y1="55" x2="60" y2="80" stroke="var(--accent-color)" strokeWidth="0.5" strokeDasharray="3 3" opacity="0.6" />
+              <line x1="60" y1="80" x2="30" y2="75" stroke="var(--accent-color)" strokeWidth="0.5" strokeDasharray="3 3" opacity="0.6" />
+              
+              {/* Stars */}
+              {/* Zubeneschamali */}
+              <circle cx="50" cy="20" r="2.2" className="constellation-star" style={{ fill: 'var(--primary-color)' }} />
+              {/* Zubenelgenubi */}
+              <circle cx="25" cy="55" r="2.4" className="constellation-star" style={{ fill: 'var(--secondary-color)', animationDelay: '1.5s' }} />
+              {/* Zubenelhakrabi */}
+              <circle cx="75" cy="40" r="1.8" className="constellation-star" style={{ fill: 'var(--accent-color)', animationDelay: '0.7s' }} />
+              {/* Brachium */}
+              <circle cx="60" cy="80" r="1.8" className="constellation-star" style={{ fill: 'var(--secondary-color)', animationDelay: '2.2s' }} />
+              {/* upsilon Librae */}
+              <circle cx="30" cy="75" r="1.5" className="constellation-star" style={{ fill: 'var(--accent-color)', animationDelay: '1s' }} />
+            </svg>
+            <span className="absolute right-[10%] top-[5%] text-[9px] font-mono tracking-widest text-white/30 uppercase">Libra</span>
+          </div>
+
           <div className="absolute inset-0 overflow-hidden">
             {[...Array(20)].map((_, i) => (
               <div
