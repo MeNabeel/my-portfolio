@@ -10,6 +10,13 @@ const TicTacToeIcon = () => {
   const [userSymbol, setUserSymbol] = useState("X"); // User can choose X or O
   const [difficulty, setDifficulty] = useState("medium"); // easy, medium, hard
 
+  // Listen for global command triggers to launch the game
+  useEffect(() => {
+    const handlePlayGame = () => setIsOpen(true);
+    window.addEventListener("play-game", handlePlayGame);
+    return () => window.removeEventListener("play-game", handlePlayGame);
+  }, []);
+
   // AI move logic
   const getAIMove = (currentBoard, symbol) => {
     const opponentSymbol = symbol === 'X' ? 'O' : 'X';

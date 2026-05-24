@@ -7,6 +7,7 @@ import Certificates from "./components/Certificates";
 import Footer from "./components/Footer";
 import ProjectDetail from "./components/ProjectDetail";
 import TicTacToeIcon from "./components/TicTacToeIcon";
+import CliConsole from "./components/CliConsole";
 import CustomCursor from "./components/cursor/CustomCursor"; // Import the custom cursor
 import ContactPage from "./components/ContactPage";
 import { Link } from "react-router-dom";
@@ -137,6 +138,7 @@ const Home = () => {
       </main>
       <Footer />
       <TicTacToeIcon />
+      <CliConsole />
     </div>
   );
 };
