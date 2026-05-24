@@ -35,7 +35,7 @@ const Home = () => {
             className="absolute left-[3%] md:left-[8%] top-[25%] w-[220px] h-[220px] md:w-[280px] md:h-[280px] pointer-events-none z-0 transition-opacity duration-300"
             style={{ opacity: hoveredAries ? 0.9 : 0.4 }}
           >
-            <svg className="w-full h-full" viewBox="0 0 100 100">
+            <svg className="w-full h-full pointer-events-none" viewBox="0 0 100 100">
               {/* Lines */}
               <line 
                 x1="30" y1="20" x2="45" y2="40" 
@@ -61,41 +61,46 @@ const Home = () => {
                 opacity={hoveredAries ? "0.9" : "0.6"}
                 className="transition-all duration-300"
               />
-              
-              {/* Stars */}
-              {/* Hamal */}
-              <circle 
-                cx="45" cy="40" r="2.2" 
-                className="constellation-star pointer-events-auto cursor-pointer" 
-                style={{ fill: 'var(--primary-color)' }}
-                onMouseEnter={() => setHoveredAries(true)}
-                onMouseLeave={() => setHoveredAries(false)}
-              />
-              {/* Sheratan */}
-              <circle 
-                cx="65" cy="65" r="1.8" 
-                className="constellation-star pointer-events-auto cursor-pointer" 
-                style={{ fill: 'var(--secondary-color)', animationDelay: '1s' }}
-                onMouseEnter={() => setHoveredAries(true)}
-                onMouseLeave={() => setHoveredAries(false)}
-              />
-              {/* Mesarthim */}
-              <circle 
-                cx="75" cy="85" r="1.5" 
-                className="constellation-star pointer-events-auto cursor-pointer" 
-                style={{ fill: 'var(--accent-color)', animationDelay: '2s' }}
-                onMouseEnter={() => setHoveredAries(true)}
-                onMouseLeave={() => setHoveredAries(false)}
-              />
-              {/* 41 Arietis */}
-              <circle 
-                cx="30" cy="20" r="1.2" 
-                className="constellation-star pointer-events-auto cursor-pointer" 
-                style={{ fill: 'var(--secondary-color)', animationDelay: '0.5s' }}
-                onMouseEnter={() => setHoveredAries(true)}
-                onMouseLeave={() => setHoveredAries(false)}
-              />
             </svg>
+
+            {/* Interactive Stars (Absolute divs capture hover perfectly) */}
+            {/* Hamal */}
+            <div 
+              className="absolute w-5 h-5 -ml-2.5 -mt-2.5 rounded-full cursor-pointer z-10 flex items-center justify-center pointer-events-auto"
+              style={{ left: '45%', top: '40%' }}
+              onMouseEnter={() => setHoveredAries(true)}
+              onMouseLeave={() => setHoveredAries(false)}
+            >
+              <div className="w-2.5 h-2.5 rounded-full constellation-star" style={{ backgroundColor: 'var(--primary-color)' }}></div>
+            </div>
+            {/* Sheratan */}
+            <div 
+              className="absolute w-5 h-5 -ml-2.5 -mt-2.5 rounded-full cursor-pointer z-10 flex items-center justify-center pointer-events-auto"
+              style={{ left: '65%', top: '65%' }}
+              onMouseEnter={() => setHoveredAries(true)}
+              onMouseLeave={() => setHoveredAries(false)}
+            >
+              <div className="w-2 h-2 rounded-full constellation-star" style={{ backgroundColor: 'var(--secondary-color)', animationDelay: '1s' }}></div>
+            </div>
+            {/* Mesarthim */}
+            <div 
+              className="absolute w-5 h-5 -ml-2.5 -mt-2.5 rounded-full cursor-pointer z-10 flex items-center justify-center pointer-events-auto"
+              style={{ left: '75%', top: '85%' }}
+              onMouseEnter={() => setHoveredAries(true)}
+              onMouseLeave={() => setHoveredAries(false)}
+            >
+              <div className="w-1.5 h-1.5 rounded-full constellation-star" style={{ backgroundColor: 'var(--accent-color)', animationDelay: '2s' }}></div>
+            </div>
+            {/* 41 Arietis */}
+            <div 
+              className="absolute w-5 h-5 -ml-2.5 -mt-2.5 rounded-full cursor-pointer z-10 flex items-center justify-center pointer-events-auto"
+              style={{ left: '30%', top: '20%' }}
+              onMouseEnter={() => setHoveredAries(true)}
+              onMouseLeave={() => setHoveredAries(false)}
+            >
+              <div className="w-1.5 h-1.5 rounded-full constellation-star" style={{ backgroundColor: 'var(--secondary-color)', animationDelay: '0.5s' }}></div>
+            </div>
+
             <span 
               className="absolute left-[10%] top-[5%] text-[9px] font-mono tracking-widest uppercase transition-colors duration-300"
               style={{ color: hoveredAries ? 'var(--secondary-color)' : 'rgba(255, 255, 255, 0.3)' }}
@@ -109,7 +114,7 @@ const Home = () => {
             className="absolute right-[3%] md:right-[8%] top-[30%] w-[240px] h-[240px] md:w-[300px] md:h-[300px] pointer-events-none z-0 transition-opacity duration-300"
             style={{ opacity: hoveredLibra ? 0.9 : 0.4 }}
           >
-            <svg className="w-full h-full" viewBox="0 0 100 100">
+            <svg className="w-full h-full pointer-events-none" viewBox="0 0 100 100">
               {/* Lines */}
               <line 
                 x1="50" y1="20" x2="25" y2="55" 
@@ -159,49 +164,55 @@ const Home = () => {
                 opacity={hoveredLibra ? "0.9" : "0.6"}
                 className="transition-all duration-300"
               />
-              
-              {/* Stars */}
-              {/* Zubeneschamali */}
-              <circle 
-                cx="50" cy="20" r="2.2" 
-                className="constellation-star pointer-events-auto cursor-pointer" 
-                style={{ fill: 'var(--primary-color)' }}
-                onMouseEnter={() => setHoveredLibra(true)}
-                onMouseLeave={() => setHoveredLibra(false)}
-              />
-              {/* Zubenelgenubi */}
-              <circle 
-                cx="25" cy="55" r="2.4" 
-                className="constellation-star pointer-events-auto cursor-pointer" 
-                style={{ fill: 'var(--secondary-color)', animationDelay: '1.5s' }}
-                onMouseEnter={() => setHoveredLibra(true)}
-                onMouseLeave={() => setHoveredLibra(false)}
-              />
-              {/* Zubenelhakrabi */}
-              <circle 
-                cx="75" cy="40" r="1.8" 
-                className="constellation-star pointer-events-auto cursor-pointer" 
-                style={{ fill: 'var(--accent-color)', animationDelay: '0.7s' }}
-                onMouseEnter={() => setHoveredLibra(true)}
-                onMouseLeave={() => setHoveredLibra(false)}
-              />
-              {/* Brachium */}
-              <circle 
-                cx="60" cy="80" r="1.8" 
-                className="constellation-star pointer-events-auto cursor-pointer" 
-                style={{ fill: 'var(--secondary-color)', animationDelay: '2.2s' }}
-                onMouseEnter={() => setHoveredLibra(true)}
-                onMouseLeave={() => setHoveredLibra(false)}
-              />
-              {/* upsilon Librae */}
-              <circle 
-                cx="30" cy="75" r="1.5" 
-                className="constellation-star pointer-events-auto cursor-pointer" 
-                style={{ fill: 'var(--accent-color)', animationDelay: '1s' }}
-                onMouseEnter={() => setHoveredLibra(true)}
-                onMouseLeave={() => setHoveredLibra(false)}
-              />
             </svg>
+
+            {/* Interactive Stars */}
+            {/* Zubeneschamali */}
+            <div 
+              className="absolute w-5 h-5 -ml-2.5 -mt-2.5 rounded-full cursor-pointer z-10 flex items-center justify-center pointer-events-auto"
+              style={{ left: '50%', top: '20%' }}
+              onMouseEnter={() => setHoveredLibra(true)}
+              onMouseLeave={() => setHoveredLibra(false)}
+            >
+              <div className="w-2.2 h-2.2 rounded-full constellation-star" style={{ backgroundColor: 'var(--primary-color)' }}></div>
+            </div>
+            {/* Zubenelgenubi */}
+            <div 
+              className="absolute w-5 h-5 -ml-2.5 -mt-2.5 rounded-full cursor-pointer z-10 flex items-center justify-center pointer-events-auto"
+              style={{ left: '25%', top: '55%' }}
+              onMouseEnter={() => setHoveredLibra(true)}
+              onMouseLeave={() => setHoveredLibra(false)}
+            >
+              <div className="w-2.4 h-2.4 rounded-full constellation-star" style={{ backgroundColor: 'var(--secondary-color)', animationDelay: '1.5s' }}></div>
+            </div>
+            {/* Zubenelhakrabi */}
+            <div 
+              className="absolute w-5 h-5 -ml-2.5 -mt-2.5 rounded-full cursor-pointer z-10 flex items-center justify-center pointer-events-auto"
+              style={{ left: '75%', top: '40%' }}
+              onMouseEnter={() => setHoveredLibra(true)}
+              onMouseLeave={() => setHoveredLibra(false)}
+            >
+              <div className="w-1.8 h-1.8 rounded-full constellation-star" style={{ backgroundColor: 'var(--accent-color)', animationDelay: '0.7s' }}></div>
+            </div>
+            {/* Brachium */}
+            <div 
+              className="absolute w-5 h-5 -ml-2.5 -mt-2.5 rounded-full cursor-pointer z-10 flex items-center justify-center pointer-events-auto"
+              style={{ left: '60%', top: '80%' }}
+              onMouseEnter={() => setHoveredLibra(true)}
+              onMouseLeave={() => setHoveredLibra(false)}
+            >
+              <div className="w-1.8 h-1.8 rounded-full constellation-star" style={{ backgroundColor: 'var(--secondary-color)', animationDelay: '2.2s' }}></div>
+            </div>
+            {/* upsilon Librae */}
+            <div 
+              className="absolute w-5 h-5 -ml-2.5 -mt-2.5 rounded-full cursor-pointer z-10 flex items-center justify-center pointer-events-auto"
+              style={{ left: '30%', top: '75%' }}
+              onMouseEnter={() => setHoveredLibra(true)}
+              onMouseLeave={() => setHoveredLibra(false)}
+            >
+              <div className="w-1.5 h-1.5 rounded-full constellation-star" style={{ backgroundColor: 'var(--accent-color)', animationDelay: '1s' }}></div>
+            </div>
+
             <span 
               className="absolute right-[10%] top-[5%] text-[9px] font-mono tracking-widest uppercase transition-colors duration-300"
               style={{ color: hoveredLibra ? 'var(--secondary-color)' : 'rgba(255, 255, 255, 0.3)' }}

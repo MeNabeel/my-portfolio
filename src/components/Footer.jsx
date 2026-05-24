@@ -72,8 +72,8 @@ const Footer = () => {
         </div>
 
         {/* Gradient Orbs */}
-        <div className="absolute -bottom-32 -left-32 w-64 h-64 rounded-full opacity-10 blur-3xl animate-pulse" style={{ backgroundColor: 'var(--secondary-color)' }}></div>
-        <div className="absolute -top-32 -right-32 w-64 h-64 rounded-full opacity-10 blur-3xl animate-pulse" style={{ backgroundColor: 'var(--primary-color)', animationDelay: '2s' }}></div>
+        <div className="absolute -bottom-32 -left-32 w-64 h-64 rounded-full opacity-10 blur-3xl" style={{ backgroundColor: 'var(--secondary-color)', animation: 'space-drift-1 25s ease-in-out infinite' }}></div>
+        <div className="absolute -top-32 -right-32 w-64 h-64 rounded-full opacity-10 blur-3xl" style={{ backgroundColor: 'var(--primary-color)', animation: 'space-drift-2 30s ease-in-out infinite', animationDelay: '2s' }}></div>
 
         {/* Animated Grid */}
         <div className="absolute inset-0 opacity-5">
@@ -209,7 +209,7 @@ const Footer = () => {
             </div>
 
             <p className="text-gray-300 text-sm">
-              © {new Date().getFullYear()} Coded <span className="text-red-400 animate-pulse">with</span> purpose
+              © {new Date().getFullYear()} Coded <span className="text-red-400 animate-pulse">with</span> Purpose
             </p>
             <p className="text-gray-400 text-xs">
               Software Engineering Student at University of Central Punjab

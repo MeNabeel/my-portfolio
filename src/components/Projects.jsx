@@ -31,9 +31,9 @@ const Projects = () => {
       {/* Animated Background Elements */}
       <div className="absolute inset-0">
         {/* Floating Orbs */}
-        <div className="absolute top-10 left-10 w-72 h-72 rounded-full mix-blend-screen filter blur-xl opacity-10 animate-float" style={{ backgroundColor: 'var(--primary-color)' }}></div>
-        <div className="absolute top-40 right-10 w-96 h-96 rounded-full mix-blend-screen filter blur-xl opacity-10 animate-float" style={{ backgroundColor: 'var(--secondary-color)', animationDelay: '2s' }}></div>
-        <div className="absolute bottom-20 left-1/4 w-80 h-80 rounded-full mix-blend-screen filter blur-xl opacity-10 animate-float" style={{ backgroundColor: 'var(--primary-color)', animationDelay: '4s' }}></div>
+        <div className="absolute top-10 left-10 w-72 h-72 rounded-full mix-blend-screen filter blur-xl opacity-10" style={{ backgroundColor: 'var(--primary-color)', animation: 'space-drift-1 25s ease-in-out infinite' }}></div>
+        <div className="absolute top-40 right-10 w-96 h-96 rounded-full mix-blend-screen filter blur-xl opacity-10" style={{ backgroundColor: 'var(--secondary-color)', animation: 'space-drift-2 30s ease-in-out infinite', animationDelay: '2s' }}></div>
+        <div className="absolute bottom-20 left-1/4 w-80 h-80 rounded-full mix-blend-screen filter blur-xl opacity-10" style={{ backgroundColor: 'var(--primary-color)', animation: 'space-drift-3 35s ease-in-out infinite', animationDelay: '4s' }}></div>
         
         {/* Grid Pattern */}
         <div className="absolute inset-0 opacity-[0.03] bg-[length:50px_50px] bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)]"></div>

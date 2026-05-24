@@ -84,8 +84,8 @@ const Certificates = () => {
     <>
       <section id="certificates" className="py-20 theme-gradient-bg relative overflow-hidden text-white border-t border-white/5">
         {/* Background Elements */}
-        <div className="absolute top-20 left-10 w-64 h-64 rounded-full mix-blend-screen filter blur-xl opacity-10 animate-float" style={{ backgroundColor: 'var(--primary-color)' }}></div>
-        <div className="absolute bottom-20 right-10 w-80 h-80 rounded-full mix-blend-screen filter blur-xl opacity-10 animate-float" style={{ backgroundColor: 'var(--secondary-color)', animationDelay: '3s' }}></div>
+        <div className="absolute top-20 left-10 w-64 h-64 rounded-full mix-blend-screen filter blur-xl opacity-10" style={{ backgroundColor: 'var(--primary-color)', animation: 'space-drift-1 25s ease-in-out infinite' }}></div>
+        <div className="absolute bottom-20 right-10 w-80 h-80 rounded-full mix-blend-screen filter blur-xl opacity-10" style={{ backgroundColor: 'var(--secondary-color)', animation: 'space-drift-2 30s ease-in-out infinite', animationDelay: '3s' }}></div>
         
         {/* Animated Particles */}
         <div className="absolute inset-0 overflow-hidden">
@@ -219,8 +219,8 @@ const Certificates = () => {
             
             {/* Background elements */}
             <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-              <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600 rounded-full mix-blend-screen filter blur-[100px] opacity-35 animate-pulse"></div>
-              <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600 rounded-full mix-blend-screen filter blur-[100px] opacity-35 animate-pulse delay-1000"></div>
+              <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600 rounded-full mix-blend-screen filter blur-[100px] opacity-35" style={{ animation: 'space-drift-1 25s ease-in-out infinite' }}></div>
+              <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600 rounded-full mix-blend-screen filter blur-[100px] opacity-35" style={{ animation: 'space-drift-2 30s ease-in-out infinite' }}></div>
               <div className="absolute inset-0 bg-[length:50px_50px] bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] animate-grid-move"></div>
             </div>
 
