@@ -40,26 +40,32 @@ const Home = () => {
               <line 
                 x1="30" y1="20" x2="45" y2="40" 
                 stroke={hoveredAries ? "var(--secondary-color)" : "var(--accent-color)"} 
-                strokeWidth={hoveredAries ? "1.2" : "0.5"} 
+                strokeWidth={hoveredAries ? "1.5" : "0.5"} 
                 strokeDasharray={hoveredAries ? "none" : "3 3"} 
-                opacity={hoveredAries ? "0.9" : "0.6"}
-                className="transition-all duration-300"
+                opacity={hoveredAries ? "0.9" : "0.3"}
+                className="transition-all duration-300 pointer-events-auto cursor-pointer"
+                onMouseEnter={() => setHoveredAries(true)}
+                onMouseLeave={() => setHoveredAries(false)}
               />
               <line 
                 x1="45" y1="40" x2="65" y2="65" 
                 stroke={hoveredAries ? "var(--secondary-color)" : "var(--accent-color)"} 
-                strokeWidth={hoveredAries ? "1.2" : "0.5"} 
+                strokeWidth={hoveredAries ? "1.5" : "0.5"} 
                 strokeDasharray={hoveredAries ? "none" : "3 3"} 
-                opacity={hoveredAries ? "0.9" : "0.6"}
-                className="transition-all duration-300"
+                opacity={hoveredAries ? "0.9" : "0.3"}
+                className="transition-all duration-300 pointer-events-auto cursor-pointer"
+                onMouseEnter={() => setHoveredAries(true)}
+                onMouseLeave={() => setHoveredAries(false)}
               />
               <line 
                 x1="65" y1="65" x2="75" y2="85" 
                 stroke={hoveredAries ? "var(--secondary-color)" : "var(--accent-color)"} 
-                strokeWidth={hoveredAries ? "1.2" : "0.5"} 
+                strokeWidth={hoveredAries ? "1.5" : "0.5"} 
                 strokeDasharray={hoveredAries ? "none" : "3 3"} 
-                opacity={hoveredAries ? "0.9" : "0.6"}
-                className="transition-all duration-300"
+                opacity={hoveredAries ? "0.9" : "0.3"}
+                className="transition-all duration-300 pointer-events-auto cursor-pointer"
+                onMouseEnter={() => setHoveredAries(true)}
+                onMouseLeave={() => setHoveredAries(false)}
               />
             </svg>
 
@@ -100,13 +106,6 @@ const Home = () => {
             >
               <div className="w-1.5 h-1.5 rounded-full constellation-star" style={{ backgroundColor: 'var(--secondary-color)', animationDelay: '0.5s' }}></div>
             </div>
-
-            <span 
-              className="absolute left-[10%] top-[5%] text-[9px] font-mono tracking-widest uppercase transition-colors duration-300"
-              style={{ color: hoveredAries ? 'var(--secondary-color)' : 'rgba(255, 255, 255, 0.3)' }}
-            >
-              Aries
-            </span>
           </div>
 
           {/* Libra Constellation (Right Side) */}
@@ -119,50 +118,62 @@ const Home = () => {
               <line 
                 x1="50" y1="20" x2="25" y2="55" 
                 stroke={hoveredLibra ? "var(--secondary-color)" : "var(--accent-color)"} 
-                strokeWidth={hoveredLibra ? "1.2" : "0.5"} 
+                strokeWidth={hoveredLibra ? "1.5" : "0.5"} 
                 strokeDasharray={hoveredLibra ? "none" : "3 3"} 
-                opacity={hoveredLibra ? "0.9" : "0.6"}
-                className="transition-all duration-300"
+                opacity={hoveredLibra ? "0.9" : "0.3"}
+                className="transition-all duration-300 pointer-events-auto cursor-pointer"
+                onMouseEnter={() => setHoveredLibra(true)}
+                onMouseLeave={() => setHoveredLibra(false)}
               />
               <line 
                 x1="50" y1="20" x2="75" y2="40" 
                 stroke={hoveredLibra ? "var(--secondary-color)" : "var(--accent-color)"} 
-                strokeWidth={hoveredLibra ? "1.2" : "0.5"} 
+                strokeWidth={hoveredLibra ? "1.5" : "0.5"} 
                 strokeDasharray={hoveredLibra ? "none" : "3 3"} 
-                opacity={hoveredLibra ? "0.9" : "0.6"}
-                className="transition-all duration-300"
+                opacity={hoveredLibra ? "0.9" : "0.3"}
+                className="transition-all duration-300 pointer-events-auto cursor-pointer"
+                onMouseEnter={() => setHoveredLibra(true)}
+                onMouseLeave={() => setHoveredLibra(false)}
               />
               <line 
                 x1="25" y1="55" x2="75" y2="40" 
                 stroke={hoveredLibra ? "var(--secondary-color)" : "var(--accent-color)"} 
-                strokeWidth={hoveredLibra ? "1.2" : "0.5"} 
+                strokeWidth={hoveredLibra ? "1.5" : "0.5"} 
                 strokeDasharray={hoveredLibra ? "none" : "3 3"} 
-                opacity={hoveredLibra ? "0.9" : "0.6"}
-                className="transition-all duration-300"
+                opacity={hoveredLibra ? "0.9" : "0.3"}
+                className="transition-all duration-300 pointer-events-auto cursor-pointer"
+                onMouseEnter={() => setHoveredLibra(true)}
+                onMouseLeave={() => setHoveredLibra(false)}
               />
               <line 
                 x1="25" y1="55" x2="30" y2="75" 
                 stroke={hoveredLibra ? "var(--secondary-color)" : "var(--accent-color)"} 
-                strokeWidth={hoveredLibra ? "1.2" : "0.5"} 
+                strokeWidth={hoveredLibra ? "1.5" : "0.5"} 
                 strokeDasharray={hoveredLibra ? "none" : "3 3"} 
-                opacity={hoveredLibra ? "0.9" : "0.6"}
-                className="transition-all duration-300"
+                opacity={hoveredLibra ? "0.9" : "0.3"}
+                className="transition-all duration-300 pointer-events-auto cursor-pointer"
+                onMouseEnter={() => setHoveredLibra(true)}
+                onMouseLeave={() => setHoveredLibra(false)}
               />
               <line 
                 x1="25" y1="55" x2="60" y2="80" 
                 stroke={hoveredLibra ? "var(--secondary-color)" : "var(--accent-color)"} 
-                strokeWidth={hoveredLibra ? "1.2" : "0.5"} 
+                strokeWidth={hoveredLibra ? "1.5" : "0.5"} 
                 strokeDasharray={hoveredLibra ? "none" : "3 3"} 
-                opacity={hoveredLibra ? "0.9" : "0.6"}
-                className="transition-all duration-300"
+                opacity={hoveredLibra ? "0.9" : "0.3"}
+                className="transition-all duration-300 pointer-events-auto cursor-pointer"
+                onMouseEnter={() => setHoveredLibra(true)}
+                onMouseLeave={() => setHoveredLibra(false)}
               />
               <line 
                 x1="60" y1="80" x2="30" y2="75" 
                 stroke={hoveredLibra ? "var(--secondary-color)" : "var(--accent-color)"} 
-                strokeWidth={hoveredLibra ? "1.2" : "0.5"} 
+                strokeWidth={hoveredLibra ? "1.5" : "0.5"} 
                 strokeDasharray={hoveredLibra ? "none" : "3 3"} 
-                opacity={hoveredLibra ? "0.9" : "0.6"}
-                className="transition-all duration-300"
+                opacity={hoveredLibra ? "0.9" : "0.3"}
+                className="transition-all duration-300 pointer-events-auto cursor-pointer"
+                onMouseEnter={() => setHoveredLibra(true)}
+                onMouseLeave={() => setHoveredLibra(false)}
               />
             </svg>
 
@@ -174,7 +185,7 @@ const Home = () => {
               onMouseEnter={() => setHoveredLibra(true)}
               onMouseLeave={() => setHoveredLibra(false)}
             >
-              <div className="w-2.2 h-2.2 rounded-full constellation-star" style={{ backgroundColor: 'var(--primary-color)' }}></div>
+              <div className="w-2.5 h-2.5 rounded-full constellation-star" style={{ backgroundColor: 'var(--primary-color)' }}></div>
             </div>
             {/* Zubenelgenubi */}
             <div 
@@ -183,7 +194,7 @@ const Home = () => {
               onMouseEnter={() => setHoveredLibra(true)}
               onMouseLeave={() => setHoveredLibra(false)}
             >
-              <div className="w-2.4 h-2.4 rounded-full constellation-star" style={{ backgroundColor: 'var(--secondary-color)', animationDelay: '1.5s' }}></div>
+              <div className="w-2.5 h-2.5 rounded-full constellation-star" style={{ backgroundColor: 'var(--secondary-color)', animationDelay: '1.5s' }}></div>
             </div>
             {/* Zubenelhakrabi */}
             <div 
@@ -192,7 +203,7 @@ const Home = () => {
               onMouseEnter={() => setHoveredLibra(true)}
               onMouseLeave={() => setHoveredLibra(false)}
             >
-              <div className="w-1.8 h-1.8 rounded-full constellation-star" style={{ backgroundColor: 'var(--accent-color)', animationDelay: '0.7s' }}></div>
+              <div className="w-2 h-2 rounded-full constellation-star" style={{ backgroundColor: 'var(--accent-color)', animationDelay: '0.7s' }}></div>
             </div>
             {/* Brachium */}
             <div 
@@ -201,7 +212,7 @@ const Home = () => {
               onMouseEnter={() => setHoveredLibra(true)}
               onMouseLeave={() => setHoveredLibra(false)}
             >
-              <div className="w-1.8 h-1.8 rounded-full constellation-star" style={{ backgroundColor: 'var(--secondary-color)', animationDelay: '2.2s' }}></div>
+              <div className="w-2 h-2 rounded-full constellation-star" style={{ backgroundColor: 'var(--secondary-color)', animationDelay: '2.2s' }}></div>
             </div>
             {/* upsilon Librae */}
             <div 
@@ -212,13 +223,6 @@ const Home = () => {
             >
               <div className="w-1.5 h-1.5 rounded-full constellation-star" style={{ backgroundColor: 'var(--accent-color)', animationDelay: '1s' }}></div>
             </div>
-
-            <span 
-              className="absolute right-[10%] top-[5%] text-[9px] font-mono tracking-widest uppercase transition-colors duration-300"
-              style={{ color: hoveredLibra ? 'var(--secondary-color)' : 'rgba(255, 255, 255, 0.3)' }}
-            >
-              Libra
-            </span>
           </div>
 
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
