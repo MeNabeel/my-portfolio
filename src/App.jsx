@@ -28,8 +28,8 @@ const Home = () => {
       <Header />
       <main>
         <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-          {/* Main Hero Elements (Fades in after Boot sequence completes) */}
-          <div className={`w-full h-full absolute inset-0 transition-all duration-[1200ms] flex items-center justify-center ${isBooted ? 'opacity-100 pointer-events-auto filter-none' : 'opacity-0 pointer-events-none blur-md scale-95'}`}>
+          {/* Main Hero Elements */}
+          <div className="w-full h-full absolute inset-0 flex items-center justify-center opacity-100 pointer-events-auto">
 
           {/* Aries Constellation (Left Side) */}
           <div 

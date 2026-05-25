@@ -865,3 +865,29 @@ html {
     filter: blur(0);
   }
 }
+
+/* Futuristic Terminal Styles */
+.font-scifi {
+  font-family: 'Share Tech Mono', monospace !important;
+}
+
+.font-orbitron {
+  font-family: 'Orbitron', sans-serif !important;
+}
+
+.terminal-glass {
+  background: rgba(6, 3, 18, 0.82) !important;
+  backdrop-filter: blur(16px);
+  border: 1px solid color-mix(in srgb, var(--secondary-color) 25%, transparent) !important;
+  box-shadow: 0 0 25px color-mix(in srgb, var(--secondary-color) 12%, transparent) !important;
+}
+
+.terminal-text {
+  color: var(--secondary-color) !important;
+  text-shadow: 0 0 8px color-mix(in srgb, var(--secondary-color) 45%, transparent);
+}
+
+.terminal-titlebar {
+  background: color-mix(in srgb, var(--bg-gradient-via) 70%, #000) !important;
+  border-bottom: 1px solid color-mix(in srgb, var(--secondary-color) 15%, transparent) !important;
+}
