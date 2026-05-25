@@ -10,21 +10,23 @@ const PHASES = {
 
 const PHASE_LINES = {
   [PHASES.CONNECTING]: [
-    '> INITIALIZING SYSTEM...',
-    '> ORBIT STATUS : STABLE',
-    '> MARS LINK : CONNECTED',
-    '> VENUS LINK : CONNECTED'
+    { type: 'text', content: '> INITIALIZING SYSTEM...' },
+    { type: 'text', content: '> ENGINEER PROFILE DETECTED' },
+    { type: 'text', content: '> MISSION CODE : COSMOS_510' },
+    { type: 'binary', content: ['0001', '0101', '0000', '0100'] },
+    { type: 'text', content: '> ORBIT STATUS : STABLE' },
+    { type: 'text', content: '> MARS LINK : CONNECTED' },
+    { type: 'text', content: '> VENUS LINK : CONNECTED' }
   ],
   [PHASES.PROFILE]: [
-    '> ENGINEER PROFILE DETECTED',
-    '> ENGINEER : NABEEL IJAZ',
-    '> ROLE : SOFTWARE ENGINEER',
-    '> SPECIALIZATION : FULL-STACK • AI • CLOUD',
-    '> certified from Meta'
+    { type: 'text', content: '> ENGINEER : NABEEL IJAZ' },
+    { type: 'text', content: '> ROLE : SOFTWARE ENGINEER' },
+    { type: 'text', content: '> SPECIALIZATION : FULL-STACK • AI • CLOUD' },
+    { type: 'text', content: '> Certified from META' }
   ],
   [PHASES.WELCOME]: [
-    '> WELCOME, VISITOR.',
-    '> OPENING DIGITAL GATEWAY...'
+    { type: 'text', content: '> WELCOME, VISITOR.' },
+    { type: 'text', content: '> OPENING DIGITAL GATEWAY...' }
   ]
 };
 
@@ -35,6 +37,7 @@ export default function BootTerminal({ onBootComplete }) {
   const [lineIndex, setLineIndex] = useState(0);
   const [typedText, setTypedText] = useState("");
   const [completedLines, setCompletedLines] = useState([]);
+  const [visibleBinaryBoxes, setVisibleBinaryBoxes] = useState(0);
   const terminalBodyRef = useRef(null);
 
   // Auto-scroll inside the terminal content area only, without hijacking the browser window scroll
@@ -73,32 +76,58 @@ export default function BootTerminal({ onBootComplete }) {
         setCompletedLines([]);
         setTypedText("");
         setLineIndex(0);
+        setVisibleBinaryBoxes(0);
         setPhase(prev => prev + 1);
       }, pauseDuration);
       return () => clearTimeout(pauseTimer);
     }
 
-    const currentLine = lines[lineIndex];
-    let charIndex = 0;
-    setTypedText("");
+    const currentStep = lines[lineIndex];
 
-    const typingInterval = setInterval(() => {
-      if (charIndex < currentLine.length) {
-        const char = currentLine[charIndex];
-        setTypedText(prev => prev + char);
-        charIndex++;
-      } else {
-        clearInterval(typingInterval);
-        const commitTimer = setTimeout(() => {
-          setCompletedLines(prev => [...prev, currentLine]);
-          setTypedText("");
-          setLineIndex(prev => prev + 1);
-        }, 150); // delay between lines
-        return () => clearTimeout(commitTimer);
-      }
-    }, 20); // typing speed per character
+    if (currentStep.type === 'text') {
+      const currentLine = currentStep.content;
+      let charIndex = 0;
+      setTypedText("");
 
-    return () => clearInterval(typingInterval);
+      const typingInterval = setInterval(() => {
+        if (charIndex < currentLine.length) {
+          const char = currentLine[charIndex];
+          setTypedText(prev => prev + char);
+          charIndex++;
+        } else {
+          clearInterval(typingInterval);
+          const commitTimer = setTimeout(() => {
+            setCompletedLines(prev => [...prev, currentStep]);
+            setTypedText("");
+            setLineIndex(prev => prev + 1);
+          }, 150); // delay between lines
+          return () => clearTimeout(commitTimer);
+        }
+      }, 20); // typing speed per character
+
+      return () => clearInterval(typingInterval);
+    } 
+    else if (currentStep.type === 'binary') {
+      let boxCount = 0;
+      setVisibleBinaryBoxes(0);
+
+      const boxInterval = setInterval(() => {
+        if (boxCount < currentStep.content.length) {
+          boxCount++;
+          setVisibleBinaryBoxes(boxCount);
+        } else {
+          clearInterval(boxInterval);
+          const commitTimer = setTimeout(() => {
+            setCompletedLines(prev => [...prev, currentStep]);
+            setVisibleBinaryBoxes(0);
+            setLineIndex(prev => prev + 1);
+          }, 400); // delay after showing all binary boxes
+          return () => clearTimeout(commitTimer);
+        }
+      }, 250); // delay between revealing each box
+
+      return () => clearInterval(boxInterval);
+    }
   }, [phase, lineIndex]);
 
   // Blinking cursor component
@@ -140,18 +169,52 @@ export default function BootTerminal({ onBootComplete }) {
         className="p-5 min-h-[140px] max-h-[220px] overflow-y-auto flex-grow space-y-2 select-text custom-scrollbar terminal-text"
       >
         {/* Render Completed Lines */}
-        {completedLines.map((line, idx) => (
-          <p key={idx} className="leading-relaxed">
-            {line}
-          </p>
-        ))}
+        {completedLines.map((line, idx) => {
+          if (line.type === 'binary') {
+            return (
+              <div key={idx} className="flex gap-2 my-1 py-1">
+                {line.content.map((val, bIdx) => (
+                  <div 
+                    key={bIdx} 
+                    className="binary-box w-11 h-7 rounded font-bold flex items-center justify-center text-[10px]"
+                  >
+                    {val}
+                  </div>
+                ))}
+              </div>
+            );
+          }
+          return (
+            <p key={idx} className="leading-relaxed">
+              {line.content}
+            </p>
+          );
+        })}
 
         {/* Render Typing Text */}
         {phase < PHASES.CLOSING && PHASE_LINES[phase] && lineIndex < PHASE_LINES[phase].length && (
-          <p className="leading-relaxed">
-            {typedText}
-            <BlinkingCursor />
-          </p>
+          <>
+            {PHASE_LINES[phase][lineIndex].type === 'text' && (
+              <p className="leading-relaxed">
+                {typedText}
+                <BlinkingCursor />
+              </p>
+            )}
+
+            {PHASE_LINES[phase][lineIndex].type === 'binary' && (
+              <div className="flex gap-2 my-1 py-1">
+                {PHASE_LINES[phase][lineIndex].content.slice(0, visibleBinaryBoxes).map((val, bIdx) => (
+                  <div 
+                    key={bIdx} 
+                    className="binary-box w-11 h-7 rounded font-bold flex items-center justify-center text-[10px] animate-pulse"
+                  >
+                    {val}
+                  </div>
+                ))}
+                {visibleBinaryBoxes < PHASE_LINES[phase][lineIndex].content.length && <BlinkingCursor />}
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>
