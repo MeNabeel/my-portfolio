@@ -7,7 +7,7 @@ export default function BootTerminal({ onBootComplete }) {
   const [typedText, setTypedText] = useState("");
   const [completedLines, setCompletedLines] = useState([]);
   const [visibleBinaryBoxes, setVisibleBinaryBoxes] = useState(0);
-  const contentEndRef = useRef(null);
+  const terminalBodyRef = useRef(null);
 
   const bootSequence = [
     { type: 'text', content: '> INITIALIZING SYSTEM...' },
@@ -26,12 +26,17 @@ export default function BootTerminal({ onBootComplete }) {
     { type: 'text', content: '> OPENING DIGITAL GATEWAY...' }
   ];
 
-  // Auto-scroll to bottom of terminal content
+  // Auto-scroll inside the terminal content area only, without hijacking the browser window scroll
   useEffect(() => {
-    if (contentEndRef.current) {
-      contentEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    if (terminalBodyRef.current) {
+      terminalBodyRef.current.scrollTop = terminalBodyRef.current.scrollHeight;
     }
   }, [completedLines, typedText, visibleBinaryBoxes]);
+
+  // Scroll browser window to the top on mount to ensure the boot terminal sequence is visible
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, []);
 
   // Main typing state machine
   useEffect(() => {
@@ -146,7 +151,10 @@ export default function BootTerminal({ onBootComplete }) {
       </div>
 
       {/* Terminal Content Area */}
-      <div className="p-5 max-h-[300px] overflow-y-auto flex-grow space-y-2 select-text custom-scrollbar">
+      <div 
+        ref={terminalBodyRef}
+        className="p-5 max-h-[300px] overflow-y-auto flex-grow space-y-2 select-text custom-scrollbar"
+      >
         {/* Render Completed Lines */}
         {completedLines.map((line, idx) => {
           if (line.type === 'empty') {
@@ -196,8 +204,6 @@ export default function BootTerminal({ onBootComplete }) {
           </div>
         )}
 
-        {/* End of logs hook */}
-        <div ref={contentEndRef} />
       </div>
     </div>
   );
