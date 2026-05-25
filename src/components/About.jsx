@@ -13,10 +13,7 @@ const About = () => {
 
   return (
     <section id="about" className="py-20 relative overflow-hidden border-t border-black/5" style={{ background: 'var(--about-bg)', color: 'var(--about-text-body)' }}>
-      {/* Background Orbs */}
-      <div className="absolute top-10 left-10 w-72 h-72 rounded-full mix-blend-multiply filter blur-xl opacity-10" style={{ backgroundColor: 'var(--primary-color)', animation: 'space-drift-1 25s ease-in-out infinite' }}></div>
-      <div className="absolute top-40 right-10 w-96 h-96 rounded-full mix-blend-multiply filter blur-xl opacity-10" style={{ backgroundColor: 'var(--secondary-color)', animation: 'space-drift-2 30s ease-in-out infinite', animationDelay: '2s' }}></div>
-      <div className="absolute bottom-20 left-1/4 w-80 h-80 rounded-full mix-blend-multiply filter blur-xl opacity-10" style={{ backgroundColor: 'var(--primary-color)', animation: 'space-drift-3 35s ease-in-out infinite', animationDelay: '4s' }}></div>
+
 
       {/* Animated Particles */}
       <div className="absolute inset-0 overflow-hidden">

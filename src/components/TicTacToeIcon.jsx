@@ -302,11 +302,7 @@ const TicTacToeIcon = () => {
       {isOpen && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in">
           <div className="theme-gradient-bg text-white rounded-3xl shadow-2xl border border-white/20 p-8 max-w-md w-full transform animate-scale-in relative overflow-hidden">
-            {/* Background elements */}
-            <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-              <div className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full mix-blend-screen filter blur-[40px] opacity-15" style={{ backgroundColor: 'var(--primary-color)', animation: 'space-drift-1 25s ease-in-out infinite' }}></div>
-              <div className="absolute bottom-1/4 right-1/4 w-32 h-32 rounded-full mix-blend-screen filter blur-[40px] opacity-15" style={{ backgroundColor: 'var(--secondary-color)', animation: 'space-drift-2 30s ease-in-out infinite' }}></div>
-            </div>
+
 
             <div className="relative z-10">
               {/* Header */}

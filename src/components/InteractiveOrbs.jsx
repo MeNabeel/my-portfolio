@@ -68,8 +68,10 @@ function FloatingOrb({ position, colorType, size, speed, themeColors, hoveredUui
       // Hover effect - scale up and glow when hovered
       if (hovered) {
         meshRef.current.scale.lerp(new THREE.Vector3(1.35, 1.35, 1.35), 0.1);
+        meshRef.current.material.opacity = THREE.MathUtils.lerp(meshRef.current.material.opacity, 0.85, 0.1);
       } else {
         meshRef.current.scale.lerp(new THREE.Vector3(1, 1, 1), 0.1);
+        meshRef.current.material.opacity = THREE.MathUtils.lerp(meshRef.current.material.opacity, 0.2, 0.1);
       }
       
       // Rotation
@@ -89,7 +91,7 @@ function FloatingOrb({ position, colorType, size, speed, themeColors, hoveredUui
         roughness={0.2}
         metalness={0.8}
         transparent
-        opacity={0.8}
+        opacity={0.2}
       />
     </mesh>
   );

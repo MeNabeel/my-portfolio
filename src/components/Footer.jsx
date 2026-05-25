@@ -71,9 +71,7 @@ const Footer = () => {
           ))}
         </div>
 
-        {/* Gradient Orbs */}
-        <div className="absolute -bottom-32 -left-32 w-64 h-64 rounded-full opacity-10 blur-3xl" style={{ backgroundColor: 'var(--secondary-color)', animation: 'space-drift-1 25s ease-in-out infinite' }}></div>
-        <div className="absolute -top-32 -right-32 w-64 h-64 rounded-full opacity-10 blur-3xl" style={{ backgroundColor: 'var(--primary-color)', animation: 'space-drift-2 30s ease-in-out infinite', animationDelay: '2s' }}></div>
+
 
         {/* Animated Grid */}
         <div className="absolute inset-0 opacity-5">

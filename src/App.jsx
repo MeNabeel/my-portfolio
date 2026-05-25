@@ -18,6 +18,7 @@ const Home = () => {
   const [hoveredLibra, setHoveredLibra] = React.useState(false);
   const [hoveredMars, setHoveredMars] = React.useState(false);
   const [hoveredVenus, setHoveredVenus] = React.useState(false);
+  const [hoveredSun, setHoveredSun] = React.useState(false);
 
   return (
     <div>
@@ -25,13 +26,6 @@ const Home = () => {
       <Header />
       <main>
         <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-          {/* Drifting Background Orbs */}
-          <div className="absolute inset-0 opacity-20 pointer-events-none">
-            <div className="absolute top-[10%] left-[15%] w-80 h-80 rounded-full blur-3xl" style={{ backgroundColor: 'var(--primary-color)', animation: 'space-drift-1 25s ease-in-out infinite' }}></div>
-            <div className="absolute bottom-[15%] right-[10%] w-96 h-96 rounded-full blur-3xl" style={{ backgroundColor: 'var(--secondary-color)', animation: 'space-drift-2 30s ease-in-out infinite' }}></div>
-            <div className="absolute bottom-[10%] left-[20%] w-72 h-72 rounded-full blur-3xl" style={{ backgroundColor: 'var(--primary-color)', animation: 'space-drift-3 35s ease-in-out infinite' }}></div>
-            <div className="absolute top-[20%] right-[15%] w-64 h-64 rounded-full blur-2xl" style={{ backgroundColor: 'var(--secondary-color)', animation: 'space-drift-1 25s ease-in-out infinite', animationDelay: '-5s' }}></div>
-          </div>
 
           {/* Aries Constellation (Left Side) */}
           <div 
@@ -291,8 +285,37 @@ const Home = () => {
             ))}
           </div>
 
-          {/* Distant Sun */}
-          <div className="sun"></div>
+          {/* Distant Sun (Interactive) */}
+          <div 
+            className="absolute top-[10%] md:top-[12%] left-1/2 -translate-x-1/2 pointer-events-auto cursor-pointer z-10 flex flex-col items-center group transition-all duration-500"
+            onMouseEnter={() => setHoveredSun(true)}
+            onMouseLeave={() => setHoveredSun(false)}
+          >
+            <div 
+              className="sun transition-all duration-500"
+              style={{
+                position: 'relative',
+                top: 0,
+                left: 0,
+                transform: 'none',
+                scale: hoveredSun ? '1.18' : '1.0',
+                opacity: hoveredSun ? 1.0 : 0.65,
+                boxShadow: hoveredSun 
+                  ? '0 0 50px rgba(255, 240, 180, 1.0), 0 0 100px rgba(255, 180, 50, 0.85), 0 0 150px rgba(255, 140, 50, 0.6)' 
+                  : '0 0 15px rgba(255, 212, 148, 0.4), 0 0 30px rgba(255, 180, 100, 0.2)'
+              }}
+            ></div>
+            <span 
+              className="mt-2 text-[9px] font-mono tracking-widest uppercase transition-all duration-300"
+              style={{ 
+                color: 'var(--secondary-color)', 
+                opacity: hoveredSun ? 0.85 : 0, 
+                transform: hoveredSun ? 'translateY(0)' : 'translateY(4px)' 
+              }}
+            >
+              Sun
+            </span>
+          </div>
           
           <div className="text-center text-white relative z-20 px-6">
             <div className="mb-8">
@@ -314,6 +337,11 @@ const Home = () => {
                 passionate about <span className="text-blue-300">AI</span>,{" "}
                 <span className="text-purple-300">Cloud Computing</span>, and building{" "}
                 <span className="text-cyan-300">innovative digital solutions</span>
+              </p>
+              
+              {/* Premium Built-With-Purpose Subtitle centered between Mars & Venus */}
+              <p className="mt-8 text-md md:text-lg italic text-purple-200/80 font-mono tracking-wide max-w-2xl mx-auto animate-reveal-text">
+                "Between distant planets and endless possibilities, I engineer the future."
               </p>
             </div>
 
