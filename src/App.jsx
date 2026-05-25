@@ -11,6 +11,7 @@ import CliConsole from "./components/CliConsole";
 import CustomCursor from "./components/cursor/CustomCursor"; // Import the custom cursor
 import ContactPage from "./components/ContactPage";
 import { Link } from "react-router-dom";
+import InteractiveOrbs from "./components/InteractiveOrbs";
 
 const Home = () => {
   const [hoveredAries, setHoveredAries] = React.useState(false);
@@ -23,7 +24,7 @@ const Home = () => {
       <CustomCursor /> {/* Add custom cursor here */}
       <Header />
       <main>
-        <section id="home" className="min-h-screen flex items-center justify-center theme-gradient-bg relative overflow-hidden">
+        <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
           {/* Drifting Background Orbs */}
           <div className="absolute inset-0 opacity-20 pointer-events-none">
             <div className="absolute top-[10%] left-[15%] w-80 h-80 rounded-full blur-3xl" style={{ backgroundColor: 'var(--primary-color)', animation: 'space-drift-1 25s ease-in-out infinite' }}></div>
@@ -289,6 +290,9 @@ const Home = () => {
               />
             ))}
           </div>
+
+          {/* Distant Sun */}
+          <div className="sun"></div>
           
           <div className="text-center text-white relative z-20 px-6">
             <div className="mb-8">
@@ -347,11 +351,16 @@ const Home = () => {
 const App = () => {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/project/:projectId" element={<ProjectDetail />} />
-        <Route path="/contact" element={<ContactPage />} />
-      </Routes>
+      <div className="relative min-h-screen theme-gradient-bg">
+        {/* Animated background orbs */}
+        <InteractiveOrbs />
+        
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/project/:projectId" element={<ProjectDetail />} />
+          <Route path="/contact" element={<ContactPage />} />
+        </Routes>
+      </div>
     </Router>
   );
 };

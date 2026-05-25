@@ -113,7 +113,7 @@ const ProjectDetail = () => {
   }
 
   return (
-    <div className="min-h-screen theme-gradient-bg py-8 animate-fade-in text-white relative overflow-hidden">
+    <div className="min-h-screen py-8 animate-fade-in text-white relative overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full mix-blend-screen filter blur-[100px] opacity-25" style={{ backgroundColor: 'var(--primary-color)', animation: 'space-drift-1 25s ease-in-out infinite' }}></div>

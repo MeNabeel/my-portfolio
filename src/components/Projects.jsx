@@ -27,7 +27,7 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="py-20 theme-gradient-bg relative overflow-hidden text-white border-t border-white/5">
+    <section id="projects" className="py-20 relative overflow-hidden text-white border-t border-white/5">
       {/* Animated Background Elements */}
       <div className="absolute inset-0">
         {/* Floating Orbs */}
