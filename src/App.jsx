@@ -12,6 +12,7 @@ import CustomCursor from "./components/cursor/CustomCursor"; // Import the custo
 import ContactPage from "./components/ContactPage";
 import { Link } from "react-router-dom";
 import InteractiveOrbs from "./components/InteractiveOrbs";
+import BootTerminal from "./components/BootTerminal";
 
 const Home = () => {
   const [hoveredAries, setHoveredAries] = React.useState(false);
@@ -19,6 +20,7 @@ const Home = () => {
   const [hoveredMars, setHoveredMars] = React.useState(false);
   const [hoveredVenus, setHoveredVenus] = React.useState(false);
   const [hoveredSun, setHoveredSun] = React.useState(false);
+  const [isBooted, setIsBooted] = React.useState(false);
 
   return (
     <div>
@@ -26,6 +28,8 @@ const Home = () => {
       <Header />
       <main>
         <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+          {/* Main Hero Elements (Fades in after Boot sequence completes) */}
+          <div className={`w-full h-full absolute inset-0 transition-all duration-[1200ms] flex items-center justify-center ${isBooted ? 'opacity-100 pointer-events-auto filter-none' : 'opacity-0 pointer-events-none blur-md scale-95'}`}>
 
           {/* Aries Constellation (Left Side) */}
           <div 
@@ -364,6 +368,10 @@ const Home = () => {
               </Link>
             </div>
           </div>
+          </div>
+
+          {/* Boot sequence terminal popup */}
+          <BootTerminal onBootComplete={() => setIsBooted(true)} />
         </section>
         <About />
         <Projects />
