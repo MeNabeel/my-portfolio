@@ -77,32 +77,34 @@ body.theme-gold {
 }
 
 body.theme-aurora {
-  --primary-color: #00ffd0;        /* Bright Teal/Mint */
-  --secondary-color: #00f2fe;      /* Electric Cyan */
-  --accent-color: #7c4dff;         /* Neon Purple */
-  --bg-gradient-from: #020617;     /* Deep slate space background */
-  --bg-gradient-via: #0b1329;      /* Dark navy space */
-  --bg-gradient-to: #020617;
+  --primary-color: #10b981;       /* Emerald Green */
+  --secondary-color: #00ffd0;     /* Electric Teal */
+  --accent-color: #0052ff;        /* Space Blue */
+  --bg-gradient-from: #000504;    /* Pitch black with green tint */
+  --bg-gradient-via: #000000;     /* Pure space black */
+  --bg-gradient-to: #000504;
   
-  /* Highly legible About section breakout */
-  --about-bg: linear-gradient(135deg, #f0fdfa, #ccfbf1);
-  --about-card-bg: rgba(255, 255, 255, 0.85);
-  --about-card-border: rgba(0, 242, 254, 0.15);
-  --about-text-title: #0f172a;      /* slate-900 */
-  --about-text-body: #334155;       /* slate-700 */
-  --about-highlight-color: #0d9488;
-  --footer-bg: linear-gradient(to bottom, rgba(2, 6, 23, 0) 0%, #000000 100%);
+  /* Highly legible neutral Slate/Zinc light layout break for About section */
+  --about-bg: linear-gradient(135deg, #f8fafc, #f1f5f9);
+  --about-card-bg: rgba(255, 255, 255, 0.9);
+  --about-card-border: rgba(16, 185, 129, 0.15);
+  --about-text-title: #0f172a;    /* slate-900 */
+  --about-text-body: #334155;     /* slate-700 */
+  --about-highlight-color: #10b981;
+  
+  /* Solid black-infused footer gradient for distinct visual separation */
+  --footer-bg: linear-gradient(to bottom, #000000 0%, #01120f 100%);
 
-  /* Dynamic dark space sections to show through top-level Aurora shader */
+  /* Dynamic dark green-black space sections to show through top-level Aurora shader */
   --projects-bg: transparent;
-  --projects-card-bg: rgba(15, 23, 42, 0.45);
-  --projects-card-border: rgba(0, 242, 254, 0.15);
+  --projects-card-bg: rgba(0, 8, 6, 0.7);
+  --projects-card-border: rgba(16, 185, 129, 0.2);
   --projects-text-title: #ffffff;
   --projects-text-body: #cbd5e1;
 
   --certificates-bg: transparent;
-  --certificates-card-bg: rgba(15, 23, 42, 0.45);
-  --certificates-card-border: rgba(0, 242, 254, 0.15);
+  --certificates-card-bg: rgba(0, 8, 6, 0.7);
+  --certificates-card-border: rgba(16, 185, 129, 0.2);
   --certificates-text-title: #ffffff;
   --certificates-text-body: #cbd5e1;
 }

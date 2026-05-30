@@ -419,7 +419,7 @@ const App = () => {
         {theme === "aurora" && (
           <div className="fixed inset-0 z-0 pointer-events-none">
             <Aurora 
-              colorStops={["#00ffd0", "#7c4dff", "#00f2fe"]} 
+              colorStops={["#10b981", "#00ffd0", "#0052ff"]} 
               blend={0.5} 
               amplitude={1.0} 
               speed={1} 
