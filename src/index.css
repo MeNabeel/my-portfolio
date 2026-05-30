@@ -32,6 +32,19 @@ body.theme-cosmic {
   --about-text-body: #4b5563;
   --about-highlight-color: var(--primary-color);
   --footer-bg: linear-gradient(to bottom, #05020c, #000000);
+
+  /* Section variables for cosmic */
+  --projects-bg: transparent;
+  --projects-card-bg: rgba(255, 255, 255, 0.1);
+  --projects-card-border: rgba(255, 255, 255, 0.1);
+  --projects-text-title: #ffffff;
+  --projects-text-body: #d1d5db;
+
+  --certificates-bg: transparent;
+  --certificates-card-bg: rgba(255, 255, 255, 0.1);
+  --certificates-card-border: rgba(255, 255, 255, 0.1);
+  --certificates-text-title: #ffffff;
+  --certificates-text-body: #d1d5db;
 }
 
 body.theme-gold {
@@ -48,22 +61,50 @@ body.theme-gold {
   --about-text-body: #52525b;
   --about-highlight-color: var(--secondary-color);
   --footer-bg: linear-gradient(to bottom, #030107, #000000);
+
+  /* Section variables for gold */
+  --projects-bg: transparent;
+  --projects-card-bg: rgba(255, 255, 255, 0.1);
+  --projects-card-border: rgba(255, 255, 255, 0.1);
+  --projects-text-title: #ffffff;
+  --projects-text-body: #d1d5db;
+
+  --certificates-bg: transparent;
+  --certificates-card-bg: rgba(255, 255, 255, 0.1);
+  --certificates-card-border: rgba(255, 255, 255, 0.1);
+  --certificates-text-title: #ffffff;
+  --certificates-text-body: #d1d5db;
 }
 
 body.theme-aurora {
-  --primary-color: #10b981;       /* Emerald Green */
-  --secondary-color: #34d399;     /* Mint Green / Sage */
-  --accent-color: #059669;        /* Dark Forest Green */
-  --bg-gradient-from: #011c15;    /* Deep Polar Teal */
-  --bg-gradient-via: #022c22;     /* Dark Pine Night */
-  --bg-gradient-to: #011c15;
-  --about-bg: linear-gradient(135deg, #01241a, #02382b);
-  --about-card-bg: rgba(2, 44, 34, 0.45);
-  --about-card-border: rgba(16, 185, 129, 0.25);
-  --about-text-title: #34d399;
-  --about-text-body: #a7f3d0;
-  --about-highlight-color: #10b981;
-  --footer-bg: linear-gradient(to bottom, #00120d, #000000);
+  --primary-color: #059669;        /* Emerald Green (Dark text accent) */
+  --secondary-color: #10b981;      /* Bright Emerald */
+  --accent-color: #047857;         /* Deep Teal */
+  --bg-gradient-from: #020c1b;     /* Deep navy space background for Hero to show Aurora glow */
+  --bg-gradient-via: #0b1535;      /* Hero space indigo */
+  --bg-gradient-to: #020c1b;
+  
+  /* High contrast light theme for all other sections */
+  --about-bg: linear-gradient(135deg, #f0fdf4, #dcfce7);
+  --about-card-bg: rgba(255, 255, 255, 0.85);
+  --about-card-border: rgba(16, 185, 129, 0.15);
+  --about-text-title: #064e3b;      /* Deep green headings */
+  --about-text-body: #065f46;       /* Clean green body text */
+  --about-highlight-color: #059669;
+  --footer-bg: linear-gradient(to bottom, #020c1b, #000000);
+
+  /* Section variables for aurora */
+  --projects-bg: linear-gradient(135deg, #f0fdf4, #dcfce7);
+  --projects-card-bg: rgba(255, 255, 255, 0.85);
+  --projects-card-border: rgba(16, 185, 129, 0.15);
+  --projects-text-title: #064e3b;
+  --projects-text-body: #065f46;
+
+  --certificates-bg: linear-gradient(135deg, #f0fdf4, #dcfce7);
+  --certificates-card-bg: rgba(255, 255, 255, 0.85);
+  --certificates-card-border: rgba(16, 185, 129, 0.15);
+  --certificates-text-title: #064e3b;
+  --certificates-text-body: #065f46;
 }
 
 /* Custom theme helper utility classes */

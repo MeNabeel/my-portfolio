@@ -13,6 +13,7 @@ import ContactPage from "./components/ContactPage";
 import { Link } from "react-router-dom";
 import InteractiveOrbs from "./components/InteractiveOrbs";
 import BootTerminal from "./components/BootTerminal";
+import Aurora from "./components/Aurora";
 
 const Home = () => {
   const [hoveredAries, setHoveredAries] = React.useState(false);
@@ -21,6 +22,15 @@ const Home = () => {
   const [hoveredVenus, setHoveredVenus] = React.useState(false);
   const [hoveredSun, setHoveredSun] = React.useState(false);
   const [isBooted, setIsBooted] = React.useState(false);
+  const [theme, setTheme] = React.useState(localStorage.getItem("portfolio-theme") || "cosmic");
+
+  React.useEffect(() => {
+    const handleThemeChange = () => {
+      setTheme(localStorage.getItem("portfolio-theme") || "cosmic");
+    };
+    window.addEventListener("theme-change", handleThemeChange);
+    return () => window.removeEventListener("theme-change", handleThemeChange);
+  }, []);
 
   return (
     <div>
@@ -28,6 +38,16 @@ const Home = () => {
       <Header />
       <main>
         <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+          {theme === "aurora" && (
+            <div className="absolute inset-0 z-0 pointer-events-none">
+              <Aurora 
+                colorStops={["#7cff67", "#B497CF", "#5227FF"]} 
+                blend={0.5} 
+                amplitude={1.0} 
+                speed={1} 
+              />
+            </div>
+          )}
           {/* Main Hero Elements */}
           <div className="w-full h-full absolute inset-0 flex items-center justify-center opacity-100 pointer-events-auto">
 
@@ -226,100 +246,105 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Mars (Left Bottom Corner) */}
-          <div 
-            className="absolute left-[5%] md:left-[10%] bottom-[8%] md:bottom-[12%] pointer-events-auto cursor-pointer z-10 flex flex-col items-center group transition-all duration-500"
-            style={{ animation: 'planet-float 7s ease-in-out infinite' }}
-            onMouseEnter={() => setHoveredMars(true)}
-            onMouseLeave={() => setHoveredMars(false)}
-          >
-            <div 
-              className="w-14 h-14 md:w-16 md:h-16 rounded-full relative transition-all duration-500 hover:scale-105"
-              style={{
-                background: 'radial-gradient(circle at 35% 35%, #ffa3a3 0%, #dc2626 55%, #7f1d1d 100%)',
-                boxShadow: hoveredMars ? '0 0 35px rgba(220, 38, 38, 0.8), inset -6px -6px 12px rgba(0, 0, 0, 0.8)' : '0 0 15px rgba(220, 38, 38, 0.3), inset -6px -6px 12px rgba(0, 0, 0, 0.8)'
-              }}
-            >
-              {/* Polar Ice Cap */}
-              <div className="absolute w-2 h-1.5 bg-white/80 rounded-full blur-[0.5px] top-[8%] left-[62%] -rotate-12"></div>
-            </div>
-            <span 
-              className="mt-2 text-[9px] font-mono tracking-widest uppercase transition-all duration-300"
-              style={{ color: 'var(--secondary-color)', opacity: hoveredMars ? 0.8 : 0, transform: hoveredMars ? 'translateY(0)' : 'translateY(4px)' }}
-            >
-              Mars
-            </span>
-          </div>
+          {theme !== "aurora" && (
+            <>
+              {/* Mars (Left Bottom Corner) */}
+              <div 
+                className="absolute left-[5%] md:left-[10%] bottom-[8%] md:bottom-[12%] pointer-events-auto cursor-pointer z-10 flex flex-col items-center group transition-all duration-500"
+                style={{ animation: 'planet-float 7s ease-in-out infinite' }}
+                onMouseEnter={() => setHoveredMars(true)}
+                onMouseLeave={() => setHoveredMars(false)}
+              >
+                <div 
+                  className="w-14 h-14 md:w-16 md:h-16 rounded-full relative transition-all duration-500 hover:scale-105"
+                  style={{
+                    background: 'radial-gradient(circle at 35% 35%, #ffa3a3 0%, #dc2626 55%, #7f1d1d 100%)',
+                    boxShadow: hoveredMars ? '0 0 35px rgba(220, 38, 38, 0.8), inset -6px -6px 12px rgba(0, 0, 0, 0.8)' : '0 0 15px rgba(220, 38, 38, 0.3), inset -6px -6px 12px rgba(0, 0, 0, 0.8)'
+                  }}
+                >
+                  {/* Polar Ice Cap */}
+                  <div className="absolute w-2 h-1.5 bg-white/80 rounded-full blur-[0.5px] top-[8%] left-[62%] -rotate-12"></div>
+                </div>
+                <span 
+                  className="mt-2 text-[9px] font-mono tracking-widest uppercase transition-all duration-300"
+                  style={{ color: 'var(--secondary-color)', opacity: hoveredMars ? 0.8 : 0, transform: hoveredMars ? 'translateY(0)' : 'translateY(4px)' }}
+                >
+                  Mars
+                </span>
+              </div>
 
-          {/* Venus (Right Bottom Corner) */}
-          <div 
-            className="absolute right-[5%] md:right-[10%] bottom-[8%] md:bottom-[12%] pointer-events-auto cursor-pointer z-10 flex flex-col items-center group transition-all duration-500"
-            style={{ animation: 'planet-float 8s ease-in-out infinite', animationDelay: '1s' }}
-            onMouseEnter={() => setHoveredVenus(true)}
-            onMouseLeave={() => setHoveredVenus(false)}
-          >
-            <div 
-              className="w-12 h-12 md:w-14 md:h-14 rounded-full relative transition-all duration-500 hover:scale-105"
-              style={{
-                background: 'radial-gradient(circle at 30% 30%, #fffbeb 0%, #f59e0b 50%, #78350f 100%)',
-                boxShadow: hoveredVenus ? '0 0 35px rgba(245, 158, 11, 0.8), inset -5px -5px 10px rgba(0, 0, 0, 0.8)' : '0 0 15px rgba(245, 158, 11, 0.3), inset -5px -5px 10px rgba(0, 0, 0, 0.8)'
-              }}
-            >
-            </div>
-            <span 
-              className="mt-2 text-[9px] font-mono tracking-widest uppercase transition-all duration-300"
-              style={{ color: 'var(--secondary-color)', opacity: hoveredVenus ? 0.8 : 0, transform: hoveredVenus ? 'translateY(0)' : 'translateY(4px)' }}
-            >
-              Venus
-            </span>
-          </div>
+              {/* Venus (Right Bottom Corner) */}
+              <div 
+                className="absolute right-[5%] md:right-[10%] bottom-[8%] md:bottom-[12%] pointer-events-auto cursor-pointer z-10 flex flex-col items-center group transition-all duration-500"
+                style={{ animation: 'planet-float 8s ease-in-out infinite', animationDelay: '1s' }}
+                onMouseEnter={() => setHoveredVenus(true)}
+                onMouseLeave={() => setHoveredVenus(false)}
+              >
+                <div 
+                  className="w-12 h-12 md:w-14 md:h-14 rounded-full relative transition-all duration-500 hover:scale-105"
+                  style={{
+                    background: 'radial-gradient(circle at 30% 30%, #fffbeb 0%, #f59e0b 50%, #78350f 100%)',
+                    boxShadow: hoveredVenus ? '0 0 35px rgba(245, 158, 11, 0.8), inset -5px -5px 10px rgba(0, 0, 0, 0.8)' : '0 0 15px rgba(245, 158, 11, 0.3), inset -5px -5px 10px rgba(0, 0, 0, 0.8)'
+                  }}
+                >
+                </div>
+                <span 
+                  className="mt-2 text-[9px] font-mono tracking-widest uppercase transition-all duration-300"
+                  style={{ color: 'var(--secondary-color)', opacity: hoveredVenus ? 0.8 : 0, transform: hoveredVenus ? 'translateY(0)' : 'translateY(4px)' }}
+                >
+                  Venus
+                </span>
+              </div>
 
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {[...Array(20)].map((_, i) => (
-              <div
-                key={i}
-                className="absolute w-2 h-2 bg-white rounded-full opacity-20 animate-float"
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                  animationDelay: `${Math.random() * 5}s`,
-                  animationDuration: `${10 + Math.random() * 10}s`
-                }}
-              />
-            ))}
-          </div>
+              <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                {[...Array(20)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="absolute w-2 h-2 bg-white rounded-full opacity-20 animate-float"
+                    style={{
+                      left: `${Math.random() * 100}%`,
+                      top: `${Math.random() * 100}%`,
+                      animationDelay: `${Math.random() * 5}s`,
+                      animationDuration: `${10 + Math.random() * 10}s`
+                    }}
+                  />
+                ))}
+              </div>
 
-          {/* Distant Sun (Interactive) */}
-          <div 
-            className="absolute top-[10%] md:top-[12%] left-1/2 -translate-x-1/2 pointer-events-auto cursor-pointer z-10 flex flex-col items-center group transition-all duration-500"
-            onMouseEnter={() => setHoveredSun(true)}
-            onMouseLeave={() => setHoveredSun(false)}
-          >
-            <div 
-              className="sun transition-all duration-500"
-              style={{
-                position: 'relative',
-                top: 0,
-                left: 0,
-                transform: 'none',
-                scale: hoveredSun ? '1.18' : '1.0',
-                opacity: hoveredSun ? 1.0 : 0.65,
-                boxShadow: hoveredSun 
-                  ? '0 0 50px rgba(255, 240, 180, 1.0), 0 0 100px rgba(255, 180, 50, 0.85), 0 0 150px rgba(255, 140, 50, 0.6)' 
-                  : '0 0 15px rgba(255, 212, 148, 0.4), 0 0 30px rgba(255, 180, 100, 0.2)'
-              }}
-            ></div>
-            <span 
-              className="mt-2 text-[9px] font-mono tracking-widest uppercase transition-all duration-300"
-              style={{ 
-                color: 'var(--secondary-color)', 
-                opacity: hoveredSun ? 0.85 : 0, 
-                transform: hoveredSun ? 'translateY(0)' : 'translateY(4px)' 
-              }}
-            >
-              Sun
-            </span>
-          </div>
+              {/* Distant Sun (Interactive) */}
+              <div 
+                className="absolute top-[10%] md:top-[12%] left-1/2 -translate-x-1/2 pointer-events-auto cursor-pointer z-10 flex flex-col items-center group transition-all duration-500"
+                onMouseEnter={() => setHoveredSun(true)}
+                onMouseLeave={() => setHoveredSun(false)}
+              >
+                <div 
+                  className="sun transition-all duration-500"
+                  style={{
+                    position: 'relative',
+                    top: 0,
+                    left: 0,
+                    transform: 'none',
+                    scale: hoveredSun ? '1.18' : '1.0',
+                    opacity: hoveredSun ? 1.0 : 0.65,
+                    boxShadow: hoveredSun 
+                      ? '0 0 50px rgba(255, 240, 180, 1.0), 0 0 100px rgba(255, 180, 50, 0.85), 0 0 150px rgba(255, 140, 50, 0.6)' 
+                      : '0 0 15px rgba(255, 212, 148, 0.4), 0 0 30px rgba(255, 180, 100, 0.2)'
+                  }}
+                ></div>
+                <span 
+                  className="mt-2 text-[9px] font-mono tracking-widest uppercase transition-all duration-300"
+                  style={{ 
+                    color: 'var(--secondary-color)', 
+                    opacity: hoveredSun ? 0.85 : 0, 
+                    transform: hoveredSun ? 'translateY(0)' : 'translateY(4px)' 
+                  }}
+                >
+                  Sun
+                </span>
+              </div>
+            </>
+          )}
+
           
           <div className="text-center text-white relative z-20 px-6">
             <div className="mb-8">

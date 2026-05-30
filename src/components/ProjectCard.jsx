@@ -3,7 +3,15 @@ import { Link } from "react-router-dom";
 
 const ProjectCard = ({ id, title, description, technologies, image }) => {
   return (
-    <div className="bg-white/10 backdrop-blur-md text-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-200 transform hover:-translate-y-2 border border-white/10 overflow-hidden group animate-fade-in-up">
+    <div 
+      className="backdrop-blur-md rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-200 transform hover:-translate-y-2 overflow-hidden group animate-fade-in-up"
+      style={{
+        backgroundColor: 'var(--projects-card-bg)',
+        borderColor: 'var(--projects-card-border)',
+        borderWidth: '1px',
+        color: 'var(--projects-text-body)'
+      }}
+    >
       
       {/* Image Container with Enhanced Animations */}
       <div className="h-48 theme-button-gradient relative overflow-hidden">
@@ -42,12 +50,18 @@ const ProjectCard = ({ id, title, description, technologies, image }) => {
       {/* Content Section with Staggered Animations */}
       <div className="p-6">
         {/* Title with Slide-in Effect */}
-        <h3 className="text-xl font-bold text-white mb-3 group-hover:text-[var(--primary-color)] transition-all duration-200 transform group-hover:translate-x-2">
+        <h3 
+          className="text-xl font-bold mb-3 group-hover:text-[var(--primary-color)] transition-all duration-200 transform group-hover:translate-x-2"
+          style={{ color: 'var(--projects-text-title)' }}
+        >
           {title}
         </h3>
         
         {/* Description with Fade-in Effect */}
-        <p className="text-gray-300 mb-4 leading-relaxed transform group-hover:translate-x-1 transition-all duration-200 delay-75">
+        <p 
+          className="mb-4 leading-relaxed transform group-hover:translate-x-1 transition-all duration-200 delay-75"
+          style={{ color: 'var(--projects-text-body)' }}
+        >
           {description}
         </p>
         
@@ -94,7 +108,13 @@ const ProjectCard = ({ id, title, description, technologies, image }) => {
           </Link>
           
           {/* Favorite Button with Enhanced Animation */}
-          <button className="px-4 py-3 border border-white/20 text-gray-300 rounded-lg hover:border-[var(--primary-color)] hover:text-[var(--primary-color)] transition-all duration-200 transform hover:scale-110 hover:shadow-md group relative overflow-hidden">
+          <button 
+            className="px-4 py-3 border rounded-lg hover:border-[var(--primary-color)] hover:text-[var(--primary-color)] transition-all duration-200 transform hover:scale-110 hover:shadow-md group relative overflow-hidden"
+            style={{
+              borderColor: 'var(--projects-card-border)',
+              color: 'var(--projects-text-body)'
+            }}
+          >
             <svg 
               className="w-5 h-5 transform group-hover:scale-110 transition-transform duration-200" 
               fill="none" 

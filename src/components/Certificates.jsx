@@ -82,7 +82,15 @@ const Certificates = () => {
 
   return (
     <>
-      <section id="certificates" className="py-20 relative overflow-hidden text-white border-t border-white/5">
+      <section 
+        id="certificates" 
+        className="py-20 relative overflow-hidden border-t"
+        style={{
+          background: 'var(--certificates-bg)',
+          color: 'var(--certificates-text-body)',
+          borderColor: 'var(--certificates-card-border)'
+        }}
+      >
 
         
         {/* Animated Particles */}
@@ -107,16 +115,22 @@ const Certificates = () => {
             <h2 className="text-5xl font-bold mb-4 theme-accent-text transform transition-all duration-500 hover:scale-105">
               Certificates & Achievements
             </h2>
-            <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+            <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--certificates-text-body)' }}>
               Professional certifications and courses that validate my expertise in various technologies.
             </p>
           </div>
 
           {/* Main Slider */}
           <div 
-            className="relative max-w-6xl mx-auto bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl border border-white/10 p-8 mb-8 transform transition-all duration-700 hover:shadow-3xl text-white"
+            className="relative max-w-6xl mx-auto backdrop-blur-lg rounded-3xl shadow-2xl p-8 mb-8 transform transition-all duration-700 hover:shadow-3xl"
             onMouseEnter={() => setIsAutoPlaying(false)}
             onMouseLeave={() => setIsAutoPlaying(true)}
+            style={{
+              backgroundColor: 'var(--certificates-card-bg)',
+              borderColor: 'var(--certificates-card-border)',
+              borderWidth: '1px',
+              color: 'var(--certificates-text-body)'
+            }}
           >
             <div className="flex flex-col lg:flex-row items-center gap-8">
               {/* Certificate Image */}
@@ -136,26 +150,26 @@ const Certificates = () => {
 
               {/* Certificate Details */}
               <div className="flex-1 text-left">
-                <h3 className="text-3xl font-bold text-white mb-4 transform transition-all duration-500 hover:translate-x-2">
+                <h3 className="text-3xl font-bold mb-4 transform transition-all duration-500 hover:translate-x-2" style={{ color: 'var(--certificates-text-title)' }}>
                   {certificates[currentIndex].title}
                 </h3>
                 <div className="space-y-3 mb-6">
-                  <div className="flex items-center text-gray-300 transform transition-all duration-500 delay-100 hover:translate-x-2">
+                  <div className="flex items-center transform transition-all duration-500 delay-100 hover:translate-x-2" style={{ color: 'var(--certificates-text-body)' }}>
                     <svg className="w-5 h-5 mr-3" style={{ color: 'var(--primary-color)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                     </svg>
-                    <span className="font-semibold text-white mr-1.5">Issuer:</span> {certificates[currentIndex].issuer}
+                    <span className="font-semibold mr-1.5" style={{ color: 'var(--certificates-text-title)' }}>Issuer:</span> {certificates[currentIndex].issuer}
                   </div>
-                  <div className="flex items-center text-gray-300 transform transition-all duration-500 delay-200 hover:translate-x-2">
+                  <div className="flex items-center transform transition-all duration-500 delay-200 hover:translate-x-2" style={{ color: 'var(--certificates-text-body)' }}>
                     <svg className="w-5 h-5 mr-3" style={{ color: 'var(--secondary-color)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
-                    <span className="font-semibold text-white mr-1.5">Date:</span> {certificates[currentIndex].date}
+                    <span className="font-semibold mr-1.5" style={{ color: 'var(--certificates-text-title)' }}>Date:</span> {certificates[currentIndex].date}
                   </div>
                 </div>
 
                 <div className="mb-6">
-                  <h4 className="text-lg font-semibold text-white mb-3 flex items-center transform transition-all duration-300 hover:translate-x-2">
+                  <h4 className="text-lg font-semibold mb-3 flex items-center transform transition-all duration-300 hover:translate-x-2" style={{ color: 'var(--certificates-text-title)' }}>
                     <span className="w-2 h-2 rounded-full mr-3 transition-all duration-300 hover:scale-150" style={{ backgroundColor: 'var(--primary-color)' }}></span>
                     Skills Acquired
                   </h4>
@@ -189,8 +203,12 @@ const Certificates = () => {
                 className={`w-3.5 h-3.5 rounded-full transition-all duration-300 transform hover:scale-125 ${
                   index === currentIndex
                     ? 'theme-button-gradient scale-125 shadow-lg'
-                    : 'bg-white/20 hover:bg-white/45'
+                    : 'hover:opacity-100'
                 }`}
+                style={{
+                  backgroundColor: index === currentIndex ? '' : 'var(--certificates-card-border)',
+                  opacity: index === currentIndex ? 1 : 0.4
+                }}
               />
             ))}
           </div>
@@ -242,10 +260,16 @@ const Certificates = () => {
                 {certificates.map((cert, index) => (
                   <div
                     key={cert.id}
-                    className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-white/20 transform transition-all duration-500 hover:scale-105 hover:shadow-xl cursor-pointer group"
+                    className="backdrop-blur-lg rounded-2xl p-6 shadow-lg border transform transition-all duration-500 hover:scale-105 hover:shadow-xl cursor-pointer group"
                     onClick={() => {
                       setCurrentIndex(index);
                       setShowAllCertificates(false);
+                    }}
+                    style={{
+                      backgroundColor: 'var(--certificates-card-bg)',
+                      borderColor: 'var(--certificates-card-border)',
+                      borderWidth: '1px',
+                      color: 'var(--certificates-text-body)'
                     }}
                   >
                     <div className="relative mb-4 rounded-lg overflow-hidden">
@@ -264,10 +288,10 @@ const Certificates = () => {
                         {cert.date}
                       </div>
                     </div>
-                    <h4 className="font-bold text-white mb-2 line-clamp-2 group-hover:text-[var(--accent-color)] transition-colors duration-200">
+                    <h4 className="font-bold mb-2 line-clamp-2 group-hover:text-[var(--accent-color)] transition-colors duration-200" style={{ color: 'var(--certificates-text-title)' }}>
                       {cert.title}
                     </h4>
-                    <p className="text-sm text-gray-300 mb-3">{cert.issuer}</p>
+                    <p className="text-sm mb-3" style={{ color: 'var(--certificates-text-body)' }}>{cert.issuer}</p>
                     <div className="flex flex-wrap gap-1">
                       {cert.skills.slice(0, 3).map((skill) => (
                         <span

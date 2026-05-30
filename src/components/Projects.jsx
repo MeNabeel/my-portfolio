@@ -27,7 +27,7 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="py-20 relative overflow-hidden text-white border-t border-white/5">
+    <section id="projects" className="py-20 relative overflow-hidden border-t" style={{ background: 'var(--projects-bg)', color: 'var(--projects-text-body)', borderColor: 'var(--projects-card-border)' }}>
       {/* Animated Background Elements */}
       <div className="absolute inset-0">
 
@@ -57,7 +57,7 @@ const Projects = () => {
         <div className="text-center mb-16">
           {/* Animated Typography */}
           <div className="relative inline-block">
-            <h2 className="text-5xl font-bold text-white mb-4">
+            <h2 className="text-5xl font-bold mb-4" style={{ color: 'var(--projects-text-title)' }}>
               <span className="relative">
                 <span className="theme-accent-text animate-gradient-x">
                   My Projects
@@ -72,7 +72,7 @@ const Projects = () => {
             <div className="absolute -bottom-2 -right-4 w-6 h-6 rounded-full opacity-20 animate-bounce" style={{ backgroundColor: 'var(--primary-color)', animationDelay: '1s' }}></div>
           </div>
           
-          <p className="text-gray-300 text-lg max-w-2xl mx-auto mt-8 animate-fade-in-up">
+          <p className="text-lg max-w-2xl mx-auto mt-8 animate-fade-in-up" style={{ color: 'var(--projects-text-body)' }}>
             Building innovative solutions that solve real-world problems using modern technologies and best practices.
           </p>
         </div>
@@ -92,7 +92,7 @@ const Projects = () => {
 
         {/* Decorative Element Instead of Button */}
         <div className="text-center mt-16">
-          <div className="inline-flex items-center gap-4 text-gray-400 animate-pulse">
+          <div className="inline-flex items-center gap-4 animate-pulse" style={{ color: 'var(--projects-text-body)', opacity: 0.6 }}>
             <div className="w-8 h-0.5 bg-gradient-to-r from-transparent to-[var(--secondary-color)]"></div>
             <span className="text-sm font-medium">Scroll for more</span>
             <div className="w-8 h-0.5 bg-gradient-to-l from-transparent to-[var(--primary-color)]"></div>

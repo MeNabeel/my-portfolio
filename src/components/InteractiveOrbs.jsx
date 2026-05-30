@@ -424,6 +424,10 @@ export default function InteractiveOrbs() {
     return <FallbackBackdrop />;
   }
 
+  if (themeName === 'aurora') {
+    return null;
+  }
+
   return (
     <div 
       className={`fixed inset-0 pointer-events-none transition-opacity duration-1000 z-0 ${isReady ? 'opacity-100' : 'opacity-0'}`}
