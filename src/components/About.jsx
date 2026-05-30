@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 const About = () => {
   const [theme, setTheme] = useState(localStorage.getItem("portfolio-theme") || "cosmic");
+  const [activeTab, setActiveTab] = useState("education");
 
   useEffect(() => {
     const handleThemeChange = () => {
@@ -37,15 +38,106 @@ const About = () => {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 flex flex-col items-center">
             <div className="relative">
               <img
                 src={theme === "gold" ? "/assets/nabeel_t2.png" : "/assets/nabeel_t1.png"}
                 alt="Nabeel Ijaz"
                 className="w-80 h-80 rounded-2xl object-cover shadow-2xl border-8 transform rotate-3 hover:rotate-0 transition-all duration-300 ease-out hover:scale-105"
-                style={{ borderColor: 'var(--about-card-border)' }}
+                style={{ 
+                  borderColor: 'var(--about-card-border)',
+                  filter: theme === 'aurora' ? 'hue-rotate(85deg) saturate(1.25) contrast(1.15) brightness(0.92)' : 'none'
+                }}
               />
               <div className="absolute -inset-4 theme-button-gradient rounded-2xl -z-10 opacity-20 blur-lg transition-all duration-300 hover:opacity-30 hover:blur-xl"></div>
+            </div>
+
+            {/* Interactive Sub-Profile Info Panel */}
+            <div 
+              className="w-80 mt-6 backdrop-blur-md rounded-2xl p-5 border shadow-lg relative overflow-hidden transition-all duration-300 hover:shadow-xl font-mono text-xs"
+              style={{ backgroundColor: 'var(--about-card-bg)', borderColor: 'var(--about-card-border)', color: 'var(--about-text-body)' }}
+            >
+              {/* Tab Headers */}
+              <div className="flex border-b pb-2 mb-4" style={{ borderColor: 'color-mix(in srgb, var(--primary-color) 20%, transparent)' }}>
+                <button
+                  onClick={() => setActiveTab("education")}
+                  className={`flex-1 text-center py-1.5 rounded-lg transition-all duration-300 font-bold uppercase tracking-wider cursor-pointer ${
+                    activeTab === "education" 
+                      ? "text-white bg-[var(--primary-color)]/80 shadow-[0_0_10px_var(--primary-color)]" 
+                      : "hover:bg-white/5 opacity-60 hover:opacity-100"
+                  }`}
+                >
+                  Education
+                </button>
+                <button
+                  onClick={() => setActiveTab("stack")}
+                  className={`flex-1 text-center py-1.5 rounded-lg transition-all duration-300 font-bold uppercase tracking-wider cursor-pointer ${
+                    activeTab === "stack" 
+                      ? "text-white bg-[var(--primary-color)]/80 shadow-[0_0_10px_var(--primary-color)]" 
+                      : "hover:bg-white/5 opacity-60 hover:opacity-100"
+                  }`}
+                >
+                  Stack
+                </button>
+              </div>
+
+              {/* Content Area with smooth transition */}
+              <div className="relative min-h-[160px] flex flex-col justify-center">
+                {activeTab === "education" ? (
+                  <div className="space-y-3 animate-fade-in">
+                    <div className="flex gap-3 relative pl-4 border-l border-dashed" style={{ borderColor: 'var(--primary-color)' }}>
+                      <span className="absolute -left-[4.5px] top-1 w-2 h-2 rounded-full shadow-[0_0_8px_var(--secondary-color)]" style={{ backgroundColor: 'var(--secondary-color)' }}></span>
+                      <div>
+                        <h4 className="font-bold text-[var(--about-text-title)] text-xs">BS Software Engineering</h4>
+                        <p className="text-[10px] opacity-75">Univ. of Central Punjab (UCP)</p>
+                        <p className="text-[9px] opacity-60 font-sans">CGPA: 3.5+ | Expected 2026</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex gap-3 relative pl-4 border-l border-dashed" style={{ borderColor: 'var(--primary-color)' }}>
+                      <span className="absolute -left-[4.5px] top-1 w-2 h-2 rounded-full shadow-[0_0_8px_var(--secondary-color)]" style={{ backgroundColor: 'var(--secondary-color)' }}></span>
+                      <div>
+                        <h4 className="font-bold text-[var(--about-text-title)] text-xs">FSc Pre-Engineering</h4>
+                        <p className="text-[10px] opacity-75">Punjab Group of Colleges</p>
+                        <p className="text-[9px] opacity-60 font-sans">Distinction in Mathematics</p>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="space-y-3 text-[10px] animate-fade-in">
+                    <div>
+                      <span className="font-bold text-[var(--about-text-title)] block mb-1">FRONTEND:</span>
+                      <div className="flex flex-wrap gap-1.5">
+                        {["React", "Vite", "Tailwind CSS", "HTML5/CSS3"].map(s => (
+                          <span key={s} className="px-2 py-0.5 rounded border border-[var(--primary-color)]/25 bg-[var(--primary-color)]/5 hover:border-[var(--secondary-color)] transition-colors">
+                            {s}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <div>
+                      <span className="font-bold text-[var(--about-text-title)] block mb-1">BACKEND:</span>
+                      <div className="flex flex-wrap gap-1.5">
+                        {["Node.js", "Express", "MongoDB", "Python"].map(s => (
+                          <span key={s} className="px-2 py-0.5 rounded border border-[var(--primary-color)]/25 bg-[var(--primary-color)]/5 hover:border-[var(--secondary-color)] transition-colors">
+                            {s}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <div>
+                      <span className="font-bold text-[var(--about-text-title)] block mb-1">TOOLS / CLOUD:</span>
+                      <div className="flex flex-wrap gap-1.5">
+                        {["Git", "Docker", "AWS", "AI Models"].map(s => (
+                          <span key={s} className="px-2 py-0.5 rounded border border-[var(--primary-color)]/25 bg-[var(--primary-color)]/5 hover:border-[var(--secondary-color)] transition-colors">
+                            {s}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 

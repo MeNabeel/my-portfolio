@@ -48,7 +48,9 @@ const CliConsole = () => {
         break;
       case "/theme": {
         const currentTheme = localStorage.getItem("portfolio-theme") || "cosmic";
-        const nextTheme = currentTheme === "cosmic" ? "gold" : "cosmic";
+        let nextTheme = "cosmic";
+        if (currentTheme === "cosmic") nextTheme = "gold";
+        else if (currentTheme === "gold") nextTheme = "aurora";
         localStorage.setItem("portfolio-theme", nextTheme);
         document.body.className = `theme-${nextTheme}`;
         window.dispatchEvent(new Event("theme-change"));

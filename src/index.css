@@ -50,6 +50,22 @@ body.theme-gold {
   --footer-bg: linear-gradient(to bottom, #030107, #000000);
 }
 
+body.theme-aurora {
+  --primary-color: #10b981;       /* Emerald Green */
+  --secondary-color: #34d399;     /* Mint Green / Sage */
+  --accent-color: #059669;        /* Dark Forest Green */
+  --bg-gradient-from: #011c15;    /* Deep Polar Teal */
+  --bg-gradient-via: #022c22;     /* Dark Pine Night */
+  --bg-gradient-to: #011c15;
+  --about-bg: linear-gradient(135deg, #01241a, #02382b);
+  --about-card-bg: rgba(2, 44, 34, 0.45);
+  --about-card-border: rgba(16, 185, 129, 0.25);
+  --about-text-title: #34d399;
+  --about-text-body: #a7f3d0;
+  --about-highlight-color: #10b981;
+  --footer-bg: linear-gradient(to bottom, #00120d, #000000);
+}
+
 /* Custom theme helper utility classes */
 .theme-gradient-bg {
   background: linear-gradient(135deg, var(--bg-gradient-from), var(--bg-gradient-via), var(--bg-gradient-to)) !important;

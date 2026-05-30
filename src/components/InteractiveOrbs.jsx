@@ -198,8 +198,115 @@ function RaycastHandler({ meshRefs, onHoverChange }) {
   return null;
 }
 
+// Aurora Curtain Component for organic waving light curtains
+function AuroraCurtain({ color, countX = 80, countY = 15, yOffset = 0, zOffset = -2, speed = 0.4, amplitude = 0.6, frequency = 0.2, spacingX = 0.25, spacingY = 0.15 }) {
+  const pointsRef = useRef();
+  const totalPoints = countX * countY;
+
+  const positions = useMemo(() => {
+    const pos = new Float32Array(totalPoints * 3);
+    for (let x = 0; x < countX; x++) {
+      const posX = (x - countX / 2) * spacingX;
+      for (let y = 0; y < countY; y++) {
+        const idx = x * countY + y;
+        const posY = yOffset + (y - countY / 2) * spacingY;
+        
+        pos[idx * 3] = posX;
+        pos[idx * 3 + 1] = posY;
+        pos[idx * 3 + 2] = zOffset + (Math.random() - 0.5) * 0.1;
+      }
+    }
+    return pos;
+  }, [countX, countY, spacingX, spacingY, yOffset, zOffset, totalPoints]);
+
+  useFrame(({ clock }) => {
+    if (pointsRef.current) {
+      const t = clock.getElapsedTime() * speed;
+      const posAttr = pointsRef.current.geometry.attributes.position;
+      
+      for (let x = 0; x < countX; x++) {
+        const idxOffset = x * countY;
+        const xPos = posAttr.getX(idxOffset);
+        // Combine sine wave components for dynamic oscillation
+        const wave = Math.sin(xPos * frequency + t) * amplitude + Math.cos(xPos * 0.12 + t * 0.6) * (amplitude * 0.5);
+        
+        for (let y = 0; y < countY; y++) {
+          const idx = idxOffset + y;
+          posAttr.setY(idx, yOffset + (y - countY / 2) * spacingY + wave * 0.8);
+          posAttr.setZ(idx, zOffset + wave * 0.6);
+        }
+      }
+      posAttr.needsUpdate = true;
+    }
+  });
+
+  return (
+    <points ref={pointsRef}>
+      <bufferGeometry>
+        <bufferAttribute attach="attributes-position" count={totalPoints} array={positions} itemSize={3} />
+      </bufferGeometry>
+      <pointsMaterial
+        size={0.07}
+        color={color}
+        transparent
+        opacity={0.35}
+        blending={THREE.AdditiveBlending}
+        depthWrite={false}
+      />
+    </points>
+  );
+}
+
+// Aurora Waves wrapper combining three wave layers
+function AuroraWaves({ themeColors }) {
+  const primaryColor = themeColors.primary || '#10b981';
+  const secondaryColor = themeColors.secondary || '#34d399';
+  const accentColor = themeColors.accent || '#059669';
+
+  return (
+    <group>
+      <AuroraCurtain
+        color={primaryColor}
+        countX={100}
+        countY={18}
+        yOffset={0.5}
+        zOffset={-2.5}
+        speed={0.35}
+        amplitude={0.7}
+        frequency={0.18}
+        spacingX={0.28}
+        spacingY={0.16}
+      />
+      <AuroraCurtain
+        color={secondaryColor}
+        countX={90}
+        countY={15}
+        yOffset={-0.3}
+        zOffset={-1.5}
+        speed={0.48}
+        amplitude={0.9}
+        frequency={0.24}
+        spacingX={0.26}
+        spacingY={0.15}
+      />
+      <AuroraCurtain
+        color={accentColor}
+        countX={85}
+        countY={12}
+        yOffset={0.1}
+        zOffset={-0.5}
+        speed={0.25}
+        amplitude={0.5}
+        frequency={0.15}
+        spacingX={0.3}
+        spacingY={0.18}
+      />
+    </group>
+  );
+}
+
 // Inner Canvas Wrapper
-function OrbsCanvas({ themeColors, isMobile }) {
+function OrbsCanvas({ themeColors, themeName, isMobile }) {
   const meshRefs = useRef([]);
   const [hoveredUuid, setHoveredUuid] = useState(null);
 
@@ -228,20 +335,24 @@ function OrbsCanvas({ themeColors, isMobile }) {
       <pointLight position={[-10, -10, -10]} intensity={0.6} />
       <directionalLight position={[0, 5, 5]} intensity={0.9} />
       
-      <GlowParticles themeColors={themeColors} />
-      
-      {orbsConfig.map((orb, index) => (
-        <FloatingOrb
-          key={index}
-          index={index}
-          meshRefs={meshRefs}
-          hoveredUuid={hoveredUuid}
-          themeColors={themeColors}
-          {...orb}
-        />
-      ))}
-
-      <RaycastHandler meshRefs={meshRefs} onHoverChange={setHoveredUuid} />
+      {themeName === 'aurora' ? (
+        <AuroraWaves themeColors={themeColors} />
+      ) : (
+        <>
+          <GlowParticles themeColors={themeColors} />
+          {orbsConfig.map((orb, index) => (
+            <FloatingOrb
+              key={index}
+              index={index}
+              meshRefs={meshRefs}
+              hoveredUuid={hoveredUuid}
+              themeColors={themeColors}
+              {...orb}
+            />
+          ))}
+          <RaycastHandler meshRefs={meshRefs} onHoverChange={setHoveredUuid} />
+        </>
+      )}
     </Canvas>
   );
 }
@@ -263,6 +374,7 @@ export default function InteractiveOrbs() {
     secondary: '#00f5ff',
     accent: '#d8b4fe'
   });
+  const [themeName, setThemeName] = useState("cosmic");
   const [isMobile, setIsMobile] = useState(false);
   const [isWebGLSupported, setIsWebGLSupported] = useState(true);
   const [isReady, setIsReady] = useState(false);
@@ -294,6 +406,10 @@ export default function InteractiveOrbs() {
       const secondary = styles.getPropertyValue('--secondary-color').trim() || '#00f5ff';
       const accent = styles.getPropertyValue('--accent-color').trim() || '#d8b4fe';
       setThemeColors({ primary, secondary, accent });
+
+      // Determine active theme name class
+      const themeClass = Array.from(document.body.classList).find(c => c.startsWith('theme-')) || 'theme-cosmic';
+      setThemeName(themeClass.replace('theme-', ''));
     };
 
     updateColors();
@@ -314,7 +430,7 @@ export default function InteractiveOrbs() {
       style={{ mixBlendMode: 'screen' }}
     >
       <WebGLErrorBoundary fallback={<FallbackBackdrop />}>
-        <OrbsCanvas themeColors={themeColors} isMobile={isMobile} />
+        <OrbsCanvas themeColors={themeColors} themeName={themeName} isMobile={isMobile} />
       </WebGLErrorBoundary>
     </div>
   );

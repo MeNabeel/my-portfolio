@@ -7,14 +7,18 @@ const Header = () => {
   const [theme, setTheme] = useState(localStorage.getItem("portfolio-theme") || "cosmic");
 
   useEffect(() => {
-    document.body.className = theme === "gold" ? "theme-gold" : "theme-cosmic";
+    document.body.className = `theme-${theme}`;
     localStorage.setItem("portfolio-theme", theme);
     // Dispatch custom event to notify other components (e.g., About)
     window.dispatchEvent(new Event("theme-change"));
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev === "cosmic" ? "gold" : "cosmic"));
+    setTheme((prev) => {
+      if (prev === "cosmic") return "gold";
+      if (prev === "gold") return "aurora";
+      return "cosmic";
+    });
   };
 
   return (
@@ -97,15 +101,21 @@ const Header = () => {
               <button
                 onClick={toggleTheme}
                 className="p-2 rounded-full border border-gray-200 bg-gray-50 text-gray-700 hover:bg-gray-100 transition-all duration-500 shadow-sm flex items-center justify-center cursor-pointer hover:rotate-45"
-                title={theme === "gold" ? "Switch to Cosmic Theme" : "Switch to Gold Theme"}
+                title={`Theme: ${theme.charAt(0).toUpperCase() + theme.slice(1)}`}
               >
-                {theme === "gold" ? (
-                  <svg className="w-5 h-5 text-[var(--secondary-color)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {theme === "cosmic" && (
+                  <svg className="w-5 h-5 text-[var(--primary-color)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" title="Switch Theme">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                   </svg>
-                ) : (
-                  <svg className="w-5 h-5 text-[var(--primary-color)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                )}
+                {theme === "gold" && (
+                  <svg className="w-5 h-5 text-[var(--primary-color)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" title="Switch Theme">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+                  </svg>
+                )}
+                {theme === "aurora" && (
+                  <svg className="w-5 h-5 text-[var(--primary-color)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" title="Switch Theme">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                   </svg>
                 )}
               </button>
@@ -171,7 +181,7 @@ const Header = () => {
                 onClick={() => { toggleTheme(); setIsMobileMenuOpen(false); }}
                 className="inline-flex items-center gap-2 text-gray-700 hover:text-purple-600 font-medium text-lg mt-2 bg-gray-50 px-4 py-2 rounded-lg border border-gray-200 cursor-pointer"
               >
-                <span>Theme: {theme === "gold" ? "Cosmic" : "Gold"}</span>
+                <span className="capitalize">Theme: {theme}</span>
               </button>
             </li>
           </ul>
