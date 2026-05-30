@@ -18,6 +18,7 @@ uniform float uAmplitude;
 uniform vec3 uColorStops[3];
 uniform vec2 uResolution;
 uniform float uBlend;
+uniform vec2 uMouse;
 
 out vec4 fragColor;
 
@@ -95,7 +96,9 @@ void main() {
   vec3 rampColor;
   COLOR_RAMP(colors, uv.x, rampColor);
   
-  float height = snoise(vec2(uv.x * 2.0 + uTime * 0.1, uTime * 0.25)) * 0.5 * uAmplitude;
+  float dist = distance(uv, uMouse);
+  float distortion = sin(dist * 10.0 - uTime * 2.0) * 0.05 * smoothstep(0.4, 0.0, dist);
+  float height = snoise(vec2((uv.x + distortion) * 2.0 + uTime * 0.1, uTime * 0.25)) * 0.5 * uAmplitude;
   height = exp(height);
   height = (uv.y * 2.0 - height + 0.2);
   float intensity = 0.6 * height;
@@ -144,6 +147,15 @@ export default function Aurora(props) {
     }
     window.addEventListener('resize', resize);
 
+    let mouse = [0.5, 0.5];
+    const handleMouseMove = (e) => {
+      const rect = ctn.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = 1.0 - (e.clientY - rect.top) / rect.height;
+      mouse = [x, y];
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+
     const geometry = new Triangle(gl);
     if (geometry.attributes.uv) {
       delete geometry.attributes.uv;
@@ -162,7 +174,8 @@ export default function Aurora(props) {
         uAmplitude: { value: amplitude },
         uColorStops: { value: colorStopsArray },
         uResolution: { value: [ctn.offsetWidth, ctn.offsetHeight] },
-        uBlend: { value: blend }
+        uBlend: { value: blend },
+        uMouse: { value: [0.5, 0.5] }
       }
     });
 
@@ -176,6 +189,7 @@ export default function Aurora(props) {
       program.uniforms.uTime.value = time * speed * 0.1;
       program.uniforms.uAmplitude.value = propsRef.current.amplitude ?? 1.0;
       program.uniforms.uBlend.value = propsRef.current.blend ?? blend;
+      program.uniforms.uMouse.value = mouse;
       const stops = propsRef.current.colorStops ?? colorStops;
       program.uniforms.uColorStops.value = stops.map(hex => {
         const c = new Color(hex);
@@ -190,6 +204,7 @@ export default function Aurora(props) {
     return () => {
       cancelAnimationFrame(animateId);
       window.removeEventListener('resize', resize);
+      window.removeEventListener('mousemove', handleMouseMove);
       if (ctn && gl.canvas.parentNode === ctn) {
         ctn.removeChild(gl.canvas);
       }

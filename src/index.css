@@ -77,34 +77,34 @@ body.theme-gold {
 }
 
 body.theme-aurora {
-  --primary-color: #059669;        /* Emerald Green (Dark text accent) */
-  --secondary-color: #10b981;      /* Bright Emerald */
-  --accent-color: #047857;         /* Deep Teal */
-  --bg-gradient-from: #020c1b;     /* Deep navy space background for Hero to show Aurora glow */
-  --bg-gradient-via: #0b1535;      /* Hero space indigo */
-  --bg-gradient-to: #020c1b;
+  --primary-color: #00ffd0;        /* Bright Teal/Mint */
+  --secondary-color: #00f2fe;      /* Electric Cyan */
+  --accent-color: #7c4dff;         /* Neon Purple */
+  --bg-gradient-from: #020617;     /* Deep slate space background */
+  --bg-gradient-via: #0b1329;      /* Dark navy space */
+  --bg-gradient-to: #020617;
   
-  /* High contrast light theme for all other sections */
-  --about-bg: linear-gradient(135deg, #f0fdf4, #dcfce7);
+  /* Highly legible About section breakout */
+  --about-bg: linear-gradient(135deg, #f0fdfa, #ccfbf1);
   --about-card-bg: rgba(255, 255, 255, 0.85);
-  --about-card-border: rgba(16, 185, 129, 0.15);
-  --about-text-title: #064e3b;      /* Deep green headings */
-  --about-text-body: #065f46;       /* Clean green body text */
-  --about-highlight-color: #059669;
-  --footer-bg: linear-gradient(to bottom, #020c1b, #000000);
+  --about-card-border: rgba(0, 242, 254, 0.15);
+  --about-text-title: #0f172a;      /* slate-900 */
+  --about-text-body: #334155;       /* slate-700 */
+  --about-highlight-color: #0d9488;
+  --footer-bg: linear-gradient(to bottom, rgba(2, 6, 23, 0) 0%, #000000 100%);
 
-  /* Section variables for aurora */
-  --projects-bg: linear-gradient(135deg, #f0fdf4, #dcfce7);
-  --projects-card-bg: rgba(255, 255, 255, 0.85);
-  --projects-card-border: rgba(16, 185, 129, 0.15);
-  --projects-text-title: #064e3b;
-  --projects-text-body: #065f46;
+  /* Dynamic dark space sections to show through top-level Aurora shader */
+  --projects-bg: transparent;
+  --projects-card-bg: rgba(15, 23, 42, 0.45);
+  --projects-card-border: rgba(0, 242, 254, 0.15);
+  --projects-text-title: #ffffff;
+  --projects-text-body: #cbd5e1;
 
-  --certificates-bg: linear-gradient(135deg, #f0fdf4, #dcfce7);
-  --certificates-card-bg: rgba(255, 255, 255, 0.85);
-  --certificates-card-border: rgba(16, 185, 129, 0.15);
-  --certificates-text-title: #064e3b;
-  --certificates-text-body: #065f46;
+  --certificates-bg: transparent;
+  --certificates-card-bg: rgba(15, 23, 42, 0.45);
+  --certificates-card-border: rgba(0, 242, 254, 0.15);
+  --certificates-text-title: #ffffff;
+  --certificates-text-body: #cbd5e1;
 }
 
 /* Custom theme helper utility classes */

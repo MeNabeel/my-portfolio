@@ -41,12 +41,12 @@ const About = () => {
           <div className="flex-shrink-0 flex flex-col items-center">
             <div className="relative">
               <img
-                src={theme === "gold" ? "/assets/nabeel_t2.png" : "/assets/nabeel_t1.png"}
+                src={theme === "aurora" ? "/assets/nabeel_aurora.png" : theme === "gold" ? "/assets/nabeel_t2.png" : "/assets/nabeel_t1.png"}
                 alt="Nabeel Ijaz"
                 className="w-80 h-80 rounded-2xl object-cover shadow-2xl border-8 transform rotate-3 hover:rotate-0 transition-all duration-300 ease-out hover:scale-105"
                 style={{ 
                   borderColor: 'var(--about-card-border)',
-                  filter: theme === 'aurora' ? 'hue-rotate(85deg) saturate(1.25) contrast(1.15) brightness(0.92)' : 'none'
+                  filter: 'none'
                 }}
               />
               <div className="absolute -inset-4 theme-button-gradient rounded-2xl -z-10 opacity-20 blur-lg transition-all duration-300 hover:opacity-30 hover:blur-xl"></div>

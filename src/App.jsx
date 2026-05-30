@@ -38,16 +38,6 @@ const Home = () => {
       <Header />
       <main>
         <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-          {theme === "aurora" && (
-            <div className="absolute inset-0 z-0 pointer-events-none">
-              <Aurora 
-                colorStops={["#7cff67", "#B497CF", "#5227FF"]} 
-                blend={0.5} 
-                amplitude={1.0} 
-                speed={1} 
-              />
-            </div>
-          )}
           {/* Main Hero Elements */}
           <div className="w-full h-full absolute inset-0 flex items-center justify-center opacity-100 pointer-events-auto">
 
@@ -410,11 +400,32 @@ const Home = () => {
 };
 
 const App = () => {
+  const [theme, setTheme] = React.useState(localStorage.getItem("portfolio-theme") || "cosmic");
+
+  React.useEffect(() => {
+    const handleThemeChange = () => {
+      setTheme(localStorage.getItem("portfolio-theme") || "cosmic");
+    };
+    window.addEventListener("theme-change", handleThemeChange);
+    return () => window.removeEventListener("theme-change", handleThemeChange);
+  }, []);
+
   return (
     <Router>
       <div className="relative min-h-screen theme-gradient-bg">
         {/* Animated background orbs */}
         <InteractiveOrbs />
+
+        {theme === "aurora" && (
+          <div className="fixed inset-0 z-0 pointer-events-none">
+            <Aurora 
+              colorStops={["#00ffd0", "#7c4dff", "#00f2fe"]} 
+              blend={0.5} 
+              amplitude={1.0} 
+              speed={1} 
+            />
+          </div>
+        )}
         
         <Routes>
           <Route path="/" element={<Home />} />
