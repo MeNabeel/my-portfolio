@@ -80,9 +80,9 @@ body.theme-aurora {
   --primary-color: #10b981;       /* Emerald Green */
   --secondary-color: #00ffd0;     /* Electric Teal */
   --accent-color: #0052ff;        /* Space Blue */
-  --bg-gradient-from: #000504;    /* Pitch black with green tint */
-  --bg-gradient-via: #000000;     /* Pure space black */
-  --bg-gradient-to: #000504;
+  --bg-gradient-from: #02040a;    /* Dark deep-space start */
+  --bg-gradient-via: #03060f;     /* Dark deep-space middle */
+  --bg-gradient-to: #050814;      /* Dark deep-space end */
   
   /* Highly legible neutral Slate/Zinc light layout break for About section */
   --about-bg: linear-gradient(135deg, #f8fafc, #f1f5f9);

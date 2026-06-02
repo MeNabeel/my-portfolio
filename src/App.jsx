@@ -38,6 +38,11 @@ const Home = () => {
       <Header />
       <main>
         <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+          {theme === "aurora" && (
+            <div className="absolute inset-0 z-0 pointer-events-none">
+              <Aurora amplitude={1.0} />
+            </div>
+          )}
           {/* Main Hero Elements */}
           <div className="w-full h-full absolute inset-0 flex items-center justify-center opacity-100 pointer-events-auto">
 
@@ -337,6 +342,14 @@ const Home = () => {
 
           
           <div className="text-center text-white relative z-20 px-6">
+            {theme === "aurora" && (
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-emerald-500/30 bg-black/45 backdrop-blur-md shadow-[0_0_15px_rgba(16,185,129,0.15)] mb-6 animate-float cursor-pointer hover:border-emerald-400/50 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all duration-300 pointer-events-auto">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_#10b981]"></span>
+                <span className="text-[10px] md:text-xs font-mono uppercase tracking-widest text-emerald-300 font-semibold select-none">
+                  Available for Opportunities
+                </span>
+              </div>
+            )}
             <div className="mb-8">
               <h1 className="text-6xl md:text-8xl font-bold mb-4 animate-fade-in-up">
                 <span className="theme-accent-text animate-gradient-x">
@@ -369,7 +382,7 @@ const Home = () => {
                 href="#projects" 
                 className="group relative theme-button-gradient text-white px-10 py-4 rounded-full font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-500 transform hover:scale-110 hover:shadow-2xl overflow-hidden"
               >
-                <span className="relative z-10">View My Work</span>
+                <span className="relative z-10">View My Work ↗</span>
                 <div className="absolute inset-0 theme-button-gradient-hover opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="absolute -inset-1 theme-button-gradient rounded-full blur opacity-30 group-hover:opacity-70 transition-opacity duration-500"></div>
               </a>
@@ -378,7 +391,7 @@ const Home = () => {
                 to="/contact" 
                 className="group relative border-2 border-[var(--primary-color)] text-[var(--accent-color)] px-10 py-4 rounded-full font-semibold hover:bg-[var(--primary-color)]/20 hover:text-white hover:border-[var(--secondary-color)] transition-all duration-500 transform hover:scale-105 hover:shadow-xl"
               >
-                <span className="relative z-10">Contact Me</span>
+                <span className="relative z-10">Contact Me ↗</span>
                 <div className="absolute inset-0 bg-[var(--primary-color)] rounded-full scale-0 group-hover:scale-100 transition-transform duration-500 opacity-10"></div>
               </Link>
             </div>
@@ -386,7 +399,9 @@ const Home = () => {
           </div>
 
           {/* Boot sequence terminal popup */}
-          <BootTerminal onBootComplete={() => setIsBooted(true)} />
+          {theme !== "aurora" && (
+            <BootTerminal onBootComplete={() => setIsBooted(true)} />
+          )}
         </section>
         <About />
         <Projects />
@@ -416,16 +431,7 @@ const App = () => {
         {/* Animated background orbs */}
         <InteractiveOrbs />
 
-        {theme === "aurora" && (
-          <div className="fixed inset-0 z-0 pointer-events-none">
-            <Aurora 
-              colorStops={["#10b981", "#00ffd0", "#0052ff"]} 
-              blend={0.5} 
-              amplitude={1.0} 
-              speed={1} 
-            />
-          </div>
-        )}
+        {/* Top-level Aurora background removed, rendered locally in Hero section instead */}
         
         <Routes>
           <Route path="/" element={<Home />} />

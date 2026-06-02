@@ -15,105 +15,214 @@ precision highp float;
 
 uniform float uTime;
 uniform float uAmplitude;
-uniform vec3 uColorStops[3];
 uniform vec2 uResolution;
-uniform float uBlend;
 uniform vec2 uMouse;
 
 out vec4 fragColor;
 
-vec3 permute(vec3 x) {
-  return mod(((x * 34.0) + 1.0) * x, 289.0);
+// Pseudo-random hash
+float hash(vec2 p) {
+    p = fract(p * vec2(123.34, 456.21));
+    p += dot(p, p + 45.32);
+    return fract(p.x * p.y);
 }
 
-float snoise(vec2 v){
-  const vec4 C = vec4(
-      0.211324865405187, 0.366025403784439,
-      -0.577350269189626, 0.024390243902439
-  );
-  vec2 i  = floor(v + dot(v, C.yy));
-  vec2 x0 = v - i + dot(i, C.xx);
-  vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
-  vec4 x12 = x0.xyxy + C.xxzz;
-  x12.xy -= i1;
-  i = mod(i, 289.0);
-
-  vec3 p = permute(
-      permute(i.y + vec3(0.0, i1.y, 1.0))
-    + i.x + vec3(0.0, i1.x, 1.0)
-  );
-
-  vec3 m = max(
-      0.5 - vec3(
-          dot(x0, x0),
-          dot(x12.xy, x12.xy),
-          dot(x12.zw, x12.zw)
-      ), 
-      0.0
-  );
-  m = m * m;
-  m = m * m;
-
-  vec3 x = 2.0 * fract(p * C.www) - 1.0;
-  vec3 h = abs(x) - 0.5;
-  vec3 ox = floor(x + 0.5);
-  vec3 a0 = x - ox;
-  m *= 1.79284291400159 - 0.85373472095314 * (a0*a0 + h*h);
-
-  vec3 g;
-  g.x  = a0.x  * x0.x  + h.x  * x0.y;
-  g.yz = a0.yz * x12.xz + h.yz * x12.yw;
-  return 130.0 * dot(m, g);
+// 2D Value Noise
+float noise(vec2 p) {
+    vec2 i = floor(p);
+    vec2 f = fract(p);
+    f = f * f * (3.0 - 2.0 * f);
+    float a = hash(i);
+    float b = hash(i + vec2(1.0, 0.0));
+    float c = hash(i + vec2(0.0, 1.0));
+    float d = hash(i + vec2(1.0, 1.0));
+    return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
 }
 
-struct ColorStop {
-  vec3 color;
-  float position;
-};
+// 2D Simplex Noise approximation for scrolling aurora
+float simplexNoise(vec2 p) {
+    const vec3 C = vec3(0.211324865405187, 0.366025403784439, -0.577350269189626);
+    vec2 i  = floor(p + dot(p, C.yy));
+    vec2 x0 = p - i + dot(i, C.xx);
+    vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+    vec4 x12 = x0.xyxy + C.xxzz;
+    x12.xy -= i1;
+    
+    float h0 = hash(i);
+    float h1 = hash(i + i1);
+    float h2 = hash(i + 1.0);
+    
+    vec3 m = max(0.5 - vec3(dot(x0, x0), dot(x12.xy, x12.xy), dot(x12.zw, x12.zw)), 0.0);
+    m = m * m;
+    m = m * m;
+    
+    vec3 g = vec3(h0, h1, h2) - 0.5;
+    vec3 ext = vec3(x0.x * g.x + x0.y * g.x, x12.x * g.y + x12.y * g.y, x12.z * g.z + x12.w * g.z);
+    
+    return 80.0 * dot(m, ext);
+}
 
-#define COLOR_RAMP(colors, factor, finalColor) {              \
-  int index = 0;                                            \
-  for (int i = 0; i < 2; i++) {                               \
-     ColorStop currentColor = colors[i];                    \
-     bool isInBetween = currentColor.position <= factor;    \
-     index = int(mix(float(index), float(i), float(isInBetween))); \
-  }                                                         \
-  ColorStop currentColor = colors[index];                   \
-  ColorStop nextColor = colors[index + 1];                  \
-  float range = nextColor.position - currentColor.position; \
-  float lerpFactor = (factor - currentColor.position) / range; \
-  finalColor = mix(currentColor.color, nextColor.color, lerpFactor); \
+// Fractal Brownian Motion (FBM) for vertical light beams
+float fbm(vec2 p) {
+    float v = 0.0;
+    float a = 0.5;
+    vec2 shift = vec2(100.0);
+    mat2 rot = mat2(cos(0.5), sin(0.5), -sin(0.5), cos(0.5));
+    for (int i = 0; i < 4; ++i) {
+        v += a * simplexNoise(p);
+        p = rot * p * 2.0 + shift;
+        a *= 0.5;
+    }
+    return v;
+}
+
+// Map horizontal coordinates to aurora colors
+vec3 getAuroraColor(float x) {
+    vec3 purple = vec3(0.55, 0.1, 0.95);
+    vec3 magenta = vec3(0.9, 0.05, 0.6);
+    vec3 emerald = vec3(0.0, 0.9, 0.45);
+    vec3 cyan = vec3(0.0, 0.6, 1.0);
+    
+    if (x < 0.25) {
+        return mix(purple, magenta, x * 4.0);
+    } else if (x < 0.5) {
+        return mix(magenta, emerald, (x - 0.25) * 4.0);
+    } else if (x < 0.75) {
+        return mix(emerald, cyan, (x - 0.5) * 4.0);
+    } else {
+        return mix(cyan, purple, (x - 0.75) * 4.0);
+    }
 }
 
 void main() {
-  vec2 uv = gl_FragCoord.xy / uResolution;
-  
-  ColorStop colors[3];
-  colors[0] = ColorStop(uColorStops[0], 0.0);
-  colors[1] = ColorStop(uColorStops[1], 0.5);
-  colors[2] = ColorStop(uColorStops[2], 1.0);
-  
-  vec3 rampColor;
-  COLOR_RAMP(colors, uv.x, rampColor);
-  
-  float dist = distance(uv, uMouse);
-  float distortion = sin(dist * 10.0 - uTime * 2.0) * 0.05 * smoothstep(0.4, 0.0, dist);
-  float height = snoise(vec2((uv.x + distortion) * 2.0 + uTime * 0.1, uTime * 0.25)) * 0.5 * uAmplitude;
-  height = exp(height);
-  height = (uv.y * 2.0 - height + 0.2);
-  float intensity = 0.6 * height;
-  
-  float midPoint = 0.20;
-  float auroraAlpha = smoothstep(midPoint - uBlend * 0.5, midPoint + uBlend * 0.5, intensity);
-  
-  vec3 auroraColor = intensity * rampColor;
-  
-  fragColor = vec4(auroraColor * auroraAlpha, auroraAlpha);
+    vec2 uv = gl_FragCoord.xy / uResolution;
+    
+    // 1. Dark Deep-Space Background Gradient (#02040a to #050814)
+    vec3 spaceTop = vec3(0.0078, 0.0157, 0.0392); // #02040a
+    vec3 spaceBottom = vec3(0.0196, 0.0314, 0.0784); // #050814
+    vec3 spaceBg = mix(spaceBottom, spaceTop, uv.y);
+    
+    // Add soft nebula haze in background
+    float nebulaNoise = simplexNoise(uv * 1.5 + vec2(uTime * 0.02, 0.0)) * 0.5 + 0.5;
+    vec3 nebulaColor = mix(vec3(0.1, 0.0, 0.2), vec3(0.0, 0.1, 0.15), uv.x);
+    spaceBg += nebulaColor * nebulaNoise * 0.35;
+
+    // 2. Multi-Layer Star Field with 3D Parallax & Twinkle
+    vec3 stars = vec3(0.0);
+    for (int layer = 1; layer <= 3; layer++) {
+        float fl = float(layer);
+        
+        // Deep parallax offset based on uMouse
+        vec2 starOffset = uMouse * (fl * 0.012);
+        
+        // Star field grid
+        vec2 gridUv = (uv + starOffset) * (20.0 * fl * fl);
+        vec2 id = floor(gridUv);
+        vec2 f = fract(gridUv) - 0.5;
+        
+        float h = hash(id);
+        float twinkle = sin(uTime * (2.5 + h * 4.0) + h * 6.28) * 0.5 + 0.5;
+        
+        // Threshold controls density
+        if (h > 0.91 - (fl * 0.02)) {
+            float size = 0.04 + 0.04 * hash(id + 1.0);
+            float dist = length(f);
+            
+            // Draw star point
+            float brightness = smoothstep(size, 0.0, dist) + 0.25 * smoothstep(size * 4.0, 0.0, dist);
+            vec3 starTint = mix(vec3(0.85, 0.92, 1.0), vec3(1.0, 0.85, 0.95), hash(id + 2.0));
+            stars += starTint * brightness * twinkle * (0.35 + 0.65 * hash(id + 3.0));
+        }
+    }
+    
+    // 3. Subtle Floating Cosmic Dust
+    vec3 dust = vec3(0.0);
+    vec2 dustOffset = uMouse * 0.004 + vec2(sin(uTime * 0.04), cos(uTime * 0.04)) * 0.02;
+    vec2 dustGridUv = (uv + dustOffset) * 6.0;
+    vec2 dustId = floor(dustGridUv);
+    vec2 dustF = fract(dustGridUv) - 0.5;
+    float dustHash = hash(dustId);
+    if (dustHash > 0.95) {
+        float size = 0.12 * dustHash;
+        float dist = length(dustF);
+        float brightness = smoothstep(size * 2.0, 0.0, dist) * 0.18;
+        vec3 dustTint = mix(vec3(0.0, 0.9, 0.6), vec3(0.5, 0.0, 0.9), hash(dustId + 1.0));
+        dust += dustTint * brightness;
+    }
+
+    // 4. Vertical Aurora Borealis Beams (from top, fading down)
+    vec3 aurora = vec3(0.0);
+    
+    // Stretched noise coordinates for vertical beams
+    vec2 beamUv = vec2(uv.x * 6.0 - uMouse.x * 0.05, uv.y * 0.3 - uTime * 0.015);
+    
+    // Base FBM columns
+    float beamNoise = fbm(beamUv);
+    beamNoise = smoothstep(0.15, 0.75, beamNoise);
+    
+    // Distort x coordinate using mouse position for interactive waving
+    float hoverDist = distance(uv, uMouse);
+    float hoverDistortion = sin(hoverDist * 8.0 - uTime * 1.5) * 0.03 * smoothstep(0.45, 0.0, hoverDist);
+    
+    // High-altitude volumetric light columns
+    float colNoise1 = simplexNoise(vec2((uv.x + hoverDistortion) * 12.0 + uTime * 0.05, uTime * 0.02));
+    float colNoise2 = simplexNoise(vec2((uv.x + hoverDistortion) * 20.0 - uTime * 0.08, uTime * 0.03));
+    float columnStrength = smoothstep(-0.2, 0.6, colNoise1 * 0.6 + colNoise2 * 0.4);
+    
+    // Combine noise layers
+    float auroraIntensity = beamNoise * columnStrength * uAmplitude;
+    
+    // Fade out as they go down
+    auroraIntensity *= smoothstep(0.18, 0.9, uv.y);
+    
+    // Add soft atmospheric glow at the top
+    auroraIntensity += pow(uv.y, 4.0) * 0.25;
+
+    // Apply aurora colors distributed horizontally
+    vec3 auroraColor = getAuroraColor(uv.x + simplexNoise(uv * 0.2) * 0.08);
+    aurora = auroraColor * auroraIntensity * 0.95;
+
+    // 5. Curved Planet Horizon (at the bottom)
+    vec2 planetCenter = vec2(0.5, -0.82);
+    float planetRadius = 0.93;
+    float distToPlanet = distance(uv, planetCenter);
+    
+    // Solid planet body mask
+    float planetMask = step(distToPlanet, planetRadius);
+    
+    // Atmospheric glow on the edge of the planet
+    float edgeGlow = 0.0;
+    if (distToPlanet > planetRadius) {
+        float distFromEdge = distToPlanet - planetRadius;
+        edgeGlow = smoothstep(0.28, 0.0, distFromEdge);
+        edgeGlow = pow(edgeGlow, 3.8) * 0.88;
+    }
+    vec3 planetAtmosphere = vec3(0.0, 0.95, 0.7) * edgeGlow;
+    
+    // Rising sun flare on the center of the planet horizon
+    vec2 sunPos = vec2(0.5, 0.11);
+    float distToSun = distance(uv, sunPos);
+    
+    float sunFlare = smoothstep(0.32, 0.0, distToSun);
+    sunFlare = pow(sunFlare, 4.5) * 1.6;
+    
+    float sunGlow = smoothstep(0.65, 0.0, distToSun);
+    sunGlow = pow(sunGlow, 2.2) * 0.55;
+    
+    vec3 sunriseGlow = vec3(0.5, 1.0, 0.92) * (sunFlare + sunGlow);
+
+    // Combine planet elements
+    vec3 planetColor = planetAtmosphere + sunriseGlow;
+
+    // 6. Composite the entire scene
+    vec3 finalColor = mix(spaceBg + stars + dust + aurora, planetColor, planetMask);
+    
+    fragColor = vec4(finalColor, 1.0);
 }
 `;
 
 export default function Aurora(props) {
-  const { colorStops = ['#5227FF', '#7cff67', '#5227FF'], amplitude = 1.0, blend = 0.5 } = props;
+  const { amplitude = 1.0 } = props;
   const propsRef = useRef(props);
   propsRef.current = props;
 
@@ -161,20 +270,13 @@ export default function Aurora(props) {
       delete geometry.attributes.uv;
     }
 
-    const colorStopsArray = colorStops.map(hex => {
-      const c = new Color(hex);
-      return [c.r, c.g, c.b];
-    });
-
     program = new Program(gl, {
       vertex: VERT,
       fragment: FRAG,
       uniforms: {
         uTime: { value: 0 },
         uAmplitude: { value: amplitude },
-        uColorStops: { value: colorStopsArray },
         uResolution: { value: [ctn.offsetWidth, ctn.offsetHeight] },
-        uBlend: { value: blend },
         uMouse: { value: [0.5, 0.5] }
       }
     });
@@ -188,13 +290,7 @@ export default function Aurora(props) {
       const { time = t * 0.01, speed = 1.0 } = propsRef.current;
       program.uniforms.uTime.value = time * speed * 0.1;
       program.uniforms.uAmplitude.value = propsRef.current.amplitude ?? 1.0;
-      program.uniforms.uBlend.value = propsRef.current.blend ?? blend;
       program.uniforms.uMouse.value = mouse;
-      const stops = propsRef.current.colorStops ?? colorStops;
-      program.uniforms.uColorStops.value = stops.map(hex => {
-        const c = new Color(hex);
-        return [c.r, c.g, c.b];
-      });
       renderer.render({ scene: mesh });
     };
     animateId = requestAnimationFrame(update);
