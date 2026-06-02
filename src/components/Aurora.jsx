@@ -39,27 +39,31 @@ float noise(vec2 p) {
     return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
 }
 
-// 2D Simplex Noise approximation for scrolling aurora
-float simplexNoise(vec2 p) {
-    const vec3 C = vec3(0.211324865405187, 0.366025403784439, -0.577350269189626);
-    vec2 i  = floor(p + dot(p, C.yy));
-    vec2 x0 = p - i + dot(i, C.xx);
+vec3 permute(vec3 x) {
+    return mod(((x * 34.0) + 1.0) * x, 289.0);
+}
+
+float snoise(vec2 v) {
+    const vec4 C = vec4(0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439);
+    vec2 i  = floor(v + dot(v, C.yy));
+    vec2 x0 = v - i + dot(i, C.xx);
     vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
     vec4 x12 = x0.xyxy + C.xxzz;
     x12.xy -= i1;
-    
-    float h0 = hash(i);
-    float h1 = hash(i + i1);
-    float h2 = hash(i + 1.0);
-    
+    i = mod(i, 289.0);
+    vec3 p = permute(permute(i.y + vec3(0.0, i1.y, 1.0)) + i.x + vec3(0.0, i1.x, 1.0));
     vec3 m = max(0.5 - vec3(dot(x0, x0), dot(x12.xy, x12.xy), dot(x12.zw, x12.zw)), 0.0);
     m = m * m;
     m = m * m;
-    
-    vec3 g = vec3(h0, h1, h2) - 0.5;
-    vec3 ext = vec3(x0.x * g.x + x0.y * g.x, x12.x * g.y + x12.y * g.y, x12.z * g.z + x12.w * g.z);
-    
-    return 80.0 * dot(m, ext);
+    vec3 x = 2.0 * fract(p * C.www) - 1.0;
+    vec3 h = abs(x) - 0.5;
+    vec3 ox = floor(x + 0.5);
+    vec3 a0 = x - ox;
+    m *= 1.79284291400159 - 0.85373472095314 * (a0 * a0 + h * h);
+    vec3 g;
+    g.x  = a0.x  * x0.x  + h.x  * x0.y;
+    g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+    return 130.0 * dot(m, g);
 }
 
 // Fractal Brownian Motion (FBM) for vertical light beams
@@ -69,7 +73,7 @@ float fbm(vec2 p) {
     vec2 shift = vec2(100.0);
     mat2 rot = mat2(cos(0.5), sin(0.5), -sin(0.5), cos(0.5));
     for (int i = 0; i < 4; ++i) {
-        v += a * simplexNoise(p);
+        v += a * snoise(p);
         p = rot * p * 2.0 + shift;
         a *= 0.5;
     }
@@ -103,7 +107,7 @@ void main() {
     vec3 spaceBg = mix(spaceBottom, spaceTop, uv.y);
     
     // Add soft nebula haze in background
-    float nebulaNoise = simplexNoise(uv * 1.5 + vec2(uTime * 0.02, 0.0)) * 0.5 + 0.5;
+    float nebulaNoise = snoise(uv * 1.5 + vec2(uTime * 0.02, 0.0)) * 0.5 + 0.5;
     vec3 nebulaColor = mix(vec3(0.1, 0.0, 0.2), vec3(0.0, 0.1, 0.15), uv.x);
     spaceBg += nebulaColor * nebulaNoise * 0.35;
 
@@ -125,13 +129,13 @@ void main() {
         
         // Threshold controls density
         if (h > 0.91 - (fl * 0.02)) {
-            float size = 0.04 + 0.04 * hash(id + 1.0);
+            float size = 0.04 + 0.04 * hash(id + vec2(1.0));
             float dist = length(f);
             
             // Draw star point
             float brightness = smoothstep(size, 0.0, dist) + 0.25 * smoothstep(size * 4.0, 0.0, dist);
-            vec3 starTint = mix(vec3(0.85, 0.92, 1.0), vec3(1.0, 0.85, 0.95), hash(id + 2.0));
-            stars += starTint * brightness * twinkle * (0.35 + 0.65 * hash(id + 3.0));
+            vec3 starTint = mix(vec3(0.85, 0.92, 1.0), vec3(1.0, 0.85, 0.95), hash(id + vec2(2.0)));
+            stars += starTint * brightness * twinkle * (0.35 + 0.65 * hash(id + vec2(3.0)));
         }
     }
     
@@ -146,7 +150,7 @@ void main() {
         float size = 0.12 * dustHash;
         float dist = length(dustF);
         float brightness = smoothstep(size * 2.0, 0.0, dist) * 0.18;
-        vec3 dustTint = mix(vec3(0.0, 0.9, 0.6), vec3(0.5, 0.0, 0.9), hash(dustId + 1.0));
+        vec3 dustTint = mix(vec3(0.0, 0.9, 0.6), vec3(0.5, 0.0, 0.9), hash(dustId + vec2(1.0)));
         dust += dustTint * brightness;
     }
 
@@ -165,8 +169,8 @@ void main() {
     float hoverDistortion = sin(hoverDist * 8.0 - uTime * 1.5) * 0.03 * smoothstep(0.45, 0.0, hoverDist);
     
     // High-altitude volumetric light columns
-    float colNoise1 = simplexNoise(vec2((uv.x + hoverDistortion) * 12.0 + uTime * 0.05, uTime * 0.02));
-    float colNoise2 = simplexNoise(vec2((uv.x + hoverDistortion) * 20.0 - uTime * 0.08, uTime * 0.03));
+    float colNoise1 = snoise(vec2((uv.x + hoverDistortion) * 12.0 + uTime * 0.05, uTime * 0.02));
+    float colNoise2 = snoise(vec2((uv.x + hoverDistortion) * 20.0 - uTime * 0.08, uTime * 0.03));
     float columnStrength = smoothstep(-0.2, 0.6, colNoise1 * 0.6 + colNoise2 * 0.4);
     
     // Combine noise layers
@@ -179,7 +183,7 @@ void main() {
     auroraIntensity += pow(uv.y, 4.0) * 0.25;
 
     // Apply aurora colors distributed horizontally
-    vec3 auroraColor = getAuroraColor(uv.x + simplexNoise(uv * 0.2) * 0.08);
+    vec3 auroraColor = getAuroraColor(uv.x + snoise(uv * 0.2) * 0.08);
     aurora = auroraColor * auroraIntensity * 0.95;
 
     // 5. Curved Planet Horizon (at the bottom)
