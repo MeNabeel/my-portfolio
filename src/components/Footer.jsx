@@ -61,9 +61,18 @@ const Footer = () => {
   return (
     <footer id="contact" className="text-white py-16 relative overflow-hidden border-t border-white/10" style={{ background: 'var(--footer-bg)' }}>
       {theme === "aurora" && (
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          <Aurora amplitude={0.8} showPlanet={false} />
-        </div>
+        <>
+          <div className="absolute inset-0 z-0 pointer-events-none">
+            <Aurora amplitude={0.4} showPlanet={false} />
+          </div>
+          {/* Black infuser overlay acting as separator and dimming effect */}
+          <div 
+            className="absolute inset-0 z-[1] pointer-events-none"
+            style={{
+              background: 'linear-gradient(to bottom, #000000 0%, rgba(0, 0, 0, 0.9) 30%, rgba(0, 0, 0, 0.9) 70%, #000000 100%)'
+            }}
+          />
+        </>
       )}
       {/* Animated Background Elements */}
       <div className="absolute inset-0">

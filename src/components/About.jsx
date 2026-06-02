@@ -41,7 +41,7 @@ const About = () => {
           <div className="flex-shrink-0 flex flex-col items-center">
             <div className="relative">
               <img
-                src={theme === "aurora" ? "/assets/nabeel_aurora.png" : theme === "gold" ? "/assets/nabeel_t2.png" : "/assets/nabeel_t1.png"}
+                src={theme === "aurora" ? "/assets/nabeel_ar2.png" : theme === "gold" ? "/assets/nabeel_t2.png" : "/assets/nabeel_t1.png"}
                 alt="Nabeel Ijaz"
                 className="w-80 h-80 rounded-2xl object-cover shadow-2xl border-8 transform rotate-3 hover:rotate-0 transition-all duration-300 ease-out hover:scale-105"
                 style={{
