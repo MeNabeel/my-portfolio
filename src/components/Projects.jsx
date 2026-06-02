@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ProjectCard from "./ProjectCard";
+import Aurora from "./Aurora";
 
 const Projects = () => {
+  const [theme, setTheme] = useState(localStorage.getItem("portfolio-theme") || "cosmic");
+
+  useEffect(() => {
+    const handleThemeChange = () => {
+      setTheme(localStorage.getItem("portfolio-theme") || "cosmic");
+    };
+    window.addEventListener("theme-change", handleThemeChange);
+    return () => window.removeEventListener("theme-change", handleThemeChange);
+  }, []);
+
   const projectData = [
     {
       id: "wifi-intrusion", 
@@ -28,6 +39,11 @@ const Projects = () => {
 
   return (
     <section id="projects" className="py-20 relative overflow-hidden border-t" style={{ background: 'var(--projects-bg)', color: 'var(--projects-text-body)', borderColor: 'var(--projects-card-border)' }}>
+      {theme === "aurora" && (
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <Aurora amplitude={0.8} showPlanet={false} />
+        </div>
+      )}
       {/* Animated Background Elements */}
       <div className="absolute inset-0">
 

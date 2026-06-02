@@ -40,7 +40,7 @@ const Home = () => {
         <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
           {theme === "aurora" && (
             <div className="absolute inset-0 z-0 pointer-events-none">
-              <Aurora amplitude={1.0} />
+              <Aurora amplitude={1.0} showPlanet={true} />
             </div>
           )}
           {/* Main Hero Elements */}
@@ -373,7 +373,9 @@ const Home = () => {
               
               {/* Premium Built-With-Purpose Subtitle centered between Mars & Venus */}
               <p className="mt-8 text-md md:text-lg italic text-purple-200/80 font-mono tracking-wide max-w-2xl mx-auto animate-reveal-text">
-                "Between distant planets and endless possibilities, I engineer the future."
+                {theme === "aurora"
+                  ? "“Inspired by the Aurora, building technology beyond horizons.”"
+                  : "“Between distant planets and endless possibilities, I engineer the future.”"}
               </p>
             </div>
 

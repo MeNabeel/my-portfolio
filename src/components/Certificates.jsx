@@ -1,9 +1,19 @@
 import React, { useState, useEffect } from "react";
+import Aurora from "./Aurora";
 
 const Certificates = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [showAllCertificates, setShowAllCertificates] = useState(false);
+  const [theme, setTheme] = useState(localStorage.getItem("portfolio-theme") || "cosmic");
+
+  useEffect(() => {
+    const handleThemeChange = () => {
+      setTheme(localStorage.getItem("portfolio-theme") || "cosmic");
+    };
+    window.addEventListener("theme-change", handleThemeChange);
+    return () => window.removeEventListener("theme-change", handleThemeChange);
+  }, []);
 
   const certificates = [
     {
@@ -91,6 +101,11 @@ const Certificates = () => {
           borderColor: 'var(--certificates-card-border)'
         }}
       >
+        {theme === "aurora" && (
+          <div className="absolute inset-0 z-0 pointer-events-none">
+            <Aurora amplitude={0.8} showPlanet={false} />
+          </div>
+        )}
 
         
         {/* Animated Particles */}

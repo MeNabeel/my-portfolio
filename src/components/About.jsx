@@ -44,7 +44,7 @@ const About = () => {
                 src={theme === "aurora" ? "/assets/nabeel_aurora.png" : theme === "gold" ? "/assets/nabeel_t2.png" : "/assets/nabeel_t1.png"}
                 alt="Nabeel Ijaz"
                 className="w-80 h-80 rounded-2xl object-cover shadow-2xl border-8 transform rotate-3 hover:rotate-0 transition-all duration-300 ease-out hover:scale-105"
-                style={{ 
+                style={{
                   borderColor: 'var(--about-card-border)',
                   filter: 'none'
                 }}
@@ -53,7 +53,7 @@ const About = () => {
             </div>
 
             {/* Interactive Sub-Profile Info Panel */}
-            <div 
+            <div
               className="w-80 mt-6 backdrop-blur-md rounded-2xl p-5 border shadow-lg relative overflow-hidden transition-all duration-300 hover:shadow-xl font-mono text-xs"
               style={{ backgroundColor: 'var(--about-card-bg)', borderColor: 'var(--about-card-border)', color: 'var(--about-text-body)' }}
             >
@@ -61,21 +61,19 @@ const About = () => {
               <div className="flex border-b pb-2 mb-4" style={{ borderColor: 'color-mix(in srgb, var(--primary-color) 20%, transparent)' }}>
                 <button
                   onClick={() => setActiveTab("education")}
-                  className={`flex-1 text-center py-1.5 rounded-lg transition-all duration-300 font-bold uppercase tracking-wider cursor-pointer ${
-                    activeTab === "education" 
-                      ? "text-white bg-[var(--primary-color)]/80 shadow-[0_0_10px_var(--primary-color)]" 
-                      : "hover:bg-white/5 opacity-60 hover:opacity-100"
-                  }`}
+                  className={`flex-1 text-center py-1.5 rounded-lg transition-all duration-300 font-bold uppercase tracking-wider cursor-pointer ${activeTab === "education"
+                    ? "text-white bg-[var(--primary-color)]/80 shadow-[0_0_10px_var(--primary-color)]"
+                    : "hover:bg-white/5 opacity-60 hover:opacity-100"
+                    }`}
                 >
                   Education
                 </button>
                 <button
                   onClick={() => setActiveTab("stack")}
-                  className={`flex-1 text-center py-1.5 rounded-lg transition-all duration-300 font-bold uppercase tracking-wider cursor-pointer ${
-                    activeTab === "stack" 
-                      ? "text-white bg-[var(--primary-color)]/80 shadow-[0_0_10px_var(--primary-color)]" 
-                      : "hover:bg-white/5 opacity-60 hover:opacity-100"
-                  }`}
+                  className={`flex-1 text-center py-1.5 rounded-lg transition-all duration-300 font-bold uppercase tracking-wider cursor-pointer ${activeTab === "stack"
+                    ? "text-white bg-[var(--primary-color)]/80 shadow-[0_0_10px_var(--primary-color)]"
+                    : "hover:bg-white/5 opacity-60 hover:opacity-100"
+                    }`}
                 >
                   Stack
                 </button>
@@ -90,16 +88,16 @@ const About = () => {
                       <div>
                         <h4 className="font-bold text-[var(--about-text-title)] text-xs">BS Software Engineering</h4>
                         <p className="text-[10px] opacity-75">Univ. of Central Punjab (UCP)</p>
-                        <p className="text-[9px] opacity-60 font-sans">CGPA: 3.5+ | Expected 2026</p>
+                        <p className="text-[9px] opacity-60 font-sans">CGPA: 3.3+ | Expected 2026</p>
                       </div>
                     </div>
-                    
+
                     <div className="flex gap-3 relative pl-4 border-l border-dashed" style={{ borderColor: 'var(--primary-color)' }}>
                       <span className="absolute -left-[4.5px] top-1 w-2 h-2 rounded-full shadow-[0_0_8px_var(--secondary-color)]" style={{ backgroundColor: 'var(--secondary-color)' }}></span>
                       <div>
-                        <h4 className="font-bold text-[var(--about-text-title)] text-xs">FSc Pre-Engineering</h4>
+                        <h4 className="font-bold text-[var(--about-text-title)] text-xs">Intermediate (ICS) Computing</h4>
                         <p className="text-[10px] opacity-75">Punjab Group of Colleges</p>
-                        <p className="text-[9px] opacity-60 font-sans">Distinction in Mathematics</p>
+                        <p className="text-[9px] opacity-60 font-sans">75%</p>
                       </div>
                     </div>
                   </div>
@@ -146,7 +144,7 @@ const About = () => {
               About Me
             </h2>
 
-            <div 
+            <div
               className="backdrop-blur-lg rounded-2xl p-8 shadow-xl border transform transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] relative overflow-hidden"
               style={{ backgroundColor: 'var(--about-card-bg)', borderColor: 'var(--about-card-border)', color: 'var(--about-text-body)' }}
             >

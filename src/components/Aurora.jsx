@@ -17,6 +17,7 @@ uniform float uTime;
 uniform float uAmplitude;
 uniform vec2 uResolution;
 uniform vec2 uMouse;
+uniform float uShowPlanet;
 
 out vec4 fragColor;
 
@@ -191,42 +192,70 @@ void main() {
     float planetRadius = 0.93;
     float distToPlanet = distance(uv, planetCenter);
     
-    // Solid planet body mask
-    float planetMask = step(distToPlanet, planetRadius);
+    // Thin, sharp glowing horizon line
+    float horizonLine = smoothstep(0.005, 0.0, abs(distToPlanet - planetRadius));
     
-    // Atmospheric glow on the edge of the planet
-    float edgeGlow = 0.0;
+    // Atmospheric glow above the horizon (only for uv.y > horizon)
+    float glowAbove = 0.0;
     if (distToPlanet > planetRadius) {
         float distFromEdge = distToPlanet - planetRadius;
-        edgeGlow = smoothstep(0.28, 0.0, distFromEdge);
-        edgeGlow = pow(edgeGlow, 3.8) * 0.88;
+        glowAbove = smoothstep(0.12, 0.0, distFromEdge);
+        glowAbove = pow(glowAbove, 2.0); // softer, wider glow
     }
-    vec3 planetAtmosphere = vec3(0.0, 0.95, 0.7) * edgeGlow;
     
-    // Rising sun flare on the center of the planet horizon
+    // Color of the horizon line and atmosphere glow based on x-coordinate
+    vec3 horizonThemeColor = getAuroraColor(uv.x);
+    
+    // Rising sun flare in the middle of the horizon (x near 0.5)
     vec2 sunPos = vec2(0.5, 0.11);
     float distToSun = distance(uv, sunPos);
     
-    float sunFlare = smoothstep(0.32, 0.0, distToSun);
-    sunFlare = pow(sunFlare, 4.5) * 1.6;
+    // Sharp bright sun flare at the center
+    float sunFlare = smoothstep(0.08, 0.0, distToSun);
+    sunFlare = pow(sunFlare, 4.0) * 2.0;
     
-    float sunGlow = smoothstep(0.65, 0.0, distToSun);
-    sunGlow = pow(sunGlow, 2.2) * 0.55;
+    // Broader sun glow
+    float sunGlow = smoothstep(0.35, 0.0, distToSun);
+    sunGlow = pow(sunGlow, 2.2) * 0.7;
     
-    vec3 sunriseGlow = vec3(0.5, 1.0, 0.92) * (sunFlare + sunGlow);
-
-    // Combine planet elements
-    vec3 planetColor = planetAtmosphere + sunriseGlow;
+    // Sun light is bright green/white in the center
+    vec3 sunLightColor = vec3(0.8, 1.0, 0.9) * (sunFlare + sunGlow);
+    
+    // Combine the horizon elements
+    vec3 thinLineColor = mix(horizonThemeColor, vec3(1.0), 0.7) * horizonLine * 1.5;
+    vec3 atmosphereColor = horizonThemeColor * glowAbove * 0.8;
+    
+    // Inside the planet is black, plus a tiny bit of glow bleeding in at the edge
+    float glowInside = 0.0;
+    if (distToPlanet <= planetRadius) {
+        float distFromEdge = planetRadius - distToPlanet;
+        glowInside = smoothstep(0.02, 0.0, distFromEdge);
+        glowInside = pow(glowInside, 2.0) * 0.3;
+    }
+    vec3 planetBodyColor = horizonThemeColor * glowInside;
+    
+    // Solid planet body mask
+    float planetMask = step(distToPlanet, planetRadius);
 
     // 6. Composite the entire scene
-    vec3 finalColor = mix(spaceBg + stars + dust + aurora, planetColor, planetMask);
+    vec3 spaceScene = spaceBg + stars + dust + aurora;
+    vec3 finalColor;
+    
+    if (uShowPlanet > 0.5) {
+        finalColor = mix(spaceScene, planetBodyColor, planetMask);
+        finalColor += thinLineColor + atmosphereColor + sunLightColor;
+    } else {
+        // Fade the space background, stars, dust, and aurora to black at the top and bottom
+        float edgeFade = smoothstep(0.0, 0.15, uv.y) * smoothstep(1.0, 0.85, uv.y);
+        finalColor = spaceScene * edgeFade;
+    }
     
     fragColor = vec4(finalColor, 1.0);
 }
 `;
 
 export default function Aurora(props) {
-  const { amplitude = 1.0 } = props;
+  const { amplitude = 1.0, showPlanet = false } = props;
   const propsRef = useRef(props);
   propsRef.current = props;
 
@@ -281,7 +310,8 @@ export default function Aurora(props) {
         uTime: { value: 0 },
         uAmplitude: { value: amplitude },
         uResolution: { value: [ctn.offsetWidth, ctn.offsetHeight] },
-        uMouse: { value: [0.5, 0.5] }
+        uMouse: { value: [0.5, 0.5] },
+        uShowPlanet: { value: showPlanet ? 1.0 : 0.0 }
       }
     });
 
@@ -294,6 +324,7 @@ export default function Aurora(props) {
       const { time = t * 0.01, speed = 1.0 } = propsRef.current;
       program.uniforms.uTime.value = time * speed * 0.1;
       program.uniforms.uAmplitude.value = propsRef.current.amplitude ?? 1.0;
+      program.uniforms.uShowPlanet.value = propsRef.current.showPlanet ? 1.0 : 0.0;
       program.uniforms.uMouse.value = mouse;
       renderer.render({ scene: mesh });
     };
@@ -311,7 +342,7 @@ export default function Aurora(props) {
       gl.getExtension('WEBGL_lose_context')?.loseContext();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [amplitude]);
+  }, [amplitude, showPlanet]);
 
   return <div ref={ctnDom} className="aurora-container" />;
 }
